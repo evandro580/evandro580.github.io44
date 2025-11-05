@@ -1,0 +1,59 @@
+# 🌐 Meu Site Estático - Publicação Web
+
+**Nome Completo do Aluno: Evandro Azevedo**
+
+## 📋 Descrição do Projeto
+
+Este projeto foi desenvolvido como parte das atividades da unidade curricular **Publicar Aplicações Web**, com o objetivo de revisar e consolidar na prática os conceitos abordados sobre publicação de aplicações web estáticas.
+
+O site demonstra todo o fluxo de desenvolvimento, desde a criação local até a publicação em plataformas modernas de deploy.
+
+## 🚀 Principais Pontos Revisados
+
+### ✅ Git e Controle de Versão
+- Criação e gerenciamento de repositórios
+- Commits e versionamento do código
+- Fluxo de trabalho com branches
+- GitHub para hospedagem de código
+
+### ✅ Comandos Linux Essenciais
+- Navegação entre diretórios (`cd`, `ls`, `pwd`)
+- Gerenciamento de arquivos (`touch`, `cp`, `mv`, `rm`)
+- Criação de estrutura de pastas
+- Permissões e operações básicas
+
+### ✅ Publicação com GitHub Pages
+- Configuração do repositório
+- Deploy automático via GitHub Actions
+- Domínio personalizado `.github.io`
+- Versionamento das publicações
+
+### ✅ Deploy na Vercel
+- Integração contínua com GitHub
+- Deploy automático a cada push
+- HTTPS gratuito
+- CDN global para performance
+- Domínios customizados
+
+### ✅ Protocolo HTTPS
+- Certificados SSL/TLS
+- Segurança na comunicação
+- Configuração automática na Vercel
+- Boas práticas de segurança web
+
+### ✅ Configuração DNS
+- Entendimento de registros DNS
+- Configuração de domínios personalizados
+- Propagação de DNS
+- Relação entre domínio e hosting
+
+## 🛠 Tecnologias Utilizadas
+
+- **HTML5** - Estrutura semântica
+- **CSS3** - Estilos e responsividade
+- **JavaScript** - Interatividade
+- **Git** - Controle de versão
+- **GitHub** - Hospedagem do código
+- **Vercel** - Plataforma de deploy
+
+## 📁 Estrutura do Projeto
