@@ -3,1215 +3,600 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚀 Publicação Web - Projeto Master</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Comparação de Plataformas de Hospedagem Estática</title>
     <style>
-        /* 🌟 VARIÁVEIS E RESET */
         :root {
-            --vermelho: #ff3b30;
-            --vermelho-escuro: #cc0000;
-            --vermelho-claro: #ff6b6b;
-            --azul: #007bff;
-            --azul-escuro: #0056b3;
-            --preto: #1a1a1a;
-            --cinza-escuro: #2d2d2d;
-            --cinza: #6c757d;
-            --branco: #ffffff;
-            --gradiente: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradiente-vermelho: linear-gradient(135deg, var(--vermelho) 0%, #ff6b6b 100%);
-            --gradiente-hero: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            --sombra: 0 10px 30px rgba(0,0,0,0.1);
-            --sombra-vermelha: 0 10px 30px rgba(255,59,48,0.3);
-            --sombra-pesada: 0 20px 50px rgba(0,0,0,0.15);
-            --borda-radius: 16px;
-            --transicao: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --vermelho-principal: #8B0000;
+            --vermelho-escuro: #5A0000;
+            --vermelho-medio: #B22222;
+            --vermelho-claro: #CD5C5C;
+            --vermelho-suave: #FFE4E1;
+            --cinza-escuro: #1A1A1A;
+            --branco: #FFFFFF;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        
         body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.7;
-            color: var(--cinza);
-            background: var(--branco);
-            overflow-x: hidden;
+            background-color: var(--cinza-escuro);
+            color: var(--branco);
+            line-height: 1.6;
         }
-
-        /* 🌟 TIPOGRAFIA */
-        h1, h2, h3, h4, h5, h6 {
-            color: var(--preto);
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        h1 {
-            font-size: clamp(2.8rem, 5vw, 4.5rem);
-            background: linear-gradient(135deg, var(--preto) 0%, var(--vermelho) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        h2 {
-            font-size: clamp(2.2rem, 4vw, 3.2rem);
-            text-align: center;
-            position: relative;
-            margin-bottom: 3rem;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: var(--vermelho);
-            border-radius: 2px;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* 🌟 LAYOUT */
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 20px;
         }
-
-        .section {
-            padding: 8rem 0;
-        }
-
-        .section:nth-child(even) {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-
-        /* 🌟 HEADER E NAVEGAÇÃO */
-        .header {
-            position: fixed;
+        
+        /* Header */
+        header {
+            background: linear-gradient(to right, var(--vermelho-escuro), var(--vermelho-principal));
+            padding: 20px 0;
+            position: sticky;
             top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            transition: var(--transicao);
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
-
-        .header.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: var(--sombra);
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 0;
-        }
-
+        
         .logo {
             font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--vermelho);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
         }
-
-        .logo i {
-            font-size: 2rem;
+        
+        .logo span {
+            color: var(--vermelho-claro);
         }
-
-        .nav-menu {
+        
+        nav ul {
             display: flex;
+            justify-content: center;
             list-style: none;
-            gap: 2rem;
+            margin-top: 15px;
+            flex-wrap: wrap;
         }
-
-        .nav-link {
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: var(--branco);
             text-decoration: none;
-            color: var(--preto);
-            font-weight: 600;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            transition: var(--transicao);
-            position: relative;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
         }
-
-        .nav-link:hover {
-            color: var(--vermelho);
-            transform: translateY(-2px);
+        
+        nav ul li a:hover {
+            color: var(--vermelho-claro);
+            background-color: rgba(255, 255, 255, 0.1);
         }
-
-        .nav-link.active {
-            background: var(--vermelho);
-            color: var(--branco);
-            box-shadow: var(--sombra-vermelha);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            background: none;
-            border: none;
-            color: var(--preto);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 8px;
-            transition: var(--transicao);
-        }
-
-        .mobile-menu:hover {
-            background: var(--vermelho);
-            color: var(--branco);
-        }
-
-        /* 🌟 HERO SECTION */
+        
+        /* Hero Section */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: var(--gradiente-hero);
-            position: relative;
-            overflow: hidden;
-            color: var(--branco);
+            background: linear-gradient(rgba(90, 0, 0, 0.8), rgba(139, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%235A0000"/><path d="M0 0L100 100M100 0L0 100" stroke="%238B0000" stroke-width="2"/></svg>');
+            background-size: cover;
+            padding: 100px 0;
+            text-align: center;
         }
-
-        .hero::before {
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--vermelho-medio);
+            color: var(--branco);
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid var(--vermelho-medio);
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--vermelho-claro);
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+        
+        section:nth-child(even) {
+            background-color: rgba(90, 0, 0, 0.2);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            width: 100px;
+            height: 3px;
+            background-color: var(--vermelho-medio);
             bottom: 0;
-            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;
-            opacity: 0.1;
+            left: 50%;
+            transform: translateX(-50%);
         }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
+        
+        /* Platform Cards */
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .platform-card {
+            background: linear-gradient(145deg, rgba(90, 0, 0, 0.7), rgba(139, 0, 0, 0.5));
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .platform-header {
+            padding: 20px;
             text-align: center;
+            background-color: var(--vermelho-principal);
+        }
+        
+        .platform-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .platform-body {
+            padding: 20px;
+        }
+        
+        .platform-body ul {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+        
+        .platform-body ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .platform-body ul li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--vermelho-claro);
+        }
+        
+        .platform-link {
+            display: block;
+            text-align: center;
+            background-color: var(--vermelho-medio);
+            color: var(--branco);
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .platform-link:hover {
+            background-color: var(--vermelho-principal);
+        }
+        
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .comparison-table th {
+            background-color: var(--vermelho-principal);
+            font-weight: bold;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: rgba(90, 0, 0, 0.2);
+        }
+        
+        .comparison-table tr:hover {
+            background-color: rgba(139, 0, 0, 0.3);
+        }
+        
+        .rating {
+            color: var(--vermelho-claro);
+            font-weight: bold;
+        }
+        
+        /* Tutorial Section */
+        .tutorial-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
             max-width: 800px;
             margin: 0 auto;
         }
-
-        .hero h1 {
-            color: var(--branco);
-            -webkit-text-fill-color: var(--branco);
-            background: none;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.5s forwards;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.8s forwards;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeInUp 1s ease 1.1s forwards;
-        }
-
-        /* 🌟 BOTÕES */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 1.2rem 2.5rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: var(--transicao);
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
+        
+        .step {
+            background: linear-gradient(145deg, rgba(90, 0, 0, 0.5), rgba(139, 0, 0, 0.3));
+            padding: 25px;
+            border-radius: 10px;
             position: relative;
-            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-
-        .btn-primary {
-            background: var(--vermelho);
-            color: var(--branco);
-            box-shadow: var(--sombra-vermelha);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(255,59,48,0.4);
-            background: var(--vermelho-escuro);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--branco);
-            border: 2px solid var(--branco);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            background: var(--branco);
-            color: var(--vermelho);
-            transform: translateY(-5px);
-        }
-
-        /* 🌟 CARDS */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .card {
-            background: var(--branco);
-            padding: 3rem 2.5rem;
-            border-radius: var(--borda-radius);
-            box-shadow: var(--sombra);
-            transition: var(--transicao);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .card::before {
-            content: '';
+        
+        .step-number {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--vermelho);
-        }
-
-        .card:hover {
-            transform: translateY(-15px);
-            box-shadow: var(--sombra-pesada);
-        }
-
-        .card-icon {
-            width: 90px;
-            height: 90px;
-            background: var(--gradiente-vermelho);
+            top: -15px;
+            left: -15px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--vermelho-medio);
+            color: var(--branco);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 2rem;
-            font-size: 2.5rem;
-            color: var(--branco);
-            box-shadow: var(--sombra-vermelha);
-        }
-
-        .card h3 {
-            color: var(--preto);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .card ul {
-            list-style: none;
-            text-align: left;
-        }
-
-        .card li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #f0f0f0;
-            position: relative;
-            padding-left: 2rem;
-            transition: var(--transicao);
-        }
-
-        .card li:hover {
-            background: #f8f9fa;
-            padding-left: 2.5rem;
-        }
-
-        .card li:before {
-            content: '✓';
-            color: var(--vermelho);
             font-weight: bold;
-            position: absolute;
-            left: 0;
             font-size: 1.2rem;
         }
-
-        /* 🌟 TECNOLOGIAS */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        
+        .step h3 {
+            margin-bottom: 15px;
+            color: var(--vermelho-claro);
         }
-
-        .tech-item {
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--vermelho-escuro), var(--vermelho-principal));
+            padding: 40px 0 20px;
             text-align: center;
-            padding: 2.5rem 2rem;
-            background: var(--branco);
-            border-radius: var(--borda-radius);
-            box-shadow: var(--sombra);
-            transition: var(--transicao);
-            border: 1px solid rgba(0,0,0,0.05);
         }
-
-        .tech-item:hover {
-            transform: scale(1.08) rotate(2deg);
-            box-shadow: var(--sombra-vermelha);
-        }
-
-        .tech-icon {
-            font-size: 3.5rem;
-            color: var(--vermelho);
-            margin-bottom: 1.5rem;
-            height: 80px;
+        
+        .footer-content {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            gap: 20px;
         }
-
-        .tech-item h4 {
-            color: var(--preto);
-            margin-bottom: 0.5rem;
-        }
-
-        /* 🌟 GALERIA DE IMAGENS */
-        .image-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: var(--borda-radius);
-            overflow: hidden;
-            box-shadow: var(--sombra);
-            transition: var(--transicao);
-            height: 250px;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--sombra-pesada);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transicao);
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: var(--branco);
-            padding: 2rem 1.5rem 1.5rem;
-            transform: translateY(100%);
-            transition: var(--transicao);
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-        }
-
-        /* 🌟 CONTADORES */
-        .stats {
-            background: var(--gradiente-vermelho);
-            color: var(--branco);
-            padding: 6rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stats::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80') center/cover;
-            opacity: 0.1;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .stat-item h3 {
-            font-size: 3.5rem;
-            color: var(--branco);
-            margin-bottom: 0.5rem;
-            font-weight: 800;
-        }
-
-        .stat-item p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        /* 🌟 FORMULÁRIO */
-        .contact-form {
-            max-width: 700px;
-            margin: 3rem auto 0;
-            background: var(--branco);
-            padding: 4rem;
-            border-radius: var(--borda-radius);
-            box-shadow: var(--sombra-pesada);
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .form-group {
-            margin-bottom: 2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.8rem;
-            color: var(--preto);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 1.2rem 1.5rem;
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: var(--transicao);
-            font-family: 'Inter', sans-serif;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--vermelho);
-            box-shadow: 0 0 0 3px rgba(255,59,48,0.1);
-            transform: translateY(-2px);
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        /* 🌟 FOOTER */
-        .footer {
-            background: var(--preto);
-            color: var(--branco);
-            padding: 6rem 0 3rem;
-            position: relative;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://images.unsplash.com/photo-1550684376-efcbd6e3f031?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
-            opacity: 0.05;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 4rem;
-            margin-bottom: 4rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .footer-col h4 {
-            color: var(--branco);
-            margin-bottom: 2rem;
-            position: relative;
-            font-size: 1.3rem;
-        }
-
-        .footer-col h4::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--vermelho);
-        }
-
+        
         .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links a {
-            color: var(--cinza);
-            text-decoration: none;
-            transition: var(--transicao);
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .footer-links a:hover {
-            color: var(--vermelho);
-            padding-left: 8px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .social-links a {
-            width: 50px;
-            height: 50px;
-            background: var(--cinza-escuro);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
             justify-content: center;
+        }
+        
+        .footer-links a {
             color: var(--branco);
             text-decoration: none;
-            transition: var(--transicao);
-            font-size: 1.2rem;
+            transition: color 0.3s;
         }
-
-        .social-links a:hover {
-            background: var(--vermelho);
-            transform: translateY(-5px) scale(1.1);
+        
+        .footer-links a:hover {
+            color: var(--vermelho-claro);
         }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 3rem;
-            border-top: 1px solid var(--cinza-escuro);
-            color: var(--cinza);
-            position: relative;
-            z-index: 2;
-        }
-
-        /* 🌟 ANIMAÇÕES */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .animate-on-scroll.animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .float {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        /* 🌟 ELEMENTOS VERMELHOS ESPECIAIS */
-        .vermelho-destaque {
-            color: var(--vermelho);
-            font-weight: 700;
-        }
-
-        .badge-vermelho {
-            background: var(--vermelho);
-            color: var(--branco);
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
+        
+        .copyright {
+            margin-top: 20px;
             font-size: 0.9rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-left: 0.5rem;
-            box-shadow: var(--sombra-vermelha);
+            opacity: 0.8;
         }
-
-        .progress-bar {
-            height: 8px;
-            background: #e9ecef;
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 1.5rem 0;
-        }
-
-        .progress {
-            height: 100%;
-            background: var(--vermelho);
-            border-radius: 4px;
-            transition: width 1.5s ease;
-            position: relative;
-        }
-
-        .progress::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        /* 🌟 RESPONSIVIDADE */
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--branco);
-                flex-direction: column;
-                padding: 2rem;
-                box-shadow: var(--sombra-pesada);
-                border-radius: 0 0 var(--borda-radius) var(--borda-radius);
+            .hero h1 {
+                font-size: 2.2rem;
             }
-
-            .nav-menu.active {
-                display: flex;
+            
+            .section-title h2 {
+                font-size: 2rem;
             }
-
-            .mobile-menu {
+            
+            .platforms-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-table {
                 display: block;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-
-            .section {
-                padding: 5rem 0;
-            }
-
-            .contact-form {
-                padding: 2.5rem 2rem;
-                margin: 2rem 1rem 0;
-            }
-
-            .card {
-                padding: 2.5rem 2rem;
+                overflow-x: auto;
             }
         }
-
-        /* 🌟 UTILITÁRIOS */
-        .mt-2 { margin-top: 2rem; }
-        .mb-2 { margin-bottom: 2rem; }
-        .text-large { font-size: 1.2rem; }
-        .opacity-90 { opacity: 0.9; }
     </style>
 </head>
 <body>
-    <!-- 🎯 HEADER -->
-    <header class="header" id="header">
+    <header>
         <div class="container">
-            <nav class="nav">
-                <a href="#" class="logo">
-                    <i class="fas fa-rocket"></i>
-                    WebMaster
-                </a>
-                
-                <ul class="nav-menu">
-                    <li><a href="#home" class="nav-link active">Home</a></li>
-                    <li><a href="#conceitos" class="nav-link">Conceitos</a></li>
-                    <li><a href="#tecnologias" class="nav-link">Tecnologias</a></li>
-                    <li><a href="#galeria" class="nav-link">Galeria</a></li>
-                    <li><a href="#contato" class="nav-link">Contato</a></li>
+            <div class="logo">Hospedagem<span>Estática</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#introducao">Introdução</a></li>
+                    <li><a href="#plataformas">Plataformas</a></li>
+                    <li><a href="#comparacao">Comparação</a></li>
+                    <li><a href="#tutoriais">Tutoriais</a></li>
+                    <li><a href="#conclusao">Conclusão</a></li>
                 </ul>
-
-                <button class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </button>
             </nav>
         </div>
     </header>
 
-    <!-- 🌟 HERO SECTION -->
-    <section class="hero" id="home">
+    <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h1>Publicação de Aplicações Web</h1>
-                <p class="text-large opacity-90">Domine as tecnologias modernas de desenvolvimento e deploy com este projeto completo e profissional</p>
-                <div class="hero-buttons">
-                    <a href="#conceitos" class="btn btn-primary">
-                        <i class="fas fa-play-circle"></i>
-                        Explorar Conceitos
-                    </a>
-                    <a href="#galeria" class="btn btn-secondary">
-                        <i class="fas fa-images"></i>
-                        Ver Galeria
-                    </a>
-                </div>
+            <h1>Comparação de Plataformas de Hospedagem Estática</h1>
+            <p>Análise crítica das principais plataformas para hospedar sites estáticos: Render, Vercel e Netlify. Descubra qual é a melhor opção para o seu projeto.</p>
+            <a href="#plataformas" class="btn">Explorar Plataformas</a>
+        </div>
+    </section>
+
+    <section id="introducao">
+        <div class="container">
+            <div class="section-title">
+                <h2>Introdução</h2>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <p>Com a crescente popularidade de frameworks como React, Vue e Angular, além de geradores de sites estáticos como Jekyll, Hugo e Gatsby, a hospedagem de sites estáticos se tornou uma necessidade para desenvolvedores modernos.</p>
+                <p style="margin-top: 20px;">Nesta análise, vamos comparar três das principais plataformas de hospedagem estática disponíveis atualmente: Render, Vercel e Netlify. Vamos examinar suas características, facilidade de uso, recursos e acessibilidade.</p>
             </div>
         </div>
     </section>
 
-    <!-- 📚 SEÇÃO CONCEITOS -->
-    <section class="section" id="conceitos">
+    <section id="plataformas">
         <div class="container">
-            <h2>Conceitos Fundamentais</h2>
-            <p class="text-center text-large" style="max-width: 700px; margin: 0 auto 3rem;">Revisão completa dos principais tópicos de publicação web moderna</p>
-            
-            <div class="cards-grid">
-                <div class="card animate-on-scroll">
-                    <div class="card-icon">
-                        <i class="fab fa-git-alt"></i>
-                    </div>
-                    <h3>Git & GitHub</h3>
-                    <ul>
-                        <li>Controle de versão distribuído</li>
-                        <li>Commits semânticos e organização</li>
-                        <li>Branches e estratégias de merge</li>
-                        <li>GitHub Pages e Actions</li>
-                        <li>Pull Requests e code review</li>
-                    </ul>
-                </div>
-
-                <div class="card animate-on-scroll">
-                    <div class="card-icon">
-                        <i class="fab fa-linux"></i>
-                    </div>
-                    <h3>Comandos Linux</h3>
-                    <ul>
-                        <li>Navegação avançada no terminal</li>
-                        <li>Gerenciamento de arquivos e permissões</li>
-                        <li>Processos, serviços e systemd</li>
-                        <li>Scripting e automação</li>
-                        <li>SSH e administração remota</li>
-                    </ul>
-                </div>
-
-                <div class="card animate-on-scroll">
-                    <div class="card-icon">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                    </div>
-                    <h3>Publicação Estática</h3>
-                    <ul>
-                        <li>GitHub Pages - Hospedagem gratuita</li>
-                        <li>Vercel - Deploy contínuo</li>
-                        <li>Netlify - Alternativa robusta</li>
-                        <li>Domínios customizados e SSL</li>
-                        <li>Performance e otimização</li>
-                    </ul>
-                </div>
+            <div class="section-title">
+                <h2>Plataformas Analisadas</h2>
             </div>
-        </div>
-    </section>
-
-    <!-- 💻 SEÇÃO TECNOLOGIAS -->
-    <section class="section" id="tecnologias">
-        <div class="container">
-            <h2>Tecnologias Utilizadas</h2>
-            <p class="text-center text-large" style="max-width: 600px; margin: 0 auto 3rem;">Stack tecnológico completo para desenvolvimento web moderno</p>
-            
-            <div class="tech-grid">
-                <div class="tech-item animate-on-scroll">
-                    <div class="tech-icon">
-                        <i class="fab fa-git"></i>
+            <div class="platforms-grid">
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <h3>Render</h3>
+                        <p>Cloud Application Platform</p>
                     </div>
-                    <h4>Git</h4>
-                    <p>Controle de versão distribuído</p>
-                </div>
-
-                <div class="tech-item animate-on-scroll">
-                    <div class="tech-icon">
-                        <i class="fab fa-github"></i>
-                    </div>
-                    <h4>GitHub</h4>
-                    <p>Plataforma de colaboração</p>
-                </div>
-
-                <div class="tech-item animate-on-scroll">
-                    <div class="tech-icon">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <h4>Vercel</h4>
-                    <p>Deploy e hosting moderno</p>
-                </div>
-
-                <div class="tech-item animate-on-scroll">
-                    <div class="tech-icon">
-                        <i class="fab fa-linux"></i>
-                    </div>
-                    <h4>Linux</h4>
-                    <p>Sistema operacional</p>
-                </div>
-
-                <div class="tech-item animate-on-scroll">
-                    <div class="tech-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h4>HTTPS</h4>
-                    <p>Segurança e certificados</p>
-                </div>
-
-                <div class="tech-item animate-on-scroll">
-                    <div class="tech-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h4>DNS</h4>
-                    <p>Configuração de domínios</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 🖼️ SEÇÃO GALERIA -->
-    <section class="section" id="galeria">
-        <div class="container">
-            <h2>Galeria do Projeto</h2>
-            <p class="text-center text-large" style="max-width: 600px; margin: 0 auto 3rem;">Visualize as tecnologias e conceitos em ação</p>
-            
-            <div class="image-gallery">
-                <div class="gallery-item animate-on-scroll">
-                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Desenvolvimento Web">
-                    <div class="gallery-overlay">
-                        <h4>Desenvolvimento</h4>
-                        <p>Código limpo e organizado</p>
+                    <div class="platform-body">
+                        <p>Render é uma plataforma de nuvem unificada para construir e executar todos os seus aplicativos e sites com implantação automática a partir do Git.</p>
+                        <ul>
+                            <li>Deploy contínuo a partir do Git</li>
+                            <li>SSL gratuito automático</li>
+                            <li>CDN global</li>
+                            <li>Suporte a domínios customizados</li>
+                            <li>Ambientes de preview</li>
+                        </ul>
+                        <a href="https://render.com" class="platform-link" target="_blank">Visitar Render</a>
                     </div>
                 </div>
-
-                <div class="gallery-item animate-on-scroll">
-                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Git e Versionamento">
-                    <div class="gallery-overlay">
-                        <h4>Git</h4>
-                        <p>Controle de versão profissional</p>
+                
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <h3>Vercel</h3>
+                        <p>AI Cloud Platform</p>
+                    </div>
+                    <div class="platform-body">
+                        <p>Vercel é a plataforma para frontend developers, fornecendo a velocidade e confiabilidade que equipes criativas precisam para criar experiências de ponta.</p>
+                        <ul>
+                            <li>Deploy instantâneo com Git</li>
+                            <li>Edge Network global</li>
+                            <li>Preview automático para cada PR</li>
+                            <li>Funções serverless</li>
+                            <li>Otimizado para Next.js</li>
+                        </ul>
+                        <a href="https://vercel.com" class="platform-link" target="_blank">Visitar Vercel</a>
                     </div>
                 </div>
-
-                <div class="gallery-item animate-on-scroll">
-                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Tecnologia">
-                    <div class="gallery-overlay">
-                        <h4>Tecnologia</h4>
-                        <p>Stack moderno e eficiente</p>
+                
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <h3>Netlify</h3>
+                        <p>All-in-one platform for the web</p>
                     </div>
-                </div>
-
-                <div class="gallery-item animate-on-scroll">
-                    <img src="https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Deploy">
-                    <div class="gallery-overlay">
-                        <h4>Deploy</h4>
-                        <p>Publicação automatizada</p>
+                    <div class="platform-body">
+                        <p>Netlify é uma plataforma poderosa que automatiza a criação de sites e aplicativos modernos, conectando seu ecossistema de ferramentas e criando um fluxo de trabalho eficiente.</p>
+                        <ul>
+                            <li>Deploy contínuo</li>
+                            <li>Funções serverless</li>
+                            <li>Forms e Identity</li>
+                            <li>Split Testing</li>
+                            <li>Ampla gama de integrações</li>
+                        </ul>
+                        <a href="https://netlify.com" class="platform-link" target="_blank">Visitar Netlify</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 📊 SEÇÃO ESTATÍSTICAS -->
-    <section class="stats">
+    <section id="comparacao">
         <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item animate-on-scroll">
-                    <h3 data-count="6">0</h3>
-                    <p>Conceitos Dominados</p>
+            <div class="section-title">
+                <h2>Comparação Detalhada</h2>
+            </div>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Render</th>
+                        <th>Vercel</th>
+                        <th>Netlify</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Facilidade de publicação</td>
+                        <td><span class="rating">8/10</span> - Configuração simples via Git</td>
+                        <td><span class="rating">9/10</span> - Extremamente fácil com integração nativa</td>
+                        <td><span class="rating">9/10</span> - Interface intuitiva e drag-and-drop</td>
+                    </tr>
+                    <tr>
+                        <td>Recursos gratuitos</td>
+                        <td>Deploys ilimitados, 100GB de banda/mês</td>
+                        <td>Deploys ilimitados, 100GB de banda/mês</td>
+                        <td>Deploys ilimitados, 100GB de banda/mês</td>
+                    </tr>
+                    <tr>
+                        <td>Performance</td>
+                        <td>CDN global, bom desempenho</td>
+                        <td>Edge Network, excelente performance</td>
+                        <td>CDN global, performance muito boa</td>
+                    </tr>
+                    <tr>
+                        <td>Usabilidade</td>
+                        <td>Interface limpa, mas menos intuitiva</td>
+                        <td>Interface moderna e muito intuitiva</td>
+                        <td>Interface completa e bem organizada</td>
+                    </tr>
+                    <tr>
+                        <td>Acessibilidade</td>
+                        <td>Boa documentação, suporte limitado no free</td>
+                        <td>Excelente documentação, comunidade ativa</td>
+                        <td>Documentação completa, ampla comunidade</td>
+                    </tr>
+                    <tr>
+                        <td>Integrações</td>
+                        <td>Integrações básicas com serviços populares</td>
+                        <td>Excelentes integrações, especialmente com Next.js</td>
+                        <td>Ampla gama de integrações e add-ons</td>
+                    </tr>
+                    <tr>
+                        <td>Funções serverless</td>
+                        <td>Disponível em planos pagos</td>
+                        <td>Incluído no plano gratuito com limites</td>
+                        <td>Incluído no plano gratuito com limites</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="tutoriais">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tutoriais de Hospedagem</h2>
+            </div>
+            <div class="tutorial-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Preparação do Site Estático</h3>
+                    <p>Certifique-se de que seu site estático está pronto para deploy. Isso inclui ter todos os arquivos HTML, CSS, JavaScript e assets em uma pasta, geralmente chamada "dist" ou "build".</p>
                 </div>
-                <div class="stat-item animate-on-scroll">
-                    <h3 data-count="500">0</h3>
-                    <p>Linhas de Código</p>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Hospedagem no Render</h3>
+                    <p>
+                        1. Crie uma conta no Render<br>
+                        2. Conecte seu repositório Git<br>
+                        3. Selecione "Static Site" como tipo de serviço<br>
+                        4. Configure o diretório de build (ex: "dist")<br>
+                        5. Defina o comando de build (ex: "npm run build")<br>
+                        6. Clique em "Create Static Site"
+                    </p>
                 </div>
-                <div class="stat-item animate-on-scroll">
-                    <h3 data-count="3">0</h3>
-                    <p>Plataformas de Deploy</p>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Hospedagem no Vercel</h3>
+                    <p>
+                        1. Crie uma conta no Vercel<br>
+                        2. Instale a CLI do Vercel (opcional)<br>
+                        3. Conecte seu repositório Git<br>
+                        4. O Vercel detectará automaticamente seu framework<br>
+                        5. Configure as variáveis de ambiente se necessário<br>
+                        6. Clique em "Deploy"
+                    </p>
                 </div>
-                <div class="stat-item animate-on-scroll">
-                    <h3 data-count="100">0</h3>
-                    <p>Performance Score</p>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Hospedagem no Netlify</h3>
+                    <p>
+                        1. Crie uma conta no Netlify<br>
+                        2. Conecte seu repositório Git<br>
+                        3. Configure o comando de build e diretório de publicação<br>
+                        4. Adicione variáveis de ambiente se necessário<br>
+                        5. Clique em "Deploy site"<br>
+                        6. Alternativamente, use o recurso de drag-and-drop
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 📞 SEÇÃO CONTATO -->
-    <section class="section" id="contato">
+    <section id="conclusao">
         <div class="container">
-            <h2>Entre em Contato</h2>
-            <p class="text-center text-large" style="max-width: 600px; margin: 0 auto 3rem;">Tem dúvidas ou quer saber mais sobre o projeto?</p>
-            
-            <form class="contact-form animate-on-scroll">
-                <div class="form-group">
-                    <label for="nome">Nome Completo</label>
-                    <input type="text" id="nome" class="form-control" placeholder="Seu nome completo" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" class="form-control" placeholder="seu@email.com" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="assunto">Assunto</label>
-                    <input type="text" id="assunto" class="form-control" placeholder="Assunto da mensagem" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="mensagem">Mensagem</label>
-                    <textarea id="mensagem" class="form-control" rows="6" placeholder="Sua mensagem..." required></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
-                    <i class="fas fa-paper-plane"></i>
-                    Enviar Mensagem
-                </button>
-            </form>
+            <div class="section-title">
+                <h2>Conclusão</h2>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <p>Após analisar as três plataformas, podemos concluir que cada uma tem seus pontos fortes:</p>
+                <ul style="margin-top: 20px; margin-left: 20px;">
+                    <li><strong>Render</strong> é uma opção sólida com boa relação custo-benefício, especialmente para quem já usa outros serviços da plataforma.</li>
+                    <li><strong>Vercel</strong> oferece a melhor experiência para desenvolvedores, especialmente para projetos usando Next.js, com performance excepcional.</li>
+                    <li><strong>Netlify</strong> é a plataforma mais completa, com a maior variedade de recursos e integrações, ideal para projetos complexos.</li>
+                </ul>
+                <p style="margin-top: 20px;">A escolha final dependerá das necessidades específicas do seu projeto, mas todas as três plataformas oferecem excelentes opções para hospedagem de sites estáticos com planos gratuitos generosos.</p>
+            </div>
         </div>
     </section>
 
-    <!-- 🦶 FOOTER -->
-    <footer class="footer">
+    <footer>
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>WebMaster Pro</h4>
-                    <p style="margin-bottom: 2rem;">Projeto desenvolvido para demonstrar domínio completo dos conceitos de publicação web moderna com design profissional e código limpo.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
+            <div class="footer-content">
+                <div class="logo">Hospedagem<span>Estática</span></div>
+                <div class="footer-links">
+                    <a href="#introducao">Introdução</a>
+                    <a href="#plataformas">Plataformas</a>
+                    <a href="#comparacao">Comparação</a>
+                    <a href="#tutoriais">Tutoriais</a>
+                    <a href="#conclusao">Conclusão</a>
                 </div>
-
-                <div class="footer-col">
-                    <h4>Links Rápidos</h4>
-                    <ul class="footer-links">
-                        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-                        <li><a href="#conceitos"><i class="fas fa-book"></i> Conceitos</a></li>
-                        <li><a href="#tecnologias"><i class="fas fa-code"></i> Tecnologias</a></li>
-                        <li><a href="#galeria"><i class="fas fa-images"></i> Galeria</a></li>
-                        <li><a href="#contato"><i class="fas fa-envelope"></i> Contato</a></li>
-                    </ul>
+                <div class="copyright">
+                    &copy; 2023 Comparação de Plataformas de Hospedagem Estática. Todos os direitos reservados.
                 </div>
-
-                <div class="footer-col">
-                    <h4>Conceitos</h4>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fab fa-git-alt"></i> Git & GitHub</a></li>
-                        <li><a href="#"><i class="fab fa-linux"></i> Comandos Linux</a></li>
-                        <li><a href="#"><i class="fas fa-cloud"></i> Vercel</a></li>
-                        <li><a href="#"><i class="fas fa-shield-alt"></i> HTTPS</a></li>
-                        <li><a href="#"><i class="fas fa-globe"></i> DNS</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Contato</h4>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-envelope"></i> email@exemplo.com</a></li>
-                        <li><a href="#"><i class="fas fa-phone"></i> (11) 99999-9999</a></li>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> São Paulo, SP</a></li>
-                        <li><a href="#"><i class="fas fa-globe"></i> www.seusite.com</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2024 Publicação de Aplicações Web - Projeto Master. Todos os direitos reservados.</p>
-                <p class="mt-2">Desenvolvido com ❤️ e muito ☕</p>
             </div>
         </div>
     </footer>
-
-    <!-- 🚀 SCRIPTS -->
-    <script>
-        // 🌟 NAVEGAÇÃO FIXA
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // 🌟 MENU MOBILE
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navMenu = document.querySelector('.nav-menu');
-
-        mobileMenu.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            mobileMenu.innerHTML = navMenu.classList.contains('active') ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-
-        // 🌟 SCROLL SUAVE
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    navMenu.classList.remove('active');
-                    mobileMenu.innerHTML = '<i class="fas fa-bars"></i>';
-                }
-            });
-        });
-
-        // 🌟 ANIMAÇÃO ON SCROLL
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
-                    
-                    // Contadores
-                    if (entry.target.querySelector('h3[data-count]')) {
-                        const countElement = entry.target.querySelector('h3[data-count]');
-                        const target = parseInt(countElement.getAttribute('data-count'));
-                        let current = 0;
-                        const increment = target / 50;
-                        
-                        const timer = setInterval(() => {
-                            current += increment;
-                            if (current >= target) {
-                                current = target;
-                                clearInterval(timer);
-                            }
-                            countElement.textContent = Math.round(current);
-                        }, 30);
-                    }
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
-
-        // 🌟 FORM SUBMISSION
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Animação de sucesso
-            const btn = this.querySelector('button');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check"></i> Mensagem Enviada!';
-            btn.style.background = '#28a745';
-            
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.style.background = '';
-                this.reset();
-            }, 3000);
-        });
-
-        // 🌟 ACTIVE NAV LINK
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= sectionTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // 🌟 EFEITOS VISUAIS EXTRAS
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-15px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        console.log('🚀 Site carregado com sucesso!');
-        console.log('🎨 Design profissional com imagens reais');
-        console.log('💻 Stack: HTML5, CSS3, JavaScript ES6+');
-        console.log('📚 Conceitos: Git, Linux, Vercel, HTTPS, DNS');
-    </script>
 </body>
 </html>
