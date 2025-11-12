@@ -3,388 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comparação detalhada das principais plataformas de hospedagem estática: Render, Vercel e Netlify">
     <title>Comparação de Plataformas de Hospedagem Estática</title>
     
-    <!-- Otimizações de carregamento -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- CSS otimizado e crítico inline -->
+    <!-- CSS Minificado e Otimizado -->
     <style>
-        :root {
-            --vermelho-principal: #8B0000;
-            --vermelho-escuro: #5A0000;
-            --vermelho-medio: #B22222;
-            --vermelho-claro: #CD5C5C;
-            --vermelho-suave: #FFE4E1;
-            --cinza-escuro: #1A1A1A;
-            --branco: #FFFFFF;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
-        
-        body {
-            background-color: var(--cinza-escuro);
-            color: var(--branco);
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header otimizado */
-        header {
-            background: linear-gradient(to right, var(--vermelho-escuro), var(--vermelho-principal));
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            will-change: transform;
-        }
-        
-        .logo {
-            font-size: 1.6rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: center;
-        }
-        
-        .logo span {
-            color: var(--vermelho-claro);
-        }
-        
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            margin-top: 12px;
-            flex-wrap: wrap;
-        }
-        
-        nav ul li {
-            margin: 0 10px;
-        }
-        
-        nav ul li a {
-            color: var(--branco);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-            padding: 5px 8px;
-            border-radius: 4px;
-        }
-        
-        nav ul li a:hover {
-            color: var(--vermelho-claro);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Hero Section otimizada */
-        .hero {
-            background: linear-gradient(rgba(90, 0, 0, 0.8), rgba(139, 0, 0, 0.7));
-            padding: 80px 0;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        
-        .hero p {
-            font-size: 1.1rem;
-            max-width: 800px;
-            margin: 0 auto 25px;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--vermelho-medio);
-            color: var(--branco);
-            padding: 10px 25px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.2s ease;
-            border: 2px solid var(--vermelho-medio);
-            will-change: transform;
-        }
-        
-        .btn:hover {
-            background-color: transparent;
-            color: var(--vermelho-claro);
-            transform: translateY(-2px);
-        }
-        
-        /* Sections otimizadas */
-        section {
-            padding: 60px 0;
-            content-visibility: auto;
-        }
-        
-        section:nth-child(even) {
-            background-color: rgba(90, 0, 0, 0.2);
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-        
-        .section-title h2 {
-            font-size: 2rem;
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-        
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 3px;
-            background-color: var(--vermelho-medio);
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        /* Platform Cards otimizadas */
-        .platforms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-        
-        .platform-card {
-            background: linear-gradient(145deg, rgba(90, 0, 0, 0.7), rgba(139, 0, 0, 0.5));
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            will-change: transform;
-        }
-        
-        .platform-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-        }
-        
-        .platform-header {
-            padding: 18px;
-            text-align: center;
-            background-color: var(--vermelho-principal);
-        }
-        
-        .platform-header h3 {
-            font-size: 1.6rem;
-            margin-bottom: 8px;
-        }
-        
-        .platform-body {
-            padding: 18px;
-        }
-        
-        .platform-body ul {
-            list-style-type: none;
-            margin-bottom: 18px;
-        }
-        
-        .platform-body ul li {
-            padding: 7px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            padding-left: 22px;
-        }
-        
-        .platform-body ul li::before {
-            content: '▶';
-            position: absolute;
-            left: 0;
-            color: var(--vermelho-claro);
-            font-size: 0.8rem;
-        }
-        
-        .platform-link {
-            display: block;
-            text-align: center;
-            background-color: var(--vermelho-medio);
-            color: var(--branco);
-            padding: 9px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.2s ease;
-        }
-        
-        .platform-link:hover {
-            background-color: var(--vermelho-principal);
-        }
-        
-        /* Comparison Table otimizada */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-        
-        .comparison-table th, .comparison-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .comparison-table th {
-            background-color: var(--vermelho-principal);
-            font-weight: bold;
-        }
-        
-        .comparison-table tr:nth-child(even) {
-            background-color: rgba(90, 0, 0, 0.2);
-        }
-        
-        .comparison-table tr:hover {
-            background-color: rgba(139, 0, 0, 0.3);
-        }
-        
-        .rating {
-            color: var(--vermelho-claro);
-            font-weight: bold;
-        }
-        
-        /* Tutorial Section otimizada */
-        .tutorial-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .step {
-            background: linear-gradient(145deg, rgba(90, 0, 0, 0.5), rgba(139, 0, 0, 0.3));
-            padding: 22px;
-            border-radius: 8px;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-        
-        .step-number {
-            position: absolute;
-            top: -12px;
-            left: -12px;
-            width: 35px;
-            height: 35px;
-            background-color: var(--vermelho-medio);
-            color: var(--branco);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1rem;
-        }
-        
-        .step h3 {
-            margin-bottom: 12px;
-            color: var(--vermelho-claro);
-        }
-        
-        /* Footer otimizado */
-        footer {
-            background: linear-gradient(to right, var(--vermelho-escuro), var(--vermelho-principal));
-            padding: 30px 0 15px;
-            text-align: center;
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: 18px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .footer-links a {
-            color: var(--branco);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--vermelho-claro);
-        }
-        
-        .copyright {
-            margin-top: 18px;
-            font-size: 0.85rem;
-            opacity: 0.8;
-        }
-        
-        /* Responsive otimizado */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-            
-            .platforms-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .comparison-table {
-                display: block;
-                overflow-x: auto;
-            }
-            
-            .hero {
-                padding: 60px 0;
-            }
-            
-            section {
-                padding: 50px 0;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .section-title h2 {
-                font-size: 1.6rem;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                gap: 8px;
-            }
-        }
+        :root{--vermelho-principal:#8B0000;--vermelho-escuro:#5A0000;--vermelho-medio:#B22222;--vermelho-claro:#CD5C5C;--vermelho-suave:#FFE4E1;--cinza-escuro:#1A1A1A;--branco:#FFF}*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif}body{background-color:var(--cinza-escuro);color:var(--branco);line-height:1.6}.container{max-width:1200px;margin:0 auto;padding:0 20px}header{background:linear-gradient(to right,var(--vermelho-escuro),var(--vermelho-principal));padding:15px 0;position:sticky;top:0;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.5);will-change:transform}.logo{font-size:1.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;text-align:center}.logo span{color:var(--vermelho-claro)}nav ul{display:flex;justify-content:center;list-style:none;margin-top:12px;flex-wrap:wrap;gap:10px}nav ul li a{color:var(--branco);text-decoration:none;font-weight:500;transition:color .2s ease;padding:5px 8px;border-radius:4px}nav ul li a:hover{color:var(--vermelho-claro);background-color:rgba(255,255,255,.1)}.hero{background:linear-gradient(rgba(90,0,0,.8),rgba(139,0,0,.7));padding:80px 0;text-align:center}.hero h1{font-size:2.5rem;margin-bottom:15px;text-shadow:2px 2px 4px rgba(0,0,0,.5)}.hero p{font-size:1.1rem;max-width:800px;margin:0 auto 25px}.btn{display:inline-block;background-color:var(--vermelho-medio);color:var(--branco);padding:10px 25px;border-radius:5px;text-decoration:none;font-weight:700;transition:all .2s ease;border:2px solid var(--vermelho-medio);will-change:transform}.btn:hover{background-color:transparent;color:var(--vermelho-claro);transform:translateY(-2px)}section{padding:60px 0;content-visibility:auto}section:nth-child(even){background-color:rgba(90,0,0,.2)}.section-title{text-align:center;margin-bottom:40px;position:relative}.section-title h2{font-size:2rem;display:inline-block;padding-bottom:10px}.section-title h2:after{content:'';position:absolute;width:80px;height:3px;background-color:var(--vermelho-medio);bottom:0;left:50%;transform:translateX(-50%)}.platforms-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}.platform-card{background:linear-gradient(145deg,rgba(90,0,0,.7),rgba(139,0,0,.5));border-radius:8px;overflow:hidden;box-shadow:0 8px 16px rgba(0,0,0,.3);transition:transform .2s ease,box-shadow .2s ease;will-change:transform}.platform-card:hover{transform:translateY(-5px);box-shadow:0 12px 24px rgba(0,0,0,.4)}.platform-header{padding:18px;text-align:center;background-color:var(--vermelho-principal)}.platform-header h3{font-size:1.6rem;margin-bottom:8px}.platform-body{padding:18px}.platform-body ul{list-style:none;margin-bottom:18px}.platform-body ul li{padding:7px 0;border-bottom:1px solid rgba(255,255,255,.1);position:relative;padding-left:22px}.platform-body ul li:before{content:'▶';position:absolute;left:0;color:var(--vermelho-claro);font-size:.8rem}.platform-link{display:block;text-align:center;background-color:var(--vermelho-medio);color:var(--branco);padding:9px;border-radius:5px;text-decoration:none;font-weight:700;transition:background-color .2s ease}.platform-link:hover{background-color:var(--vermelho-principal)}.comparison-table{width:100%;border-collapse:collapse;margin-top:25px;box-shadow:0 4px 12px rgba(0,0,0,.3)}.comparison-table th,.comparison-table td{padding:12px;text-align:left;border-bottom:1px solid rgba(255,255,255,.1)}.comparison-table th{background-color:var(--vermelho-principal);font-weight:700}.comparison-table tr:nth-child(even){background-color:rgba(90,0,0,.2)}.comparison-table tr:hover{background-color:rgba(139,0,0,.3)}.rating{color:var(--vermelho-claro);font-weight:700}.tutorial-steps{display:flex;flex-direction:column;gap:25px;max-width:800px;margin:0 auto}.step{background:linear-gradient(145deg,rgba(90,0,0,.5),rgba(139,0,0,.3));padding:22px;border-radius:8px;position:relative;box-shadow:0 4px 12px rgba(0,0,0,.2)}.step-number{position:absolute;top:-12px;left:-12px;width:35px;height:35px;background-color:var(--vermelho-medio);color:var(--branco);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem}.step h3{margin-bottom:12px;color:var(--vermelho-claro)}footer{background:linear-gradient(to right,var(--vermelho-escuro),var(--vermelho-principal));padding:30px 0 15px;text-align:center}.footer-content{display:flex;flex-direction:column;align-items:center;gap:18px}.footer-links{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}.footer-links a{color:var(--branco);text-decoration:none;transition:color .2s ease}.footer-links a:hover{color:var(--vermelho-claro)}.copyright{margin-top:18px;font-size:.85rem;opacity:.8}@media (max-width:768px){.hero h1{font-size:2rem}.section-title h2{font-size:1.8rem}.platforms-grid{grid-template-columns:1fr}.comparison-table{display:block;overflow-x:auto}.hero{padding:60px 0}section{padding:50px 0}}@media (max-width:480px){.hero h1{font-size:1.8rem}.hero p{font-size:1rem}.section-title h2{font-size:1.6rem}nav ul{flex-direction:column;gap:8px}}
     </style>
 </head>
 <body>
@@ -416,9 +40,9 @@
             <div class="section-title">
                 <h2>Introdução</h2>
             </div>
-            <div style="max-width: 800px; margin: 0 auto;">
+            <div style="max-width:800px;margin:0 auto">
                 <p>Com a crescente popularidade de frameworks como React, Vue e Angular, além de geradores de sites estáticos como Jekyll, Hugo e Gatsby, a hospedagem de sites estáticos se tornou uma necessidade para desenvolvedores modernos.</p>
-                <p style="margin-top: 15px;">Nesta análise, vamos comparar três das principais plataformas de hospedagem estática disponíveis atualmente: Render, Vercel e Netlify. Vamos examinar suas características, facilidade de uso, recursos e acessibilidade.</p>
+                <p style="margin-top:15px">Nesta análise, vamos comparar três das principais plataformas de hospedagem estática disponíveis atualmente: Render, Vercel e Netlify. Vamos examinar suas características, facilidade de uso, recursos e acessibilidade.</p>
             </div>
         </div>
     </section>
@@ -491,60 +115,62 @@
             <div class="section-title">
                 <h2>Comparação Detalhada</h2>
             </div>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Característica</th>
-                        <th>Render</th>
-                        <th>Vercel</th>
-                        <th>Netlify</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Facilidade de publicação</td>
-                        <td><span class="rating">8/10</span> - Configuração simples via Git</td>
-                        <td><span class="rating">9/10</span> - Extremamente fácil com integração nativa</td>
-                        <td><span class="rating">9/10</span> - Interface intuitiva e drag-and-drop</td>
-                    </tr>
-                    <tr>
-                        <td>Recursos gratuitos</td>
-                        <td>Deploys ilimitados, 100GB de banda/mês</td>
-                        <td>Deploys ilimitados, 100GB de banda/mês</td>
-                        <td>Deploys ilimitados, 100GB de banda/mês</td>
-                    </tr>
-                    <tr>
-                        <td>Performance</td>
-                        <td>CDN global, bom desempenho</td>
-                        <td>Edge Network, excelente performance</td>
-                        <td>CDN global, performance muito boa</td>
-                    </tr>
-                    <tr>
-                        <td>Usabilidade</td>
-                        <td>Interface limpa, mas menos intuitiva</td>
-                        <td>Interface moderna e muito intuitiva</td>
-                        <td>Interface completa e bem organizada</td>
-                    </tr>
-                    <tr>
-                        <td>Acessibilidade</td>
-                        <td>Boa documentação, suporte limitado no free</td>
-                        <td>Excelente documentação, comunidade ativa</td>
-                        <td>Documentação completa, ampla comunidade</td>
-                    </tr>
-                    <tr>
-                        <td>Integrações</td>
-                        <td>Integrações básicas com serviços populares</td>
-                        <td>Excelentes integrações, especialmente com Next.js</td>
-                        <td>Ampla gama de integrações e add-ons</td>
-                    </tr>
-                    <tr>
-                        <td>Funções serverless</td>
-                        <td>Disponível em planos pagos</td>
-                        <td>Incluído no plano gratuito com limites</td>
-                        <td>Incluído no plano gratuito com limites</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-container">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Render</th>
+                            <th>Vercel</th>
+                            <th>Netlify</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Facilidade de publicação</td>
+                            <td><span class="rating">8/10</span> - Configuração simples via Git</td>
+                            <td><span class="rating">9/10</span> - Extremamente fácil com integração nativa</td>
+                            <td><span class="rating">9/10</span> - Interface intuitiva e drag-and-drop</td>
+                        </tr>
+                        <tr>
+                            <td>Recursos gratuitos</td>
+                            <td>Deploys ilimitados, 100GB de banda/mês</td>
+                            <td>Deploys ilimitados, 100GB de banda/mês</td>
+                            <td>Deploys ilimitados, 100GB de banda/mês</td>
+                        </tr>
+                        <tr>
+                            <td>Performance</td>
+                            <td>CDN global, bom desempenho</td>
+                            <td>Edge Network, excelente performance</td>
+                            <td>CDN global, performance muito boa</td>
+                        </tr>
+                        <tr>
+                            <td>Usabilidade</td>
+                            <td>Interface limpa, mas menos intuitiva</td>
+                            <td>Interface moderna e muito intuitiva</td>
+                            <td>Interface completa e bem organizada</td>
+                        </tr>
+                        <tr>
+                            <td>Acessibilidade</td>
+                            <td>Boa documentação, suporte limitado no free</td>
+                            <td>Excelente documentação, comunidade ativa</td>
+                            <td>Documentação completa, ampla comunidade</td>
+                        </tr>
+                        <tr>
+                            <td>Integrações</td>
+                            <td>Integrações básicas com serviços populares</td>
+                            <td>Excelentes integrações, especialmente com Next.js</td>
+                            <td>Ampla gama de integrações e add-ons</td>
+                        </tr>
+                        <tr>
+                            <td>Funções serverless</td>
+                            <td>Disponível em planos pagos</td>
+                            <td>Incluído no plano gratuito com limites</td>
+                            <td>Incluído no plano gratuito com limites</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 
@@ -607,14 +233,14 @@
             <div class="section-title">
                 <h2>Conclusão</h2>
             </div>
-            <div style="max-width: 800px; margin: 0 auto;">
+            <div style="max-width:800px;margin:0 auto">
                 <p>Após analisar as três plataformas, podemos concluir que cada uma tem seus pontos fortes:</p>
-                <ul style="margin-top: 15px; margin-left: 20px;">
+                <ul style="margin-top:15px;margin-left:20px">
                     <li><strong>Render</strong> é uma opção sólida com boa relação custo-benefício, especialmente para quem já usa outros serviços da plataforma.</li>
                     <li><strong>Vercel</strong> oferece a melhor experiência para desenvolvedores, especialmente para projetos usando Next.js, com performance excepcional.</li>
                     <li><strong>Netlify</strong> é a plataforma mais completa, com a maior variedade de recursos e integrações, ideal para projetos complexos.</li>
                 </ul>
-                <p style="margin-top: 15px;">A escolha final dependerá das necessidades específicas do seu projeto, mas todas as três plataformas oferecem excelentes opções para hospedagem de sites estáticos com planos gratuitos generosos.</p>
+                <p style="margin-top:15px">A escolha final dependerá das necessidades específicas do seu projeto, mas todas as três plataformas oferecem excelentes opções para hospedagem de sites estáticos com planos gratuitos generosos.</p>
             </div>
         </div>
     </section>
@@ -637,52 +263,9 @@
         </div>
     </footer>
 
-    <!-- Scripts otimizados para performance -->
+    <!-- JavaScript Minificado e Otimizado -->
     <script>
-        // Otimização: Adicionar event listeners de forma eficiente
-        document.addEventListener('DOMContentLoaded', function() {
-            // Otimização: Smooth scroll com comportamento nativo
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-            
-            // Otimização: Prevenir layout shifts
-            const images = document.querySelectorAll('img');
-            images.forEach(img => {
-                if (!img.complete) {
-                    img.style.opacity = 0;
-                    img.addEventListener('load', function() {
-                        this.style.opacity = 1;
-                    });
-                }
-            });
-            
-            // Otimização: Adicionar intersection observer para lazy loading
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const section = entry.target;
-                            section.style.contentVisibility = 'visible';
-                            observer.unobserve(section);
-                        }
-                    });
-                }, { threshold: 0.1 });
-                
-                document.querySelectorAll('section').forEach(section => {
-                    observer.observe(section);
-                });
-            }
-        });
+        document.addEventListener('DOMContentLoaded',function(){function e(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));t&&t.scrollIntoView({behavior:'smooth',block:'start'})}document.querySelectorAll('a[href^="#"]').forEach(function(t){t.addEventListener('click',e)});const t=document.querySelectorAll('img');t.forEach(function(e){e.complete||(e.style.opacity='0',e.addEventListener('load',function(){this.style.opacity='1'}))});'IntersectionObserver'in window&&(new IntersectionObserver(function(e){e.forEach(function(e){e.isIntersecting&&(e.target.style.contentVisibility='visible',observer.unobserve(e.target))})},{threshold:.1})).observe(document.querySelector('section'))});
     </script>
 </body>
 </html>
