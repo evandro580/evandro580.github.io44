@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós - Encantu's</title>
+    <link rel="stylesheet" href="cs/sobre.css">
+</head>
+<body>
+    
+    <!-- Header -->
+    <header class="topo">
+        <div class="topo-content">
+            <div class="topo-esquerdo">
+                <div class="topo-logo">
+                    <a href="index.html">
+                        <img class="topo-imagem" src="imagem/mago.png" alt="Logo Encantu's" />
+                    </a>
+                </div>
+                <nav class="topo-menu">
+                    <a href="index.html">Início</a>
+                    <a href="sobre.html" class="active">Sobre Nós</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Sobre o Encantu's</h1>
+            <p>Conheça nosso projeto escolar desenvolvido por estudantes do primeiro ano do ensino médio do Senac!</p>
+        </div>
+    </section>
+
+    <!-- Projeto Section -->
+    <section class="projeto">
+        <div class="projeto-content">
+            <div class="projeto-texto">
+                <h2>Nosso Projeto</h2>
+                <p>O Encantu's é um projeto escolar desenvolvido por estudantes do primeiro ano do ensino médio do Senac, com o objetivo de incentivar a leitura entre crianças e jovens de maneira criativa e envolvente.</p>
+                <p>Nossa proposta é criar uma plataforma que conecta leitores a livros de forma intuitiva, promovendo o hábito da leitura através de recomendações personalizadas e uma comunidade engajada.</p>
+                <p>Como estudantes, estamos aprendendo na prática sobre desenvolvimento web, design, trabalho em equipe e gestão de projetos, aplicando os conhecimentos adquiridos em sala de aula.</p>
+            </div>
+            <div class="projeto-imagem">
+                <img src="imagem/sobre.png" alt="Estudantes trabalhando">
+            </div>
+        </div>
+    </section>
+
+    <!-- Valores Section -->
+    <section class="valores">
+        <div class="valores-content">
+            <h2>Nossos Valores</h2>
+            <p>Guiamos nosso trabalho por princípios que refletem nosso compromisso com a educação e o desenvolvimento de crianças e jovens.</p>
+            <div class="valores-cards">
+                <div class="valor-card">
+                    <h3>Incentivo à Leitura</h3>
+                    <p>Acreditamos que cada livro é uma porta para novos mundos e que a leitura pode transformar vidas.</p>
+                </div>
+                <div class="valor-card">
+                    <h3>Aprendizado Prático</h3>
+                    <p>Valorizamos a aplicação prática dos conhecimentos adquiridos em sala de aula.</p>
+                </div>
+                <div class="valor-card">
+                    <h3>Trabalho em Equipe</h3>
+                    <p>Acreditamos no poder da colaboração e no aprendizado conjunto.</p>
+                </div>
+                <div class="valor-card">
+                    <h3>Criatividade</h3>
+                    <p>Incentivamos soluções inovadoras e abordagens criativas para os desafios.</p>
+                </div>
+                <div class="valor-card">
+                    <h3>Responsabilidade Social</h3>
+                    <p>Buscamos contribuir positivamente para nossa comunidade através da educação.</p>
+                </div>
+                <div class="valor-card">
+                    <h3>Inovação</h3>
+                    <p>Estamos sempre em busca de novas formas de conectar leitores e livros.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="rodape">
+        <div class="rodape-content">
+            <div class="rodape-contato">
+                <p>Quer sugerir uma indicação?</p>
+                <p>Email: <a href="mailto:encantus1livraria@gmail.com">encantus1livraria@gmail.com</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script> // JavaScript para o site Encantu's
+
+// Header scroll effect
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('.topo');
+    if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
+// Smooth scroll para âncoras
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Animação de entrada para elementos
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+        }
+    });
+}, observerOptions);
+
+// Observar elementos para animação
+document.addEventListener('DOMContentLoaded', function() {
+    const elementsToAnimate = document.querySelectorAll('.valor-card, .membro-card, .projeto-texto, .projeto-imagem');
+    
+    elementsToAnimate.forEach(element => {
+        observer.observe(element);
+    });
+});
+
+// Efeito de hover nos cards
+document.querySelectorAll('.valor-card, .membro-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-10px)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+    });
+});
+
+// Loading animation
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+});
+
+// Contador de visitas (opcional)
+if (!localStorage.getItem('visitCount')) {
+    localStorage.setItem('visitCount', '1');
+} else {
+    let count = parseInt(localStorage.getItem('visitCount'));
+    localStorage.setItem('visitCount', (count + 1).toString());
+}
+
+console.log(`Bem-vindo ao Encantu's! Esta é sua visita número ${localStorage.getItem('visitCount')}`);
+</script>
+</body>
+</html>

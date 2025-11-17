@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cadastro na Encantu's - Sua livraria virtual de indicações literárias">
+  <title>Cadastrar - Encantu's</title>
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <link rel="stylesheet" href="cs/cadastro.css">
+  
+  <!-- ESTILOS DE ACESSIBILIDADE INTEGRADOS -->
+  <style>
+    /* === WIDGET DE ACESSIBILIDADE === */
+    .accessibility-widget {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 10000;
+    }
+
+    .accessibility-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4b2e68 0%, #47216d 100%);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      z-index: 10001;
+    }
+
+    .accessibility-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .accessibility-menu {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      background: rgba(26, 14, 63, 0.95);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      padding: 20px;
+      width: 280px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: none;
+      z-index: 10000;
+    }
+
+    .accessibility-menu.active {
+      display: block;
+      animation: fadeInUp 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .accessibility-menu h3 {
+      color: white;
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .theme-controls,
+    .font-size-controls {
+      margin-bottom: 20px;
+    }
+
+    .theme-controls span,
+    .font-size-controls span {
+      display: block;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 10px;
+      font-family: 'Merriweather', serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .theme-buttons,
+    .font-size-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .theme-btn,
+    .font-btn,
+    .reset-btn {
+      flex: 1;
+      padding: 10px 15px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Merriweather', serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .theme-btn:hover,
+    .font-btn:hover,
+    .reset-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .theme-btn.active,
+    .font-btn.active {
+      background: linear-gradient(135deg, #4b2e68 0%, #47216d 100%);
+      border-color: rgba(255, 255, 255, 0.4);
+      color: white;
+      box-shadow: 0 4px 15px rgba(75, 46, 104, 0.4);
+    }
+
+    .accessibility-actions {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 15px;
+      margin-top: 10px;
+    }
+
+    .reset-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .reset-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* === SISTEMA DE TAMANHO DE FONTE UNIFICADO === */
+    body.font-normal {
+      font-size: 16px;
+    }
+
+    body.font-large {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    body.font-x-large {
+      font-size: 20px;
+      line-height: 1.7;
+    }
+
+    /* Ajustes específicos para elementos com diferentes tamanhos de fonte */
+    body.font-large .topo-menu a,
+    body.font-large .input-field,
+    body.font-large .label,
+    body.font-large .terms label,
+    body.font-large .login p,
+    body.font-large .social-register-title span,
+    body.font-large .modal-content p,
+    body.font-large .user-data {
+      font-size: 1.05em;
+    }
+
+    body.font-x-large .topo-menu a,
+    body.font-x-large .input-field,
+    body.font-x-large .label,
+    body.font-x-large .terms label,
+    body.font-x-large .login p,
+    body.font-x-large .social-register-title span,
+    body.font-x-large .modal-content p,
+    body.font-x-large .user-data {
+      font-size: 1.1em;
+    }
+
+    body.font-large .register-header h1,
+    body.font-large .modal-header h3 {
+      font-size: 2.4rem;
+    }
+
+    body.font-x-large .register-header h1,
+    body.font-x-large .modal-header h3 {
+      font-size: 2.6rem;
+    }
+
+    /* === MODO CLARO UNIFICADO === */
+    body.light-mode {
+      /* Cores Principais */
+      --primary: #ffffff;
+      --secondary: #f8fafc;
+      --accent: #000000;
+      --accent-light: #8b5cf6;
+      --accent-dark: #ffffff;
+      
+      /* Cores de Texto */
+      --text-primary: #000000;
+      --text-secondary: #000000;
+      --text-muted: #000000;
+      
+      /* Cores de Fundo */
+      --background-primary: #ffffff;
+      --background-secondary: #f8fafc;
+      --background-card: rgba(255, 255, 255, 0.95);
+      
+      /* Cores de Borda */
+      --border-light: #e2e8f0;
+      --border-medium: #cbd5e1;
+      
+      /* Gradientes para Modo Claro */
+      --gradient-primary: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+      --gradient-accent: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%);
+      
+      /* Sombras para Modo Claro */
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.08);
+      
+      background: var(--gradient-primary);
+      color: var(--text-primary);
+    }
+
+    /* === MODO CLARO - PÁGINA DE CADASTRO === */
+
+    /* Header no modo claro */
+    body.light-mode .topo {
+      background: rgba(255, 255, 255, 0.97);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    body.light-mode .topo-menu a {
+      color: var(--text-primary);
+    }
+
+    body.light-mode .topo-menu a:hover {
+      color: var(--accent);
+    }
+
+    body.light-mode .topo-menu a.active {
+      color: var(--accent);
+    }
+
+    /* Logo no modo claro */
+    body.light-mode .topo-imagem {
+      filter: brightness(0.8);
+    }
+
+    /* Container de cadastro no modo claro */
+    body.light-mode .register_box {
+      background: var(--background-card);
+      border: 1px solid var(--border-light);
+      color: var(--text-primary);
+    }
+
+    body.light-mode .register-header h1 {
+      color: var(--text-primary);
+    }
+
+    /* Inputs no modo claro */
+    body.light-mode .input-field {
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid var(--border-medium);
+      color: var(--text-primary);
+    }
+
+    body.light-mode .input-field::placeholder {
+      color: var(--text-muted);
+    }
+
+    body.light-mode .input-field:focus {
+      background: rgba(255, 255, 255, 1);
+      border-color: var(--accent);
+    }
+
+    body.light-mode .label {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .icon {
+      color: var(--text-muted);
+    }
+
+    body.light-mode .input-field:focus ~ .icon {
+      color: var(--accent);
+    }
+
+    /* Botões no modo claro */
+    body.light-mode .input-submit {
+      background: var(--gradient-accent);
+      color: white;
+    }
+
+    body.light-mode .input-submit:hover {
+      background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
+    }
+
+    /* Termos no modo claro */
+    body.light-mode .terms label {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .terms a {
+      color: var(--accent);
+    }
+
+    /* Login link no modo claro */
+    body.light-mode .login p {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .login a {
+      color: var(--accent);
+    }
+
+    /* Botões sociais no modo claro */
+    body.light-mode .social-button {
+      background: var(--background-card);
+      border: 2px solid var(--border-medium);
+    }
+
+    body.light-mode .social-button:hover {
+      border-color: var(--accent);
+    }
+
+    /* Modal no modo claro */
+    body.light-mode .modal-content {
+      background: var(--background-card);
+      border: 1px solid var(--border-light);
+    }
+
+    body.light-mode .modal-header h3 {
+      color: var(--text-primary);
+    }
+
+    body.light-mode .modal-body p {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .user-data {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .user-data strong {
+      color: var(--text-primary);
+    }
+
+    /* Botões do modal no modo claro */
+    body.light-mode .btn-primary {
+      background: var(--gradient-accent);
+      color: white;
+    }
+
+    body.light-mode .btn-primary:hover {
+      background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
+    }
+
+    body.light-mode .btn-secondary {
+      background: var(--background-card);
+      color: var(--text-primary);
+      border: 2px solid var(--border-medium);
+    }
+
+    body.light-mode .btn-secondary:hover {
+      border-color: var(--accent);
+    }
+
+    /* Botão de acessibilidade no modo claro */
+    body.light-mode .accessibility-btn {
+      background: var(--gradient-accent);
+    }
+
+    body.light-mode .accessibility-menu {
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid var(--border-light);
+    }
+
+    body.light-mode .accessibility-menu h3 {
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    body.light-mode .theme-controls span,
+    body.light-mode .font-size-controls span {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .font-btn,
+    body.light-mode .theme-btn,
+    body.light-mode .reset-btn {
+      background: rgba(248, 250, 252, 0.8);
+      border: 2px solid var(--border-medium);
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .font-btn:hover,
+    body.light-mode .theme-btn:hover,
+    body.light-mode .reset-btn:hover {
+      background: rgba(248, 250, 252, 1);
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    body.light-mode .font-btn.active,
+    body.light-mode .theme-btn.active {
+      background: var(--gradient-accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* === ESTILOS PARA FORÇA DA SENHA === */
+    .password-strength {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+    }
+
+    .strength-bar {
+      flex: 1;
+      height: 4px;
+      background-color: #e0e0e0;
+      border-radius: 2px;
+      transition: background-color 0.3s ease;
+    }
+
+    .strength-text {
+      margin-left: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Estilos para as dicas de senha */
+    .password-tips {
+      margin-top: 8px;
+      padding: 8px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      display: none;
+    }
+
+    .password-tips.active {
+      display: block;
+    }
+
+    .password-tips ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .password-tips li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+
+    .password-tips li i.met {
+      color: #00c853; /* Verde para critério atendido */
+    }
+
+    .password-tips li i.not-met {
+      color: #ff4444; /* Vermelho para critério não atendido */
+    }
+
+    /* Estilos para mensagens de erro */
+    .error-message {
+      color: #ff4444 !important; /* Vermelho para erro */
+      font-size: 12px;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* === CORES DE TEXTO POR TEMA === */
+    
+    /* Modo Escuro - Textos Brancos */
+    body:not(.light-mode) .strength-text,
+    body:not(.light-mode) .password-tips li,
+    body:not(.light-mode) .message,
+    body:not(.light-mode) .user-data,
+    body:not(.light-mode) .user-data strong {
+      color: #ffffff !important; /* Letras brancas no modo escuro */
+    }
+
+    /* Modo Claro - Textos Pretos */
+    body.light-mode .strength-text,
+    body.light-mode .password-tips li,
+    body.light-mode .message,
+    body.light-mode .user-data,
+    body.light-mode .user-data strong {
+      color: #000000 !important; /* Letras pretas no modo claro */
+    }
+
+    /* Mensagens de notificação */
+    .message {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      z-index: 10000;
+      animation: slideInDown 0.3s ease;
+      border: 2px solid;
+    }
+
+    /* Modo Escuro - Mensagens */
+    body:not(.light-mode) .message {
+      color: #ffffff !important;
+      border-color: #ffffff;
+    }
+
+    /* Modo Claro - Mensagens */
+    body.light-mode .message {
+      color: #000000 !important;
+      border-color: #333333;
+    }
+
+    .message.success {
+      background: #00c853;
+    }
+
+    .message.error {
+      background: #ff4444;
+    }
+
+    .message.info {
+      background: #2196f3;
+    }
+
+    /* === ESTILOS PERSONALIZADOS PARA O CADASTRO === */
+    
+    /* Header do cadastro menor */
+    .register-header {
+      margin-bottom: 10px;
+    }
+
+    .register-header h1 {
+      font-size: 2rem !important;
+      font-weight: 700;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    /* Título de redes sociais - Preto apenas no modo claro */
+    body.light-mode .social-register-title span {
+      color: #000000 !important;
+    }
+
+    /* Modo escuro - manter branco */
+    body:not(.light-mode) .social-register-title span {
+      color: #ffffff !important;
+    }
+
+    /* Remover linha do "Cadastrar com redes sociais" */
+    .social-register-title {
+      position: relative;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .social-register-title span {
+      background: transparent;
+      padding: 0 15px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .social-register-title::before {
+      display: none !important;
+    }
+
+    .social-register-title::after {
+      display: none !important;
+    }
+
+    /* Ajustar tamanho dos botões sociais */
+    .social-register {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .social-button {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-button:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Animações para notificações */
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideOutRight {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
+    @keyframes slideInDown {
+      from {
+        transform: translateX(-50%) translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideOutUp {
+      from {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(-50%) translateY(-100%);
+        opacity: 0;
+      }
+    }
+
+    /* Ajustes responsivos */
+    @media (max-width: 768px) {
+      .accessibility-widget {
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .accessibility-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+      
+      .accessibility-menu {
+        width: 260px;
+        right: -10px;
+      }
+
+      .register-header h1 {
+        font-size: 1.8rem !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Botão de Acessibilidade -->
+  <div class="accessibility-widget">
+    <button class="accessibility-btn" id="accessibilityBtn" aria-label="Opções de acessibilidade">
+      <i class="bx bx-universal-access"></i>
+    </button>
+    
+    <div class="accessibility-menu" id="accessibilityMenu">
+      <h3>ACESSIBILIDADE</h3>
+      
+      <!-- Controle de Tema -->
+      <div class="theme-controls">
+        <span>Tema do Site:</span>
+        <div class="theme-buttons">
+          <button class="theme-btn" data-theme="dark" aria-label="Modo escuro">
+            <i class="bx bx-moon"></i> Escuro
+          </button>
+          <button class="theme-btn" data-theme="light" aria-label="Modo claro">
+            <i class="bx bx-sun"></i> Claro
+          </button>
+        </div>
+      </div>
+      
+      <!-- Controle de Tamanho de Fonte -->
+      <div class="font-size-controls">
+        <span>Tamanho da Fonte:</span>
+        <div class="font-size-buttons">
+          <button class="font-btn" data-size="normal" aria-label="Fonte normal">
+            A
+          </button>
+          <button class="font-btn" data-size="large" aria-label="Fonte grande">
+            A
+          </button>
+          <button class="font-btn" data-size="x-large" aria-label="Fonte extra grande">
+            A
+          </button>
+        </div>
+      </div>
+      
+      <div class="accessibility-actions">
+        <button class="reset-btn" id="resetAccessibility" aria-label="Redefinir configurações">
+          <i class="bx bx-reset"></i> Redefinir
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Superior -->
+  <header class="topo">
+    <div class="topo-content">
+      <div class="topo-esquerdo">
+        <div class="topo-logo">
+          <a href="index.html">
+            <img class="topo-imagem" src="imagem/mago.png" alt="Logo Encantu's" />
+          </a>
+        </div>
+        <nav class="topo-menu">
+          <a href="index.html">Início</a>
+          <a href="cadastro.html" class="active">Cadastro</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="wrapper">
+      <div class="register_box">
+        
+        <header class="register-header">
+          <h1>Cadastro</h1>
+        </header>
+        <form id="registerForm" class="register-form" novalidate autocomplete="off">
+          <div class="input_box">
+            <input type="text" id="username" class="input-field" placeholder=" " required aria-describedby="username-error" autocomplete="new-username">
+            <label for="username" class="label">Nome de usuário</label>
+            <i class="bx bx-at icon" aria-hidden="true"></i>
+            <span class="error-message" id="username-error"></span>
+            <div class="suggestions-box" id="usernameSuggestions"></div>
+          </div>
+          <div class="input_box">
+            <input type="email" id="email" class="input-field" placeholder=" " required aria-describedby="email-error" autocomplete="new-email">
+            <label for="email" class="label">E-mail</label>
+            <i class="bx bx-envelope icon" aria-hidden="true"></i>
+            <span class="error-message" id="email-error"></span>
+            <div class="suggestions-box" id="emailSuggestions"></div>
+          </div>
+          <div class="input_box">
+            <input type="password" id="password" class="input-field" placeholder=" " required aria-describedby="password-error" autocomplete="new-password">
+            <label for="password" class="label">Senha</label>
+            <i class="bx bx-lock-alt icon" aria-hidden="true"></i>
+            <i class="bx bx-show-alt show-icon" id="togglePassword" role="button" aria-label="Mostrar senha" tabindex="0"></i>
+            <span class="error-message" id="password-error"></span>
+            <div class="password-strength" id="passwordStrength">
+              <span class="strength-bar"></span>
+              <span class="strength-bar"></span>
+              <span class="strength-bar"></span>
+              <span class="strength-bar"></span>
+              <span class="strength-text" id="strengthText">Muito Fraco</span>
+            </div>
+            <div class="password-tips" id="passwordTips">
+              <ul>
+                <li id="tip-length"><i class="bx bx-x-circle not-met"></i> Pelo menos 6 caracteres</li>
+                <li id="tip-lowercase"><i class="bx bx-x-circle not-met"></i> Pelo menos 1 letra minúscula</li>
+                <li id="tip-uppercase"><i class="bx bx-x-circle not-met"></i> Pelo menos 1 letra maiúscula</li>
+                <li id="tip-number"><i class="bx bx-x-circle not-met"></i> Pelo menos 1 número</li>
+                <li id="tip-special"><i class="bx bx-x-circle not-met"></i> Pelo menos 1 caractere especial</li>
+              </ul>
+            </div>
+          </div>
+          <div class="terms">
+            <input type="checkbox" id="terms" required autocomplete="off">
+            <label for="terms">Eu concordo com os <a href="termos.html" aria-label="Ler termos de serviço">Termos de Serviço</a> e <a href="privacidade.html" aria-label="Ler política de privacidade">Política de Privacidade</a></label>
+          </div>
+          <div class="input_box">
+            <input type="submit" class="input-submit" value="Criar conta" id="submitButton">
+          </div>
+          <div class="social-register-title">
+            <span>Cadastrar com redes sociais</span>
+          </div>
+          <div class="social-register">
+            <button type="button" class="social-button google-button" id="googleRegister" aria-label="Cadastrar com Google">
+              <i class="bx bxl-google google-icon" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="social-button microsoft-button" id="microsoftRegister" aria-label="Cadastrar com Microsoft">
+              <i class="bx bxl-microsoft microsoft-icon" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="login">
+            <p>Já tem uma conta? <a href="login.html" aria-label="Ir para página de login">Entrar</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal de confirmação -->
+  <div class="modal" id="successModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>🎉 Cadastro realizado!</h3>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Bem-vindo à Encantu's! Sua conta foi criada com sucesso.</p>
+        <div class="user-data" id="userDataDisplay"></div>
+        <div class="modal-actions">
+          <button class="btn-primary" id="newRegisterBtn">Novo Cadastro</button>
+          <a href="index.html" class="btn-secondary">Ir para Início</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT DE ACESSIBILIDADE INTEGRADO -->
+<script>
+  // SISTEMA DE ACESSIBILIDADE UNIFICADO
+  class AccessibilityManager {
+    constructor() {
+      this.storageKey = 'encantus_accessibility';
+      this.currentSize = 'normal';
+      this.currentTheme = 'dark';
+      this.init();
+    }
+
+    init() {
+      this.loadSettings();
+      this.setupEventListeners();
+      this.applyAccessibilityToPage();
+    }
+
+    setupEventListeners() {
+      const accessibilityBtn = document.getElementById('accessibilityBtn');
+      const accessibilityMenu = document.getElementById('accessibilityMenu');
+      const fontButtons = document.querySelectorAll('.font-btn');
+      const themeButtons = document.querySelectorAll('.theme-btn');
+      const resetBtn = document.getElementById('resetAccessibility');
+
+      // Alternar menu de acessibilidade
+      if (accessibilityBtn) {
+        accessibilityBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          accessibilityMenu.classList.toggle('active');
+        });
+      }
+
+      // Fechar menu ao clicar fora
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.accessibility-widget')) {
+          accessibilityMenu.classList.remove('active');
+        }
+      });
+
+      // Botões de tamanho de fonte
+      fontButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const size = btn.getAttribute('data-size');
+          this.setFontSize(size);
+        });
+      });
+
+      // Botões de tema
+      themeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const theme = btn.getAttribute('data-theme');
+          this.setTheme(theme);
+        });
+      });
+
+      // Botão de redefinir
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          this.resetSettings();
+        });
+      }
+
+      // Tecla ESC fecha o menu
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          accessibilityMenu.classList.remove('active');
+        }
+      });
+    }
+
+    setFontSize(size) {
+      this.currentSize = size;
+      this.applyFontSize(size);
+      this.saveSettings();
+      this.updateActiveButton(size, 'size');
+      this.showNotification(`Tamanho da fonte alterado para ${this.getSizeName(size)}`);
+    }
+
+    setTheme(theme) {
+      this.currentTheme = theme;
+      this.applyTheme(theme);
+      this.saveSettings();
+      this.updateActiveButton(theme, 'theme');
+      this.showNotification(`Tema alterado para ${this.getThemeName(theme)}`);
+    }
+
+    applyFontSize(size) {
+      // Remove todas as classes de tamanho
+      document.body.classList.remove('font-normal', 'font-large', 'font-x-large');
+      
+      // Adiciona a classe correspondente
+      document.body.classList.add(`font-${size}`);
+      
+      // Atualiza o botão ativo
+      this.updateActiveButton(size, 'size');
+    }
+
+    applyTheme(theme) {
+      // Remove ambas as classes de tema
+      document.body.classList.remove('dark-mode', 'light-mode');
+      
+      // Adiciona a classe correspondente
+      document.body.classList.add(`${theme}-mode`);
+      
+      // Atualiza o botão ativo
+      this.updateActiveButton(theme, 'theme');
+    }
+
+    // APLICAR ACESSIBILIDADE À PÁGINA INTEIRA
+    applyAccessibilityToPage() {
+      // Aplicar tema
+      this.applyTheme(this.currentTheme);
+      
+      // Aplicar tamanho da fonte
+      this.applyFontSize(this.currentSize);
+    }
+
+    updateActiveButton(value, type) {
+      const buttons = document.querySelectorAll(`.${type}-btn`);
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute(`data-${type}`) === value) {
+          btn.classList.add('active');
+        }
+      });
+    }
+
+    getSizeName(size) {
+      const names = {
+        'normal': 'Normal',
+        'large': 'Grande', 
+        'x-large': 'Extra Grande'
+      };
+      return names[size] || 'Normal';
+    }
+
+    getThemeName(theme) {
+      const names = {
+        'dark': 'Escuro',
+        'light': 'Claro'
+      };
+      return names[theme] || 'Escuro';
+    }
+
+    resetSettings() {
+      this.currentSize = 'normal';
+      this.currentTheme = 'dark';
+      this.applyFontSize('normal');
+      this.applyTheme('dark');
+      this.saveSettings();
+      this.showNotification('Configurações de acessibilidade redefinidas!');
+    }
+
+    saveSettings() {
+      const settings = {
+        fontSize: this.currentSize,
+        theme: this.currentTheme,
+        lastUpdated: new Date().toISOString()
+      };
+      localStorage.setItem(this.storageKey, JSON.stringify(settings));
+    }
+
+    loadSettings() {
+      try {
+        const saved = localStorage.getItem(this.storageKey);
+        if (saved) {
+          const settings = JSON.parse(saved);
+          if (settings.fontSize) {
+            this.currentSize = settings.fontSize;
+          }
+          if (settings.theme) {
+            this.currentTheme = settings.theme;
+          }
+        }
+      } catch (error) {
+        console.warn('Erro ao carregar configurações de acessibilidade:', error);
+      }
+    }
+
+    showNotification(message) {
+      // Criar elemento de notificação
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #4a3b9b;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        z-index: 10000;
+        font-family: 'Merriweather', serif;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        animation: slideInRight 0.3s ease;
+      `;
+      
+      notification.textContent = message;
+      document.body.appendChild(notification);
+
+      // Remover após 3 segundos
+      setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 300);
+      }, 3000);
+    }
+  }
+
+  // Sistema de Sugestões Personalizadas
+  class SuggestionsManager {
+    constructor() {
+      this.storageKey = 'encantus_suggestions';
+      this.init();
+    }
+
+    init() {
+      if (!localStorage.getItem(this.storageKey)) {
+        localStorage.setItem(this.storageKey, JSON.stringify({
+          usernames: [],
+          emails: []
+        }));
+      }
+    }
+
+    addSuggestion(type, value) {
+      if (!value.trim()) return;
+      
+      const data = this.getData();
+      const values = data[type];
+      
+      const index = values.indexOf(value);
+      if (index > -1) {
+        values.splice(index, 1);
+      }
+      
+      values.unshift(value);
+      
+      if (values.length > 5) {
+        values.pop();
+      }
+      
+      data[type] = values;
+      this.saveData(data);
+    }
+
+    getSuggestions(type) {
+      const data = this.getData();
+      return data[type] || [];
+    }
+
+    getData() {
+      return JSON.parse(localStorage.getItem(this.storageKey));
+    }
+
+    saveData(data) {
+      localStorage.setItem(this.storageKey, JSON.stringify(data));
+    }
+
+    clearSuggestions(type = null) {
+      if (type) {
+        const data = this.getData();
+        data[type] = [];
+        this.saveData(data);
+      } else {
+        localStorage.removeItem(this.storageKey);
+        this.init();
+      }
+    }
+  }
+
+  // Configurações OAuth - EM PRODUÇÃO, USE VARIÁVEIS DE AMBIENTE
+  const OAUTH_CONFIG = {
+    google: {
+      clientId: 'SEU_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+      scope: 'email profile openid',
+      authUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
+      redirectUri: `${window.location.origin}/auth/callback`
+    },
+    microsoft: {
+      clientId: 'SEU_MICROSOFT_CLIENT_ID',
+      scope: 'user.read openid profile email',
+      authUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+      redirectUri: `${window.location.origin}/auth/callback`
+    }
+  };
+
+  // Inicializar quando o DOM estiver pronto
+  document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar sistema de acessibilidade
+    new AccessibilityManager();
+    
+    // Inicializar gerenciador de sugestões
+    const suggestionsManager = new SuggestionsManager();
+
+    const registerForm = document.getElementById('registerForm');
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('password');
+    const successModal = document.getElementById('successModal');
+    const modalClose = document.getElementById('modalClose');
+    const newRegisterBtn = document.getElementById('newRegisterBtn');
+    const userDataDisplay = document.getElementById('userDataDisplay');
+    const passwordTips = document.getElementById('passwordTips');
+    const inputFields = document.querySelectorAll('.input-field');
+    const usernameInput = document.getElementById('username');
+    const emailInput = document.getElementById('email');
+    const usernameSuggestions = document.getElementById('usernameSuggestions');
+    const emailSuggestions = document.getElementById('emailSuggestions');
+    const googleRegisterBtn = document.getElementById('googleRegister');
+    const microsoftRegisterBtn = document.getElementById('microsoftRegister');
+    
+    let formSubmitted = false;
+
+    // FUNCIONALIDADE DE VER SENHA (IGUAL AO LOGIN)
+    if (togglePassword && passwordField) {
+      // Alternar visibilidade da senha
+      togglePassword.addEventListener('click', function() {
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+        this.classList.toggle('bx-show-alt');
+        this.classList.toggle('bx-hide');
+        
+        const isVisible = type === 'text';
+        this.setAttribute('aria-label', isVisible ? 'Ocultar senha' : 'Mostrar senha');
+      });
+      
+      // Suporte a teclado
+      togglePassword.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    }
+
+    // Sistema de sugestões para username
+    if (usernameInput && usernameSuggestions) {
+      usernameInput.addEventListener('focus', showUsernameSuggestions);
+      usernameInput.addEventListener('input', handleUsernameInput);
+      usernameInput.addEventListener('blur', () => {
+        setTimeout(() => usernameSuggestions.classList.remove('active'), 200);
+      });
+    }
+
+    // Sistema de sugestões para email
+    if (emailInput && emailSuggestions) {
+      emailInput.addEventListener('focus', showEmailSuggestions);
+      emailInput.addEventListener('input', handleEmailInput);
+      emailInput.addEventListener('blur', () => {
+        setTimeout(() => emailSuggestions.classList.remove('active'), 200);
+      });
+    }
+
+    // Validação em tempo real dos campos
+    inputFields.forEach(field => {
+      field.addEventListener('blur', validateField);
+      field.addEventListener('input', clearFieldError);
+    });
+
+    // Dicas de senha em tempo real
+    if (passwordField && passwordTips) {
+      passwordField.addEventListener('input', showPasswordTips);
+    }
+
+    // Registro com provedores sociais
+    if (googleRegisterBtn) {
+      googleRegisterBtn.addEventListener('click', () => signInWithOAuth('google'));
+    }
+
+    if (microsoftRegisterBtn) {
+      microsoftRegisterBtn.addEventListener('click', () => signInWithOAuth('microsoft'));
+    }
+
+    // Envio do formulário
+    if (registerForm) {
+      registerForm.addEventListener('submit', handleFormSubmit);
+    }
+
+    // Modal de sucesso
+    if (modalClose) {
+      modalClose.addEventListener('click', closeSuccessModal);
+    }
+
+    if (newRegisterBtn) {
+      newRegisterBtn.addEventListener('click', resetForm);
+    }
+
+    // Fechar modal ao clicar fora
+    if (successModal) {
+      successModal.addEventListener('click', (e) => {
+        if (e.target === successModal) closeSuccessModal();
+      });
+    }
+
+    // ========== FUNÇÕES PRINCIPAIS ==========
+
+    function showUsernameSuggestions() {
+      const suggestions = suggestionsManager.getSuggestions('usernames');
+      if (suggestions.length > 0) {
+        usernameSuggestions.innerHTML = suggestions
+          .map(username => `<div class="suggestion-item" data-value="${username}">${username}</div>`)
+          .join('');
+        usernameSuggestions.classList.add('active');
+        
+        // Adicionar eventos aos itens de sugestão
+        usernameSuggestions.querySelectorAll('.suggestion-item').forEach(item => {
+          item.addEventListener('click', () => {
+            usernameInput.value = item.getAttribute('data-value');
+            usernameSuggestions.classList.remove('active');
+            validateField({ target: usernameInput });
+          });
+        });
+      }
+    }
+
+    function showEmailSuggestions() {
+      const suggestions = suggestionsManager.getSuggestions('emails');
+      if (suggestions.length > 0) {
+        emailSuggestions.innerHTML = suggestions
+          .map(email => `<div class="suggestion-item" data-value="${email}">${email}</div>`)
+          .join('');
+        emailSuggestions.classList.add('active');
+        
+        // Adicionar eventos aos itens de sugestão
+        emailSuggestions.querySelectorAll('.suggestion-item').forEach(item => {
+          item.addEventListener('click', () => {
+            emailInput.value = item.getAttribute('data-value');
+            emailSuggestions.classList.remove('active');
+            validateField({ target: emailInput });
+          });
+        });
+      }
+    }
+
+    function handleUsernameInput(e) {
+      const value = e.target.value;
+      if (value.length >= 2) {
+        showUsernameSuggestions();
+      } else {
+        usernameSuggestions.classList.remove('active');
+      }
+      clearFieldError(e);
+    }
+
+    function handleEmailInput(e) {
+      const value = e.target.value;
+      if (value.includes('@')) {
+        showEmailSuggestions();
+      } else {
+        emailSuggestions.classList.remove('active');
+      }
+      clearFieldError(e);
+    }
+
+    function validateField(e) {
+      const field = e.target;
+      const value = field.value.trim();
+      let isValid = true;
+      let errorMessage = '';
+
+      switch (field.id) {
+        case 'username':
+          if (value.length < 3) {
+            isValid = false;
+            errorMessage = 'Nome de usuário deve ter pelo menos 3 caracteres';
+          } else if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+            isValid = false;
+            errorMessage = 'Use apenas letras, números e underline';
+          }
+          break;
+
+        case 'email':
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+            isValid = false;
+            errorMessage = 'Digite um email válido';
+          }
+          break;
+
+        case 'password':
+          if (value.length < 6) {
+            isValid = false;
+            errorMessage = 'Senha deve ter pelo menos 6 caracteres';
+          }
+          // Atualizar força da senha em tempo real
+          updatePasswordStrength(value);
+          break;
+
+        case 'confirmPassword':
+          const password = document.getElementById('password').value;
+          if (value !== password) {
+            isValid = false;
+            errorMessage = 'As senhas não coincidem';
+          }
+          break;
+      }
+
+      const errorElement = document.getElementById(`${field.id}-error`);
+      if (errorElement) {
+        if (!isValid && value !== '') {
+          errorElement.textContent = errorMessage;
+          errorElement.style.color = '#ff4444'; // Vermelho para erro
+          field.classList.add('error');
+        } else {
+          errorElement.textContent = '';
+          errorElement.style.color = ''; // Resetar cor
+          field.classList.remove('error');
+        }
+      }
+
+      return isValid;
+    }
+
+    function clearFieldError(e) {
+      const field = e.target;
+      field.classList.remove('error');
+      const errorElement = document.getElementById(`${field.id}-error`);
+      if (errorElement) {
+        errorElement.textContent = '';
+        errorElement.style.color = ''; // Resetar cor
+      }
+    }
+
+    function updatePasswordStrength(password) {
+      const strengthBars = document.querySelectorAll('.strength-bar');
+      const strengthText = document.getElementById('strengthText');
+      const passwordTips = document.getElementById('passwordTips');
+
+      if (!strengthBars.length || !strengthText) return;
+
+      // Resetar barras
+      strengthBars.forEach(bar => {
+        bar.style.backgroundColor = '#e0e0e0';
+      });
+
+      let strength = 0;
+      const tips = [];
+
+      // Critérios de força
+      const hasMinLength = password.length >= 6;
+      const hasLowerCase = /[a-z]/.test(password);
+      const hasUpperCase = /[A-Z]/.test(password);
+      const hasNumber = /\d/.test(password);
+      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+      // Atualizar dicas visuais
+      updatePasswordTip('tip-length', hasMinLength);
+      updatePasswordTip('tip-lowercase', hasLowerCase);
+      updatePasswordTip('tip-uppercase', hasUpperCase);
+      updatePasswordTip('tip-number', hasNumber);
+      updatePasswordTip('tip-special', hasSpecialChar);
+
+      // Calcular força
+      if (hasMinLength) strength++;
+      if (hasLowerCase) strength++;
+      if (hasUpperCase) strength++;
+      if (hasNumber) strength++;
+      if (hasSpecialChar) strength++;
+
+      // Atualizar barras de força
+      for (let i = 0; i < strength; i++) {
+        if (i < strengthBars.length) {
+          let color;
+          if (strength <= 2) {
+            color = '#ff4444'; // Vermelho - Fraco
+          } else if (strength <= 4) {
+            color = '#ffaa00'; // Laranja - Médio
+          } else {
+            color = '#00c853'; // Verde - Forte
+          }
+          strengthBars[i].style.backgroundColor = color;
+        }
+      }
+
+      // Atualizar texto de força
+      let strengthLevel = 'Muito Fraco';
+      let textColor = '#ff4444';
+
+      if (strength === 0) {
+        strengthLevel = 'Muito Fraco';
+        textColor = '#ff4444';
+      } else if (strength <= 2) {
+        strengthLevel = 'Fraco';
+        textColor = '#ff4444';
+      } else if (strength <= 4) {
+        strengthLevel = 'Médio';
+        textColor = '#ffaa00';
+      } else {
+        strengthLevel = 'Forte';
+        textColor = '#00c853';
+      }
+
+      strengthText.textContent = strengthLevel;
+      strengthText.style.color = textColor;
+
+      // Mostrar/ocultar dicas
+      if (passwordTips) {
+        if (password.length > 0) {
+          passwordTips.classList.add('active');
+        } else {
+          passwordTips.classList.remove('active');
+        }
+      }
+    }
+
+    function updatePasswordTip(tipId, condition) {
+      const tipElement = document.getElementById(tipId);
+      if (tipElement) {
+        const icon = tipElement.querySelector('i');
+        if (icon) {
+          if (condition) {
+            icon.className = 'bx bx-check-circle met';
+            icon.style.color = '#00c853'; // Verde para critério atendido
+          } else {
+            icon.className = 'bx bx-x-circle not-met';
+            icon.style.color = '#ff4444'; // Vermelho para critério não atendido
+          }
+        }
+      }
+    }
+
+    function showPasswordTips() {
+      const password = passwordField.value;
+
+      // Atualizar força da senha
+      updatePasswordStrength(password);
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      
+      if (formSubmitted) return;
+      
+      // Validar todos os campos
+      const fields = ['username', 'email', 'password'];
+      let allValid = true;
+      
+      fields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+          const isValid = validateField({ target: field });
+          if (!isValid) allValid = false;
+        }
+      });
+      
+      // Validar termos
+      const termsCheckbox = document.getElementById('terms');
+      if (!termsCheckbox.checked) {
+        allValid = false;
+        showMessage('Você deve aceitar os termos de serviço.', 'error');
+      }
+      
+      if (!allValid) {
+        showMessage('Por favor, corrija os erros no formulário.', 'error');
+        return;
+      }
+      
+      formSubmitted = true;
+      
+      // Coletar dados do formulário
+      const formData = {
+        username: usernameInput.value,
+        email: emailInput.value,
+        password: passwordField.value,
+        timestamp: new Date().toISOString()
+      };
+      
+      // Adicionar às sugestões
+      suggestionsManager.addSuggestion('usernames', formData.username);
+      suggestionsManager.addSuggestion('emails', formData.email);
+      
+      // Simular cadastro bem-sucedido
+      showMessage('Cadastro realizado com sucesso!', 'success');
+      
+      // Mostrar modal de sucesso
+      setTimeout(() => {
+        showSuccessModal(formData);
+      }, 1000);
+    }
+
+    function showSuccessModal(userData) {
+      if (userDataDisplay) {
+        userDataDisplay.innerHTML = `
+          <div class="user-data-item">
+            <strong>Usuário:</strong> ${userData.username}
+          </div>
+          <div class="user-data-item">
+            <strong>Email:</strong> ${userData.email}
+          </div>
+          <div class="user-data-item">
+            <strong>Data de registro:</strong> ${new Date(userData.timestamp).toLocaleString()}
+          </div>
+        `;
+      }
+      
+      if (successModal) {
+        successModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeSuccessModal() {
+      if (successModal) {
+        successModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function resetForm() {
+      if (registerForm) {
+        registerForm.reset();
+      }
+      formSubmitted = false;
+      
+      // Limpar erros
+      inputFields.forEach(field => {
+        field.classList.remove('error');
+        const errorElement = document.getElementById(`${field.id}-error`);
+        if (errorElement) {
+          errorElement.textContent = '';
+          errorElement.style.color = '';
+        }
+      });
+      
+      // Limpar força da senha
+      updatePasswordStrength('');
+      
+      // Limpar dicas de senha
+      if (passwordTips) {
+        passwordTips.classList.remove('active');
+      }
+      
+      closeSuccessModal();
+    }
+
+    function signInWithOAuth(provider) {
+      const config = OAUTH_CONFIG[provider];
+      
+      if (!config) {
+        showMessage('Provedor não configurado.', 'error');
+        return;
+      }
+      
+      showMessage(`Iniciando registro com ${provider}...`, 'info');
+      
+      // Parâmetros OAuth2
+      const params = new URLSearchParams({
+        client_id: config.clientId,
+        redirect_uri: config.redirectUri,
+        response_type: 'code',
+        scope: config.scope,
+        state: generateStateParameter(provider),
+        prompt: 'select_account'
+      });
+      
+      // URL de autorização
+      const authUrl = `${config.authUrl}?${params.toString()}`;
+      
+      // Redirecionar para OAuth
+      window.location.href = authUrl;
+    }
+
+    function generateStateParameter(provider) {
+      const state = {
+        provider: provider,
+        timestamp: Date.now(),
+        random: Math.random().toString(36).substring(2),
+        action: 'register'
+      };
+      
+      const stateString = btoa(JSON.stringify(state));
+      sessionStorage.setItem('oauth_state', stateString);
+      return stateString;
+    }
+
+    function showMessage(message, type) {
+      const existingMessage = document.querySelector('.message');
+      if (existingMessage) existingMessage.remove();
+      
+      const messageElement = document.createElement('div');
+      messageElement.className = `message ${type}`;
+      messageElement.textContent = message;
+      messageElement.setAttribute('role', 'alert');
+      
+      document.body.appendChild(messageElement);
+      
+      setTimeout(() => {
+        messageElement.style.animation = 'slideOutUp 0.3s ease';
+        setTimeout(() => {
+          if (messageElement.parentNode) {
+            messageElement.parentNode.removeChild(messageElement);
+          }
+        }, 300);
+      }, 5000);
+    }
+
+    // Verificar se há parâmetros de callback OAuth na URL
+    function checkOAuthCallback() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const state = urlParams.get('state');
+      const provider = urlParams.get('provider');
+      
+      if (code && state && provider) {
+        handleOAuthCallback();
+      }
+    }
+
+    function handleOAuthCallback() {
+      // Em produção, você processaria o callback OAuth aqui
+      showMessage('Registro com OAuth realizado com sucesso!', 'success');
+      
+      // Limpar parâmetros da URL
+      const url = new URL(window.location);
+      url.search = '';
+      window.history.replaceState({}, '', url);
+    }
+
+    // Verificar callback na inicialização
+    checkOAuthCallback();
+
+    // Inicializar força da senha
+    updatePasswordStrength('');
+  });
+</script>
+</body>
+</html>

@@ -1,700 +1,1913 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Comparação detalhada das principais plataformas de hospedagem estática: Render, Vercel e Netlify">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Comparação de Plataformas de Hospedagem Estática</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Encantu's - Sua livraria virtual de indicações literárias" />
+  <title>Encantu's Books - Indicações Literárias</title>
+  <link rel="stylesheet" href="cs/style.css">
+  <!-- Adicionando Font Awesome para os ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+<!-- ESTILOS DE ACESSIBILIDADE -->
+<style>
+  /* === WIDGET DE ACESSIBILIDADE === */
+  .accessibility-widget {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1002;
+  }
+
+  .accessibility-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4b2e68 0%, #47216d 100%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1003;
+  }
+
+  .accessibility-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+  }
+
+  .accessibility-menu {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: rgba(26, 14, 63, 0.95);
+    backdrop-filter: blur(15px);
+    border-radius: 12px;
+    padding: 20px;
+    width: 280px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: none;
+    z-index: 1002;
+  }
+
+  .accessibility-menu.active {
+    display: block;
+    animation: fadeInUp 0.3s ease;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .accessibility-menu h3 {
+    color: white;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 10px;
+    font-size: 1.1rem;
+  }
+
+  .theme-controls,
+  .font-size-controls {
+    margin-bottom: 20px;
+  }
+
+  .theme-controls span,
+  .font-size-controls span {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 10px;
+    font-family: 'Merriweather', serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .theme-buttons,
+  .font-size-buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .theme-btn,
+  .font-btn,
+  .reset-btn {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Merriweather', serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .theme-btn:hover,
+  .font-btn:hover,
+  .reset-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .theme-btn.active,
+  .font-btn.active {
+    background: linear-gradient(135deg, #4b2e68 0%, #47216d 100%);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: white;
+    box-shadow: 0 4px 15px rgba(75, 46, 104, 0.4);
+  }
+
+  .accessibility-actions {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
+    margin-top: 10px;
+  }
+
+  .reset-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .reset-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  /* === SISTEMA DE TAMANHO DE FONTE CORRIGIDO === */
+  body.font-normal {
+    font-size: 16px;
+  }
+
+  body.font-large {
+    font-size: 18px;
+  }
+
+  body.font-x-large {
+    font-size: 20px;
+  }
+
+  /* Ajustes específicos para elementos com diferentes tamanhos de fonte */
+  body.font-large .topo-menu a,
+  body.font-large .input,
+  body.font-large .btn-informacoes,
+  body.font-large .rodape-contato p,
+  body.font-large .suggestion,
+  body.font-large .categoria-header,
+  body.font-large .subcategoria-link {
+    font-size: 1.05em;
+  }
+
+  body.font-x-large .topo-menu a,
+  body.font-x-large .input,
+  body.font-x-large .btn-informacoes,
+  body.font-x-large .rodape-contato p,
+  body.font-x-large .suggestion,
+  body.font-x-large .categoria-header,
+  body.font-x-large .subcategoria-link {
+    font-size: 1.1em;
+  }
+
+  body.font-large .titulo-novidades,
+  body.font-large .titulo-categoria {
+    font-size: 3.2rem;
+  }
+
+  body.font-x-large .titulo-novidades,
+  body.font-x-large .titulo-categoria {
+    font-size: 3.5rem;
+  }
+
+  body.font-large .card-livro .titulo-livro {
+    font-size: 1.15rem;
+  }
+
+  body.font-x-large .card-livro .titulo-livro {
+    font-size: 1.2rem;
+  }
+
+  body.font-large .card-livro .autor-livro {
+    font-size: 0.95rem;
+  }
+
+  body.font-x-large .card-livro .autor-livro {
+    font-size: 1rem;
+  }
+
+  /* === MODO ESCURO (PADRÃO) === */
+  body.dark-mode {
+    /* Cores Principais */
+    --primary: #1a0e3f;
+    --secondary: #2d1b5f;
+    --accent: #7c3aed;
+    --accent-light: #8b5cf6;
+    --accent-dark: #6d28d9;
     
-    <!-- CSS Otimizado para Microsoft Edge -->
-    <style>
-        :root {
-            --vermelho-principal: #8B0000;
-            --vermelho-escuro: #5A0000;
-            --vermelho-medio: #B22222;
-            --vermelho-claro: #CD5C5C;
-            --vermelho-suave: #FFE4E1;
-            --cinza-escuro: #1A1A1A;
-            --branco: #FFF;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
-        }
-        
-        body {
-            background-color: var(--cinza-escuro);
-            color: var(--branco);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        header {
-            background: linear-gradient(to right, var(--vermelho-escuro), var(--vermelho-principal));
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        }
-        
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: center;
-        }
-        
-        .logo span {
-            color: var(--vermelho-claro);
-        }
-        
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            margin-top: 12px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        nav ul li a {
-            color: var(--branco);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-            padding: 5px 8px;
-            border-radius: 4px;
-        }
-        
-        nav ul li a:hover {
-            color: var(--vermelho-claro);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .hero {
-            background: linear-gradient(rgba(90, 0, 0, 0.8), rgba(139, 0, 0, 0.7));
-            padding: 80px 0;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        
-        .hero p {
-            font-size: 1.1rem;
-            max-width: 800px;
-            margin: 0 auto 25px;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--vermelho-medio);
-            color: var(--branco);
-            padding: 10px 25px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.2s ease;
-            border: 2px solid var(--vermelho-medio);
-        }
-        
-        .btn:hover {
-            background-color: transparent;
-            color: var(--vermelho-claro);
-            transform: translateY(-2px);
-        }
-        
-        section {
-            padding: 60px 0;
-        }
-        
-        section:nth-child(even) {
-            background-color: rgba(90, 0, 0, 0.2);
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-        
-        .section-title h2 {
-            font-size: 2rem;
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-        
-        .section-title h2:after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 3px;
-            background-color: var(--vermelho-medio);
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .platforms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-        
-        .platform-card {
-            background: linear-gradient(145deg, rgba(90, 0, 0, 0.7), rgba(139, 0, 0, 0.5));
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        
-        .platform-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-        }
-        
-        .platform-header {
-            padding: 18px;
-            text-align: center;
-            background-color: var(--vermelho-principal);
-        }
-        
-        .platform-header h3 {
-            font-size: 1.6rem;
-            margin-bottom: 8px;
-        }
-        
-        .platform-body {
-            padding: 18px;
-        }
-        
-        .platform-body ul {
-            list-style: none;
-            margin-bottom: 18px;
-        }
-        
-        .platform-body ul li {
-            padding: 7px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            padding-left: 22px;
-        }
-        
-        .platform-body ul li:before {
-            content: '▶';
-            position: absolute;
-            left: 0;
-            color: var(--vermelho-claro);
-            font-size: 0.8rem;
-        }
-        
-        .platform-link {
-            display: block;
-            text-align: center;
-            background-color: var(--vermelho-medio);
-            color: var(--branco);
-            padding: 9px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: background-color 0.2s ease;
-        }
-        
-        .platform-link:hover {
-            background-color: var(--vermelho-principal);
-        }
-        
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-        
-        .comparison-table th, .comparison-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .comparison-table th {
-            background-color: var(--vermelho-principal);
-            font-weight: 700;
-        }
-        
-        .comparison-table tr:nth-child(even) {
-            background-color: rgba(90, 0, 0, 0.2);
-        }
-        
-        .comparison-table tr:hover {
-            background-color: rgba(139, 0, 0, 0.3);
-        }
-        
-        .rating {
-            color: var(--vermelho-claro);
-            font-weight: 700;
-        }
-        
-        .tutorial-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .step {
-            background: linear-gradient(145deg, rgba(90, 0, 0, 0.5), rgba(139, 0, 0, 0.3));
-            padding: 22px;
-            border-radius: 8px;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-        
-        .step-number {
-            position: absolute;
-            top: -12px;
-            left: -12px;
-            width: 35px;
-            height: 35px;
-            background-color: var(--vermelho-medio);
-            color: var(--branco);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1rem;
-        }
-        
-        .step h3 {
-            margin-bottom: 12px;
-            color: var(--vermelho-claro);
-        }
-        
-        footer {
-            background: linear-gradient(to right, var(--vermelho-escuro), var(--vermelho-principal));
-            padding: 30px 0 15px;
-            text-align: center;
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: 18px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .footer-links a {
-            color: var(--branco);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--vermelho-claro);
-        }
-        
-        .copyright {
-            margin-top: 18px;
-            font-size: 0.85rem;
-            opacity: 0.8;
-        }
-        
-        /* Media Queries */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-            
-            .platforms-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .comparison-table {
-                display: block;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-            
-            .hero {
-                padding: 60px 0;
-            }
-            
-            section {
-                padding: 50px 0;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .section-title h2 {
-                font-size: 1.6rem;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                gap: 8px;
-            }
-        }
-        
-        /* Compatibilidade específica para Edge */
-        @supports (-ms-ime-align: auto) {
-            .platform-card {
-                transition: none;
-            }
-            
-            .btn:hover {
-                transform: none;
-            }
-        }
-    </style>
+    /* Cores de Texto */
+    --text-primary: #ffffff;
+    --text-secondary: #e2e8f0;
+    --text-muted: #94a3b8;
+    
+    /* Cores de Fundo */
+    --background-primary: #1a0e3f;
+    --background-secondary: #2d1b5f;
+    --background-card: rgba(45, 27, 95, 0.8);
+    
+    /* Cores de Borda */
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border-medium: rgba(255, 255, 255, 0.2);
+    
+    /* Gradientes para Modo Escuro */
+    --gradient-primary: linear-gradient(135deg, #1a0e3f 0%, #2d1b5f 50%, #3c2968 100%);
+    --gradient-accent: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%);
+    
+    /* Sombras para Modo Escuro */
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.5);
+    
+    background: var(--gradient-primary);
+    color: var(--text-primary);
+  }
+
+  /* === MODO CLARO COM CORES LILÁS ELEGANTES === */
+  body.light-mode {
+    /* Cores Principais */
+    --primary: #F4F0FF;
+    --secondary: #FFFFFF;
+    --accent: #4B2E83;
+    --accent-light: #6A40C4;
+    --accent-dark: #4B2E83;
+    
+    /* Cores de Texto */
+    --text-primary: #000000;
+    --text-secondary: #000000;
+    --text-muted: rgba(26, 14, 63, 0.95);
+    
+    /* Cores de Fundo */
+    --background-primary: #FAFAFA;
+    --background-secondary: #F8F9FA;
+    --background-card: #ffffff;
+    
+    /* Cores de Borda */
+    --border-light: #2d186df2;
+    --border-medium: #2d186df2;
+    
+    /* Gradientes para Modo Claro */
+    --gradient-primary: linear-gradient(135deg, #F4F0FF 0%, #FFFFFF 50%, #F4F0FF 100%);
+    --gradient-accent: linear-gradient(135deg, #4B2E83 0%, #6A40C4 50%, #4B2E83 100%);
+    
+    /* Sombras para Modo Claro */
+    --shadow: 0 4px 10px rgba(83, 23, 202, 0.15);
+    --shadow-hover: 0 6px 20px rgba(84, 0, 252, 0.2);
+    
+    background: var(--background-primary);
+    color: var(--text-primary);
+  }
+
+  /* ========== CORREÇÕES ESPECÍFICAS PARA O MODO CLARO LILÁS ========== */
+
+  /* Header no modo claro */
+  body.light-mode .topo {
+    background: var(--background-secondary) !important;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  /* Texto do menu no topo em ROXO */
+  body.light-mode .topo-menu a {
+    color: #26144b !important;
+    font-weight: 600;
+  }
+
+  body.light-mode .topo-menu a:hover {
+    color: #8B6BEF !important;
+    background: rgba(107, 64, 196, 0.1);
+  }
+
+  /* Cards no modo claro */
+  body.light-mode .card-livro {
+    background: var(--background-card) !important;
+    border: 1px solid var(--border-light) !important;
+    box-shadow: var(--shadow) !important;
+    color: var(--text-primary);
+  }
+
+  /* Títulos no modo claro */
+  body.light-mode .titulo-novidades,
+  body.light-mode .titulo-categoria,
+  body.light-mode h1,
+  body.light-mode h2,
+  body.light-mode h3 {
+    color: var(--accent) !important;
+    font-weight: 700;
+  }
+
+  /* Botões preenchidos no modo claro */
+  body.light-mode .btn-informacoes {
+    background: var(--accent) !important;
+    color: white !important;
+    border: none;
+  }
+
+  body.light-mode .btn-informacoes:hover {
+    background: var(--accent-light) !important;
+  }
+
+  /* Botões contornados no modo claro */
+  body.light-mode .btn-voltar {
+    background: transparent !important;
+    border: 2px solid var(--accent) !important;
+    color: var(--accent) !important;
+  }
+
+  body.light-mode .btn-voltar:hover {
+    background: var(--background-secondary) !important;
+  }
+
+  /* Seção de destaque/banner no modo claro */
+  body.light-mode .banner-section {
+    background: var(--background-secondary) !important;
+  }
+
+  /* RODAPÉ NO MODO CLARO - CORRIGIDO PARA MAIS ESCURO */
+  body.light-mode .rodape {
+    background: #4B2E83 !important;
+  }
+
+  /* Textos do rodapé - BRANCOS para contraste */
+  body.light-mode .rodape-contato p,
+  body.light-mode .rodape-texto,
+  body.light-mode .rodape-info {
+    color: #FFFFFF !important;
+  }
+
+  /* Email no rodapé - BRANCO */
+  body.light-mode .rodape-email,
+  body.light-mode .rodape-contato a[href^="mailto"] {
+    color: #FFFFFF !important;
+    font-weight: 600;
+  }
+
+  body.light-mode .rodape-email:hover,
+  body.light-mode .rodape-contato a[href^="mailto"]:hover {
+    color: #E2E8F0 !important;
+  }
+
+  /* Input e busca no modo claro */
+  body.light-mode .input {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--border-medium);
+    color: var(--text-primary) !important;
+  }
+
+  body.light-mode .input::placeholder {
+    color: var(--text-muted) !important;
+  }
+
+  body.light-mode .input:focus {
+    background: rgba(255, 255, 255, 1);
+    border-color: var(--accent);
+    color: var(--text-primary) !important;
+  }
+
+  body.light-mode .input-container .search-icon {
+    color: var(--text-muted);
+  }
+
+  body.light-mode .input:focus ~ .search-icon {
+    color: var(--accent);
+  }
+
+  /* Sugestões de busca no modo claro */
+  body.light-mode .suggestions {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid var(--border-light);
+    color: var(--text-primary) !important;
+  }
+
+  body.light-mode .suggestion {
+    color: var(--text-primary) !important;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  body.light-mode .suggestion:hover {
+    background: rgba(107, 64, 196, 0.08);
+    color: var(--accent-light) !important;
+  }
+
+  /* Logo no modo claro */
+  body.light-mode .topo-imagem {
+    filter: brightness(0.8);
+  }
+
+  /* Botão de categorias no modo claro */
+  body.light-mode .categorias-btn {
+    background: var(--background-card);
+    border: 2px solid var(--border-medium);
+  }
+
+  body.light-mode .categorias-btn:hover {
+    border-color: var(--accent);
+  }
+
+  /* Menu de categorias no modo claro */
+  body.light-mode .categorias-menu {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid var(--border-light);
+  }
+
+  body.light-mode .categorias-menu h3 {
+    color: var(--accent);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  body.light-mode .categoria-header {
+    background: rgba(248, 250, 252, 0.8);
+    color: var(--text-secondary);
+  }
+
+  body.light-mode .categoria-header:hover {
+    background: rgba(107, 64, 196, 0.08);
+    color: var(--accent-light);
+  }
+
+  body.light-mode .categoria-item.ativo .categoria-header {
+    background: rgba(107, 64, 196, 0.12);
+    color: var(--accent-light);
+  }
+
+  body.light-mode .subcategorias {
+    background: rgba(248, 250, 252, 0.6);
+    border-top: 1px solid var(--border-light);
+  }
+
+  body.light-mode .subcategoria-link {
+    color: var(--text-secondary);
+  }
+
+  body.light-mode .subcategoria-link:hover {
+    background: rgba(107, 64, 196, 0.08);
+    color: var(--accent-light);
+  }
+
+  /* Cards de livros no modo claro */
+  body.light-mode .autor-livro {
+    color: var(--text-muted);
+  }
+
+  body.light-mode .titulo-livro {
+    color: var(--text-primary);
+  }
+
+  /* Carrossel no modo claro */
+  body.light-mode .indicacao-arraste {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--border-light);
+  }
+
+  /* Botão de acessibilidade no modo claro */
+  body.light-mode .accessibility-btn {
+    background: linear-gradient(135deg, #4B2E83 0%, #6A40C4 100%) !important;
+  }
+
+  body.light-mode .accessibility-menu {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid var(--border-light);
+  }
+
+  body.light-mode .accessibility-menu h3 {
+    color: var(--accent);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  body.light-mode .theme-controls span,
+  body.light-mode .font-size-controls span {
+    color: var(--text-secondary);
+  }
+
+  body.light-mode .font-btn,
+  body.light-mode .theme-btn,
+  body.light-mode .reset-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--border-medium);
+    color: var(--text-secondary);
+  }
+
+  body.light-mode .font-btn:hover,
+  body.light-mode .theme-btn:hover,
+  body.light-mode .reset-btn:hover {
+    background: var(--background-secondary);
+    border-color: var(--accent);
+    color: var(--text-primary);
+  }
+
+  body.light-mode .theme-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  /* Textos secundários */
+  body.light-mode .autor-livro,
+  body.light-mode .texto-secundario {
+    color: var(--text-secondary) !important;
+  }
+
+  /* Animações para notificações */
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideOutRight {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">Hospedagem<span>Estática</span></div>
-            <nav>
-                <ul>
-                    <li><a href="#introducao">Introdução</a></li>
-                    <li><a href="#plataformas">Plataformas</a></li>
-                    <li><a href="#comparacao">Comparação</a></li>
-                    <li><a href="#tutoriais">Tutoriais</a></li>
-                    <li><a href="#conclusao">Conclusão</a></li>
-                </ul>
-            </nav>
+  <!-- Botão de Acessibilidade -->
+  <div class="accessibility-widget">
+    <button class="accessibility-btn" id="accessibilityBtn" aria-label="Opções de acessibilidade">
+      <i class="fas fa-universal-access"></i>
+    </button>
+    
+    <div class="accessibility-menu" id="accessibilityMenu">
+      <h3>ACESSIBILIDADE</h3>
+      
+      <!-- Controle de Tema -->
+      <div class="theme-controls">
+        <span>Tema do Site:</span>
+        <div class="theme-buttons">
+          <button class="theme-btn" data-theme="dark" aria-label="Modo escuro">
+            <i class="fas fa-moon"></i> Escuro
+          </button>
+          <button class="theme-btn" data-theme="light" aria-label="Modo claro">
+            <i class="fas fa-sun"></i> Claro
+          </button>
         </div>
-    </header>
-
-    <section class="hero">
-        <div class="container">
-            <h1>Comparação de Plataformas de Hospedagem Estática</h1>
-            <p>Análise crítica das principais plataformas para hospedar sites estáticos: Render, Vercel e Netlify. Descubra qual é a melhor opção para o seu projeto.</p>
-            <a href="#plataformas" class="btn">Explorar Plataformas</a>
+      </div>
+      
+      <!-- Controle de Tamanho de Fonte -->
+      <div class="font-size-controls">
+        <span>Tamanho da Fonte:</span>
+        <div class="font-size-buttons">
+          <button class="font-btn" data-size="normal" aria-label="Fonte normal">
+            A
+          </button>
+          <button class="font-btn" data-size="large" aria-label="Fonte grande">
+            A
+          </button>
+          <button class="font-btn" data-size="x-large" aria-label="Fonte extra grande">
+            A
+          </button>
         </div>
-    </section>
+      </div>
+      
+      <div class="accessibility-actions">
+        <button class="reset-btn" id="resetAccessibility" aria-label="Redefinir configurações">
+          <i class="fas fa-redo"></i> Redefinir
+        </button>
+      </div>
+    </div>
+  </div>
 
-    <section id="introducao">
-        <div class="container">
-            <div class="section-title">
-                <h2>Introdução</h2>
-            </div>
-            <div style="max-width:800px;margin:0 auto">
-                <p>Com a crescente popularidade de frameworks como React, Vue e Angular, além de geradores de sites estáticos como Jekyll, Hugo e Gatsby, a hospedagem de sites estáticos se tornou uma necessidade para desenvolvedores modernos.</p>
-                <p style="margin-top:15px">Nesta análise, vamos comparar três das principais plataformas de hospedagem estática disponíveis atualmente: Render, Vercel e Netlify. Vamos examinar suas características, facilidade de uso, recursos e acessibilidade.</p>
-            </div>
+  <!-- Header -->
+  <header class="topo">
+    <div class="topo-content">
+      <!-- LADO ESQUERDO: Logo/Mago e Menu -->
+      <div class="topo-esquerdo">
+          <div class="topo-logo">
+          <a href="index.html">
+            <img class="topo-imagem" src="imagem/mago.png" alt="Logo Encantu's" />
+          </a>
         </div>
-    </section>
+        <nav class="topo-menu">
+          <a href="cadastro.html">CADASTRO</a>
+          <a href="login.html">LOGIN</a>
+          <a href="Sobre.html">SOBRE</a>
+        </nav>
+      </div>
 
-    <section id="plataformas">
-        <div class="container">
-            <div class="section-title">
-                <h2>Plataformas Analisadas</h2>
-            </div>
-            <div class="platforms-grid">
-                <div class="platform-card">
-                    <div class="platform-header">
-                        <h3>Render</h3>
-                        <p>Cloud Application Platform</p>
-                    </div>
-                    <div class="platform-body">
-                        <p>Render é uma plataforma de nuvem unificada para construir e executar todos os seus aplicativos e sites com implantação automática a partir do Git.</p>
-                        <ul>
-                            <li>Deploy contínuo a partir do Git</li>
-                            <li>SSL gratuito automático</li>
-                            <li>CDN global</li>
-                            <li>Suporte a domínios customizados</li>
-                            <li>Ambientes de preview</li>
-                        </ul>
-                        <a href="https://render.com" class="platform-link" target="_blank" rel="noopener">Visitar Render</a>
-                    </div>
-                </div>
-                
-                <div class="platform-card">
-                    <div class="platform-header">
-                        <h3>Vercel</h3>
-                        <p>AI Cloud Platform</p>
-                    </div>
-                    <div class="platform-body">
-                        <p>Vercel é a plataforma para frontend developers, fornecendo a velocidade e confiabilidade que equipes criativas precisam para criar experiências de ponta.</p>
-                        <ul>
-                            <li>Deploy instantâneo com Git</li>
-                            <li>Edge Network global</li>
-                            <li>Preview automático para cada PR</li>
-                            <li>Funções serverless</li>
-                            <li>Otimizado para Next.js</li>
-                        </ul>
-                        <a href="https://vercel.com" class="platform-link" target="_blank" rel="noopener">Visitar Vercel</a>
-                    </div>
-                </div>
-                
-                <div class="platform-card">
-                    <div class="platform-header">
-                        <h3>Netlify</h3>
-                        <p>All-in-one platform for the web</p>
-                    </div>
-                    <div class="platform-body">
-                        <p>Netlify é uma plataforma poderosa que automatiza a criação de sites e aplicativos modernos, conectando seu ecossistema de ferramentas e criando um fluxo de trabalho eficiente.</p>
-                        <ul>
-                            <li>Deploy contínuo</li>
-                            <li>Funções serverless</li>
-                            <li>Forms e Identity</li>
-                            <li>Split Testing</li>
-                            <li>Ampla gama de integrações</li>
-                        </ul>
-                        <a href="https://netlify.com" class="platform-link" target="_blank" rel="noopener">Visitar Netlify</a>
-                    </div>
-                </div>
-            </div>
+      <!-- LADO DIREITO: Busca e Botão de Categorias -->
+       <div class="topo-direito">
+        <div class="input-container">
+          <input class="input" type="text" placeholder="Procure por um livro..." id="searchText">
+          <!-- Ícone de lupa branca que funciona como botão de busca -->
+          <i class="fas fa-search search-icon" id="searchButton"></i>
+          <div id="suggestions" class="suggestions"></div>
         </div>
-    </section>
-
-    <section id="comparacao">
-        <div class="container">
-            <div class="section-title">
-                <h2>Comparação Detalhada</h2>
-            </div>
-            <div class="table-container">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Característica</th>
-                            <th>Render</th>
-                            <th>Vercel</th>
-                            <th>Netlify</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Facilidade de publicação</td>
-                            <td><span class="rating">8/10</span> - Configuração simples via Git</td>
-                            <td><span class="rating">9/10</span> - Extremamente fácil com integração nativa</td>
-                            <td><span class="rating">9/10</span> - Interface intuitiva e drag-and-drop</td>
-                        </tr>
-                        <tr>
-                            <td>Recursos gratuitos</td>
-                            <td>Deploys ilimitados, 100GB de banda/mês</td>
-                            <td>Deploys ilimitados, 100GB de banda/mês</td>
-                            <td>Deploys ilimitados, 100GB de banda/mês</td>
-                        </tr>
-                        <tr>
-                            <td>Performance</td>
-                            <td>CDN global, bom desempenho</td>
-                            <td>Edge Network, excelente performance</td>
-                            <td>CDN global, performance muito boa</td>
-                        </tr>
-                        <tr>
-                            <td>Usabilidade</td>
-                            <td>Interface limpa, mas menos intuitiva</td>
-                            <td>Interface moderna e muito intuitiva</td>
-                            <td>Interface completa e bem organizada</td>
-                        </tr>
-                        <tr>
-                            <td>Acessibilidade</td>
-                            <td>Boa documentação, suporte limitado no free</td>
-                            <td>Excelente documentação, comunidade ativa</td>
-                            <td>Documentação completa, ampla comunidade</td>
-                        </tr>
-                        <tr>
-                            <td>Integrações</td>
-                            <td>Integrações básicas com serviços populares</td>
-                            <td>Excelentes integrações, especialmente com Next.js</td>
-                            <td>Ampla gama de integrações e add-ons</td>
-                        </tr>
-                        <tr>
-                            <td>Funções serverless</td>
-                            <td>Disponível em planos pagos</td>
-                            <td>Incluído no plano gratuito com limites</td>
-                            <td>Incluído no plano gratuito com limites</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <section id="tutoriais">
-        <div class="container">
-            <div class="section-title">
-                <h2>Tutoriais de Hospedagem</h2>
-            </div>
-            <div class="tutorial-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Preparação do Site Estático</h3>
-                    <p>Certifique-se de que seu site estático está pronto para deploy. Isso inclui ter todos os arquivos HTML, CSS, JavaScript e assets em uma pasta, geralmente chamada "dist" ou "build".</p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Hospedagem no Render</h3>
-                    <p>
-                        1. Crie uma conta no Render<br>
-                        2. Conecte seu repositório Git<br>
-                        3. Selecione "Static Site" como tipo de serviço<br>
-                        4. Configure o diretório de build (ex: "dist")<br>
-                        5. Defina o comando de build (ex: "npm run build")<br>
-                        6. Clique em "Create Static Site"
-                    </p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Hospedagem no Vercel</h3>
-                    <p>
-                        1. Crie uma conta no Vercel<br>
-                        2. Instale a CLI do Vercel (opcional)<br>
-                        3. Conecte seu repositório Git<br>
-                        4. O Vercel detectará automaticamente seu framework<br>
-                        5. Configure as variáveis de ambiente se necessário<br>
-                        6. Clique em "Deploy"
-                    </p>
-                </div>
-                
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Hospedagem no Netlify</h3>
-                    <p>
-                        1. Crie uma conta no Netlify<br>
-                        2. Conecte seu repositório Git<br>
-                        3. Configure o comando de build e diretório de publicação<br>
-                        4. Adicione variáveis de ambiente se necessário<br>
-                        5. Clique em "Deploy site"<br>
-                        6. Alternativamente, use o recurso de drag-and-drop
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="conclusao">
-        <div class="container">
-            <div class="section-title">
-                <h2>Conclusão</h2>
-            </div>
-            <div style="max-width:800px;margin:0 auto">
-                <p>Após analisar as três plataformas, podemos concluir que cada uma tem seus pontos fortes:</p>
-                <ul style="margin-top:15px;margin-left:20px">
-                    <li><strong>Render</strong> é uma opção sólida com boa relação custo-benefício, especialmente para quem já usa outros serviços da plataforma.</li>
-                    <li><strong>Vercel</strong> oferece a melhor experiência para desenvolvedores, especialmente para projetos usando Next.js, com performance excepcional.</li>
-                    <li><strong>Netlify</strong> é a plataforma mais completa, com a maior variedade de recursos e integrações, ideal para projetos complexos.</li>
-                </ul>
-                <p style="margin-top:15px">A escolha final dependerá das necessidades específicas do seu projeto, mas todas as três plataformas oferecem excelentes opções para hospedagem de sites estáticos com planos gratuitos generosos.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="logo">Hospedagem<span>Estática</span></div>
-                <div class="footer-links">
-                    <a href="#introducao">Introdução</a>
-                    <a href="#plataformas">Plataformas</a>
-                    <a href="#comparacao">Comparação</a>
-                    <a href="#tutoriais">Tutoriais</a>
-                    <a href="#conclusao">Conclusão</a>
-                </div>
-                <div class="copyright">
-                    &copy; 2023 Comparação de Plataformas de Hospedagem Estática. Todos os direitos reservados.
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- JavaScript Otimizado para Microsoft Edge -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Scroll suave para âncoras
-            function smoothScroll(event) {
-                event.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                }
-            }
+        
+        <!-- Botão de Categorias -->
+        <div class="categorias-container">
+          <button class="categorias-btn" id="categoriasBtn">
+           <img class="topo-imagem" src="imagem/livro.png" alt="Logo Encantu's" />
+          </button>
+          <div class="categorias-menu" id="categoriasMenu">
+            <div class="categorias-header">
+              <h3>CATEGORIAS DE LIVROS</h3>
             
-            // Adicionar evento de clique para todos os links de âncora
-            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-                anchor.addEventListener('click', smoothScroll);
-            });
+            </div>
             
-            // Otimização para imagens (caso sejam adicionadas posteriormente)
-            const images = document.querySelectorAll('img');
-            images.forEach(function(img) {
-                if (!img.complete) {
-                    img.style.opacity = '0';
-                    img.addEventListener('load', function() {
-                        this.style.opacity = '1';
-                    });
-                }
-            });
+            <div class="categorias-resultados" id="categoriasResultados">
+              <span>7 categorias disponíveis</span>
+            </div>
             
-            // Verificar se o IntersectionObserver está disponível
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver(function(entries) {
-                    entries.forEach(function(entry) {
-                        if (entry.isIntersecting) {
-                            entry.target.style.opacity = '1';
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1 });
-                
-                // Observar seções para animação de entrada
-                document.querySelectorAll('section').forEach(function(section) {
-                    section.style.opacity = '0';
-                    section.style.transition = 'opacity 0.5s ease';
-                    observer.observe(section);
-                });
-            }
-            
-            // Fallback para navegadores sem suporte a IntersectionObserver
-            else {
-                document.querySelectorAll('section').forEach(function(section) {
-                    section.style.opacity = '1';
-                });
-            }
+            <div class="categorias-lista" id="categoriasLista">
+              <!-- Fantasia -->
+              <div class="categoria-item" data-categoria="fantasia">
+                <div class="categoria-header">
+                  <div class="categoria-info">
+                    
+                    <span>Fantasia</span>
+                  </div>
+                 
+                </div>
+                <div class="subcategorias">
+                  <a href="prisioneiro_de_azkaban.html" class="subcategoria-link">
+                   <i class="fas fa-book subcategoria-icon"></i>
+                    Harry Potter e o Prisioneiro de Azkaban
+                  </a>
+                  <a href="calice_de_fogo.html" class="subcategoria-link">
+                   <i class="fas fa-book subcategoria-icon"></i>
+                    Harry Potter e o Cálice de Fogo
+                  </a>
+                  <a href="O_príncipe_cruel.html" class="subcategoria-link">
+                  <i class="fas fa-book subcategoria-icon"></i>
+                    O Príncipe Cruel
+                  </a>
+                  <a href="sociedade_anel.html" class="subcategoria-link">
+                   <i class="fas fa-book subcategoria-icon"></i>
+                    Senhor dos Anéis
+                  </a>
+                </div>
+              </div>
+              
+              <!-- Aventura -->
+              <div class="categoria-item" data-categoria="aventura">
+                <div class="categoria-header">
+                  <div class="categoria-info">
+                   
+                    <span>Aventura</span>
+                  </div>
+                 
+                </div>
+                <div class="subcategorias">
+                  <a href="One_Piece.html" class="subcategoria-link">
+                   <i class="fas fa-book subcategoria-icon"></i>
+                    One Piece, Vol. 106
+                  </a>
+                  <a href="Horizon.html" class="subcategoria-link">
+              <i class="fas fa-book subcategoria-icon"></i>
+                    The Art of Horizon Zero Dawn
+                  </a>
+                  <a href="narnia.html" class="subcategoria-link">
+                    <i class="fas fa-book subcategoria-icon"></i>
+                    As Crônicas de Nárnia
+                  </a>
+                  <a href="percy_jackson.html" class="subcategoria-link">
+                    <i class="fas fa-book subcategoria-icon"></i>
+                    Percy Jackson
+                  </a>
+                </div>
+              </div>
+              
+              <!-- Romance -->
+              <div class="categoria-item" data-categoria="romance">
+                <div class="categoria-header">
+                  <div class="categoria-info">
+                    
+                    <span>Romance</span>
+                  </div>
+                 
+                </div>
+                <div class="subcategorias">
+                  <a href="orgulho_preconceito.html" class="subcategoria-link">
+                   <i class="fas fa-book subcategoria-icon"></i>
+                    Orgulho e Preconceito
+                  </a>
+                  <a href="culpa_estrelas.html" class="subcategoria-link">
+                    <i class="fas fa-book subcategoria-icon"></i>
+                    A Culpa é das Estrelas
+                  </a>
+                  <a href="como_eu_era.html" class="subcategoria-link">
+                    <i class="fas fa-book subcategoria-icon"></i>
+                    Como Eu Era Antes de Você
+                  </a>
+                  <a href="eleanor_park.html" class="subcategoria-link">
+                    <i class="fas fa-book subcategoria-icon"></i>
+                    Eleanor & Park
+                  </a>
+                </div>
+              </div>
+              
+              <!-- Suspense -->
+              <div class="categoria-item" data-categoria="suspense">
+                <div class="categoria-header">
+                  <div class="categoria-info">
+                    
+                    <span>Suspense</span>
+                  </div>
+                 
+                </div>
+                <div class="subcategorias">
+                  <a href="UM_DE_NOS.HTML" class="subcategoria-link">
+                    <i class="fas fa-book subcategoria-icon"></i>
+                    Um de nós é o próximo
+                  </a>
+                  <a href="garota_exemplar.html" class="subcategoria-link">
+                    <i class="fas fa-book subcategoria-icon"></i>
+                    Garota Exemplar
+                  </a>
+                  <a href="paciente_silenciosa.html" class="subcategoria-link">
+                   <i class="fas fa-book subcategoria-icon"></i>
+                    A Paciente Silenciosa
+                  </a>
+                  <a href="homem_giz.html" class="subcategoria-link">
+                    <i class="fas fa-book subcategoria-icon"></i>
+                    O Homem de Giz
+                  </a>
+                </div>
+              </div>
+              
+              <!-- Terror -->
+              <div class="categoria-item" data-categoria="terror">
+                <div class="categoria-header">
+                  <div class="categoria-info">
+                    
+                    <span>Terror</span>
+                  </div>
+                  
+                </div>
+                <div class="subcategorias">
+                  <a href="it_coisa.html" class="subcategoria-link">
+                  <i class="fas fa-book subcategoria-icon"></i>
+                    It: A Coisa
+                  </a>
+                  <a href="iluminado.html" class="subcategoria-link">
+                   <i class="fas fa-book subcategoria-icon"></i>
+                    O Iluminado
+                  </a>
+                  <a href="dracula.html" class="subcategoria-link">
+                    <i class="fas fa-book subcategoria-icon"></i>
+                    Drácula
+                  </a>
+                  <a href="exorcista.html" class="subcategoria-link">
+                   <i class="fas fa-book subcategoria-icon"></i>
+                    O Exorcista
+                  </a>
+                </div>
+              </div>
+              
+              <!-- Drama -->
+              <div class="categoria-item" data-categoria="drama">
+                <div class="categoria-header">
+                  <div class="categoria-info">
+                 
+                    <span>Drama</span>
+                  </div>
+                  
+                </div>
+                <div class="subcategorias">
+                  <a href="Declinio.html" class="subcategoria-link">
+                    <i class="fas fa-book subcategoria-icon"></i>
+                    Declínio de um homem
+                  </a>
+                  <a href="menina_livros.html" class="subcategoria-link">
+                <i class="fas fa-book subcategoria-icon"></i>
+                    A Menina que Roubava Livros
+                  </a>
+                  <a href="sol_todos.html" class="subcategoria-link">
+               <i class="fas fa-book subcategoria-icon"></i>
+                    O Sol é para Todos
+                  </a>
+                  <a href="1984.html" class="subcategoria-link">
+                   <i class="fas fa-book subcategoria-icon"></i>
+                    1984
+                  </a>
+                </div>
+              </div>
+              
+              <!-- Manga/Manhwa -->
+              <div class="categoria-item" data-categoria="manga">
+                <div class="categoria-header">
+                  <div class="categoria-info">
+                 
+                    <span>Manga/Manhwa</span>
+                  </div>
+                  
+                </div>
+                <div class="subcategorias">
+                  <a href="Weak_Hero.html" class="subcategoria-link">
+                    <i class="fas fa-book subcategoria-icon"></i>
+                    Weak Hero Vol. 1
+                  </a>
+                  <a href="Casas_estranhas.html" class="subcategoria-link">
+                    <i class="fas fa-book subcategoria-icon"></i>
+                    Casas Estranhas Vol. 1
+                  </a>
+                  <a href="Bungo_Stray_Dogs.html" class="subcategoria-link">
+                   <i class="fas fa-book subcategoria-icon"></i>
+                    Bungo Stray Dogs Vol. 25
+                  </a>
+                  <a href="attack_titan.html" class="subcategoria-link">
+                   <i class="fas fa-book subcategoria-icon"></i>
+                    Attack on Titan Vol. 1
+                  </a>
+                </div>
+              </div>
+            </div>
+          
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CARROSSEL PROMOCIONAL - COM INDICAÇÃO DE ARRASTE -->
+  <section class="carrossel-promocional-section">
+    <div class="carrossel-promocional">
+      <ul class="slides">
+        <li class="slide ativo">
+          <div class="slide-img" style="background-image: url('imagem/u.png')">
+            <!-- Sem conteúdo de texto -->
+          </div>
+        </li>
+        
+        <li class="slide">
+          <div class="slide-img" style="background-image: url('imagem/amarelo.png')">
+            <!-- Sem conteúdo de texto -->
+          </div>
+        </li>
+        
+        <li class="slide">
+          <div class="slide-img">
+            <!-- Vídeo da aranha -->
+            <video class="slide-video" autoplay muted loop playsinline>
+              <source src="imagem/miles.mp4" type="video/mp4">
+            </video>
+          </div>
+        </li>
+      </ul>
+      
+      <!-- INDICAÇÃO DE ARRASTE -->
+      <div class="indicacao-arraste">
+        Arraste para os lados para navegar
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO DE LIVROS POR CATEGORIA -->
+  <section class="secao-categoria" id="secaoCategoria" style="display: none;">
+    <div class="categoria-header">
+      <h2 class="titulo-categoria" id="tituloCategoria">LIVROS DE FANTASIA</h2>
+      <button class="btn-voltar" id="btnVoltar">
+        <i class="fas fa-arrow-left"></i> Voltar para Todos os Livros
+      </button>
+    </div>
+    
+    <div class="grid-livros-categoria" id="gridLivrosCategoria">
+      <!-- Os livros da categoria serão carregados aqui -->
+    </div>
+  </section>
+
+  <!-- SEÇÃO DE INDICAÇÕES EM DESTAQUE -->
+  <section class="secao-novidades" id="secaoNovidades">
+    <h2 class="titulo-novidades">INDICAÇÕES EM DESTAQUE</h2>
+    
+    <div class="grid-livros" id="gridLivros">
+      <!-- Os cards de livros serão gerados pelo JavaScript -->
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer class="rodape">
+    <div class="rodape-content">
+      <div class="rodape-contato">
+        <p> Quer sugerir uma indicação?</p>
+        <p>Email: <a href="mailto:encantus1livraria@gmail.com">encantus1livraria@gmail.com</a></p>
+        <p> Sua livraria virtual de indicações</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GATO MÁGICO NIGHT -->
+  <div class="gato-magico" id="gatoMagico" title="Clique para ouvir o guia mágico">
+    <img src="imagem_gato/sentado_2.png" alt="Gato Night, guia do site Encantu's">
+  </div>
+
+  <!-- Áudio do gato (oculto) -->
+  <audio id="audioGato" preload="auto">
+    <source src="audio_do_gato/gato.mpeg" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+
+  <script>
+    // === SISTEMA DE ACESSIBILIDADE CORRIGIDO ===
+    class AccessibilityManager {
+      constructor() {
+        this.storageKey = 'encantus_accessibility';
+        this.currentSize = 'normal';
+        this.currentTheme = 'dark';
+        this.init();
+      }
+
+      init() {
+        this.loadSettings();
+        this.setupEventListeners();
+        this.applyAccessibilityToPage();
+      }
+
+      setupEventListeners() {
+        const accessibilityBtn = document.getElementById('accessibilityBtn');
+        const accessibilityMenu = document.getElementById('accessibilityMenu');
+        const fontButtons = document.querySelectorAll('.font-btn');
+        const themeButtons = document.querySelectorAll('.theme-btn');
+        const resetBtn = document.getElementById('resetAccessibility');
+
+        // Alternar menu de acessibilidade
+        if (accessibilityBtn) {
+          accessibilityBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            accessibilityMenu.classList.toggle('active');
+          });
+        }
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.accessibility-widget')) {
+            accessibilityMenu.classList.remove('active');
+          }
         });
-    </script>
+
+        // Botões de tamanho de fonte
+        fontButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const size = btn.getAttribute('data-size');
+            this.setFontSize(size);
+          });
+        });
+
+        // Botões de tema
+        themeButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const theme = btn.getAttribute('data-theme');
+            this.setTheme(theme);
+          });
+        });
+
+        // Botão de redefinir
+        if (resetBtn) {
+          resetBtn.addEventListener('click', () => {
+            this.resetSettings();
+          });
+        }
+
+        // Tecla ESC fecha o menu
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            accessibilityMenu.classList.remove('active');
+          }
+        });
+      }
+
+      setFontSize(size) {
+        this.currentSize = size;
+        this.applyFontSize(size);
+        this.saveSettings();
+        this.updateActiveButton(size, 'size');
+        this.showNotification(`Tamanho da fonte alterado para ${this.getSizeName(size)}`);
+      }
+
+      setTheme(theme) {
+        this.currentTheme = theme;
+        this.applyTheme(theme);
+        this.saveSettings();
+        this.updateActiveButton(theme, 'theme');
+        this.showNotification(`Tema alterado para ${this.getThemeName(theme)}`);
+      }
+
+      applyFontSize(size) {
+        // Remove todas as classes de tamanho
+        document.body.classList.remove('font-normal', 'font-large', 'font-x-large');
+        
+        // Adiciona a classe correspondente
+        document.body.classList.add(`font-${size}`);
+        
+        // Atualiza o botão ativo
+        this.updateActiveButton(size, 'size');
+      }
+
+      applyTheme(theme) {
+        // Remove ambas as classes de tema
+        document.body.classList.remove('dark-mode', 'light-mode');
+        
+        // Adiciona a classe correspondente
+        document.body.classList.add(`${theme}-mode`);
+        
+        // Atualiza o botão ativo
+        this.updateActiveButton(theme, 'theme');
+      }
+
+      // APLICAR ACESSIBILIDADE À PÁGINA INTEIRA
+      applyAccessibilityToPage() {
+        // Aplicar tema
+        this.applyTheme(this.currentTheme);
+        
+        // Aplicar tamanho da fonte
+        this.applyFontSize(this.currentSize);
+      }
+
+      updateActiveButton(value, type) {
+        const buttons = document.querySelectorAll(`.${type}-btn`);
+        buttons.forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute(`data-${type}`) === value) {
+            btn.classList.add('active');
+          }
+        });
+      }
+
+      getSizeName(size) {
+        const names = {
+          'normal': 'Normal',
+          'large': 'Grande', 
+          'x-large': 'Extra Grande'
+        };
+        return names[size] || 'Normal';
+      }
+
+      getThemeName(theme) {
+        const names = {
+          'dark': 'Escuro',
+          'light': 'Claro'
+        };
+        return names[theme] || 'Escuro';
+      }
+
+      resetSettings() {
+        this.currentSize = 'normal';
+        this.currentTheme = 'dark';
+        this.applyFontSize('normal');
+        this.applyTheme('dark');
+        this.saveSettings();
+        this.showNotification('Configurações de acessibilidade redefinidas!');
+      }
+
+      saveSettings() {
+        const settings = {
+          fontSize: this.currentSize,
+          theme: this.currentTheme,
+          lastUpdated: new Date().toISOString()
+        };
+        localStorage.setItem(this.storageKey, JSON.stringify(settings));
+      }
+
+      loadSettings() {
+        try {
+          const saved = localStorage.getItem(this.storageKey);
+          if (saved) {
+            const settings = JSON.parse(saved);
+            if (settings.fontSize) {
+              this.currentSize = settings.fontSize;
+            }
+            if (settings.theme) {
+              this.currentTheme = settings.theme;
+            }
+          }
+        } catch (error) {
+          console.warn('Erro ao carregar configurações de acessibilidade:', error);
+        }
+      }
+
+      showNotification(message) {
+        // Criar elemento de notificação
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: #4a3b9b;
+          color: white;
+          padding: 12px 20px;
+          border-radius: 8px;
+          z-index: 10000;
+          font-family: 'Merriweather', serif;
+          font-weight: 600;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+          animation: slideInRight 0.3s ease;
+        `;
+        
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        // Remover após 3 segundos
+        setTimeout(() => {
+          notification.style.animation = 'slideOutRight 0.3s ease';
+          setTimeout(() => {
+            if (notification.parentNode) {
+              notification.parentNode.removeChild(notification);
+            }
+          }, 300);
+        }, 3000);
+      }
+    }
+
+    // DADOS COMPLETOS DOS LIVROS POR CATEGORIA
+    const livrosPorCategoria = {
+      fantasia: [
+        {
+          id: 1,
+          titulo: "Harry Potter e o Prisioneiro de Azkaban",
+          autor: "J.K. ROWLING",
+          imagem: "imagem/prisioneiro_de_azkaban.png",
+          link: "prisioneiro_de_azkaban.html",
+          categoria: "fantasia"
+        },
+        {
+          id: 2,
+          titulo: "Harry Potter e o Cálice de Fogo",
+          autor: "J.K. ROWLING",
+          imagem: "imagem/calice_de_fogo.png",
+          link: "calice_de_fogo.html",
+          categoria: "fantasia"
+        },
+        {
+          id: 3,
+          titulo: "O príncipe cruel (Vol. 1 O Povo do Ar",
+          autor: "Holly Black",
+          imagem: "https://m.media-amazon.com/images/I/81FH6q0EqYS._SY466_.jpg",
+          link: "o_príncipe_cruel.html",
+          categoria: "fantasia"
+        }
+      ],
+      aventura: [
+        {
+          id: 4,
+          titulo: "One Piece, Vol. 106",
+          autor: "Eiichiro Oda",
+          imagem: "https://m.media-amazon.com/images/I/81KuBRfJwxL._SY466_.jpg",
+          link: "one_Piece.html",
+          categoria: "aventura"
+        },
+        {
+          id: 5,
+          titulo: "The Art of Horizon Zero Dawn",
+          autor: "Paul Davies",
+          imagem: "https://m.media-amazon.com/images/I/810HInpTcJL._SY425_.jpg",
+          link: "horizon.html",
+          categoria: "aventura"
+        }
+      ],
+      romance: [
+        {
+          id: 6,
+          titulo: "Um de nós é o próximo (Vol. 2 Um de nós)",
+          autor: "Karen M. McManus",
+          imagem: "https://m.media-amazon.com/images/I/81WYMklv2pL._SY466_.jpg",
+          link: "um_de_nos.HTML",
+          categoria: "romance"
+        }
+      ],
+      terror: [
+        {
+          id: 7,
+          titulo: "Declínio de um homem",
+          autor: "Osamu Dazai",
+          imagem: "https://m.media-amazon.com/images/I/81ZWDEnkQ8L._SY466_.jpg",
+          link: "declinio.html",
+          categoria: "terror"
+        }
+      ],
+      manga: [
+        {
+          id: 8,
+          titulo: "Weak Hero Vol. 1",
+          autor: "Kim JS.Seopass",
+          imagem: "https://m.media-amazon.com/images/I/81PWk6DUQuL._SY466_.jpg",
+          link: "weak_Hero.html",
+          categoria: "manga"
+        },
+        {
+          id: 9,
+          titulo: "Casas estranhas: Casas estranhas Vol. 1",
+          autor: "Uketsu",
+          imagem: "https://m.media-amazon.com/images/I/81-m2B4F9hL._SY466_.jpg",
+          link: "casas_estranhas.html",
+          categoria: "manga"
+        },
+        {
+          id: 10,
+          titulo: "Bungo Stray Dogs Vol. 25",
+          autor: "Kafka Asagiri",
+          imagem: "https://m.media-amazon.com/images/I/612ECD2GQEL._SY425_.jpg",
+          link: "bungo_Stray_Dogs.html",
+          categoria: "manga"
+        }
+      ]
+    };
+
+    // FUNÇÃO PARA GERAR OS CARDS DE LIVROS (todos os livros)
+    function gerarCardsLivros() {
+      const gridLivros = document.getElementById('gridLivros');
+      if (!gridLivros) return;
+      
+      gridLivros.innerHTML = '';
+      
+      // Junta todos os livros de todas as categorias
+      const todosLivros = Object.values(livrosPorCategoria).flat();
+      
+      todosLivros.forEach(livro => {
+        const card = document.createElement('div');
+        card.className = 'card-livro';
+        card.innerHTML = `
+          <div class="livro-imagem-container">
+            <img src="${livro.imagem}" alt="${livro.titulo}" class="livro-imagem">
+          </div>
+          <div class="livro-info">
+            <div class="autor-livro">${livro.autor}</div>
+            <div class="titulo-livro">${livro.titulo}</div>
+            <div class="livro-botoes">
+              <a href="${livro.link}" class="btn-informacoes">Ver Informações</a>
+            </div>
+          </div>
+        `;
+        gridLivros.appendChild(card);
+      });
+    }
+
+    // FUNÇÃO PARA MOSTRAR LIVROS POR CATEGORIA
+    function mostrarLivrosPorCategoria(categoria) {
+      const livrosCategoria = livrosPorCategoria[categoria];
+      const gridLivrosCategoria = document.getElementById('gridLivrosCategoria');
+      const tituloCategoria = document.getElementById('tituloCategoria');
+      const secaoCategoria = document.getElementById('secaoCategoria');
+      const secaoNovidades = document.getElementById('secaoNovidades');
+      
+      if (!livrosCategoria || !gridLivrosCategoria) return;
+      
+      // Atualiza o título da categoria
+      const nomesCategorias = {
+        fantasia: 'FANTASIA',
+        aventura: 'AVENTURA', 
+        romance: 'ROMANCE',
+        suspense: 'SUSPENSE',
+        terror: 'TERROR',
+        drama: 'DRAMA',
+        manga: 'MANGA/MANHWA'
+      };
+      
+      tituloCategoria.textContent = `LIVROS DE ${nomesCategorias[categoria]}`;
+      
+      // Limpa e preenche o grid da categoria
+      gridLivrosCategoria.innerHTML = '';
+      
+      livrosCategoria.forEach(livro => {
+        const card = document.createElement('div');
+        card.className = 'card-livro';
+        card.innerHTML = `
+          <div class="livro-imagem-container">
+            <img src="${livro.imagem}" alt="${livro.titulo}" class="livro-imagem">
+          </div>
+          <div class="livro-info">
+            <div class="autor-livro">${livro.autor}</div>
+            <div class="titulo-livro">${livro.titulo}</div>
+            <div class="livro-botoes">
+              <a href="${livro.link}" class="btn-informacoes">Ver Informações</a>
+            </div>
+          </div>
+        `;
+        gridLivrosCategoria.appendChild(card);
+      });
+      
+      // Mostra a seção da categoria e esconde a seção principal
+      if (secaoCategoria) secaoCategoria.style.display = 'block';
+      if (secaoNovidades) secaoNovidades.style.display = 'none';
+      
+      // Rola para a seção da categoria
+      if (secaoCategoria) secaoCategoria.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // FUNÇÃO PARA VOLTAR PARA TODOS OS LIVROS
+    function voltarParaTodosLivros() {
+      const secaoCategoria = document.getElementById('secaoCategoria');
+      const secaoNovidades = document.getElementById('secaoNovidades');
+      
+      if (secaoCategoria) secaoCategoria.style.display = 'none';
+      if (secaoNovidades) secaoNovidades.style.display = 'block';
+      
+      // Rola de volta para o topo
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // CARROSSEL PROMOCIONAL
+    class Carrossel {
+      constructor(container) {
+        this.container = container;
+        this.slides = container.querySelectorAll('.slide');
+        this.indicacaoArraste = container.querySelector('.indicacao-arraste');
+        this.indexAtual = 0;
+        this.totalSlides = this.slides.length;
+        this.intervalo = null;
+        this.velocidade = 7000;
+        
+        this.arrastando = false;
+        this.startX = 0;
+        this.currentX = 0;
+        this.threshold = 50;
+        
+        this.iniciar();
+        this.adicionarEventosArrasto();
+        this.configurarIndicacao();
+      }
+      
+      iniciar() {
+        this.mostrarSlide(this.indexAtual);
+        this.iniciarAutoPlay();
+      }
+      
+      mostrarSlide(index) {
+        this.slides.forEach(slide => slide.classList.remove('ativo'));
+        this.slides[index].classList.add('ativo');
+        this.indexAtual = index;
+      }
+      
+      slideAnterior() {
+        let novoIndex = this.indexAtual - 1;
+        if (novoIndex < 0) novoIndex = this.totalSlides - 1;
+        this.mostrarSlide(novoIndex);
+        this.reiniciarAutoPlay();
+      }
+      
+      proximoSlide() {
+        let novoIndex = this.indexAtual + 1;
+        if (novoIndex >= this.totalSlides) novoIndex = 0;
+        this.mostrarSlide(novoIndex);
+        this.reiniciarAutoPlay();
+      }
+      
+      iniciarAutoPlay() {
+        this.intervalo = setInterval(() => {
+          this.proximoSlide();
+        }, this.velocidade);
+      }
+      
+      pararAutoPlay() {
+        if (this.intervalo) {
+          clearInterval(this.intervalo);
+          this.intervalo = null;
+        }
+      }
+      
+      reiniciarAutoPlay() {
+        this.pararAutoPlay();
+        this.iniciarAutoPlay();
+      }
+      
+      adicionarEventosArrasto() {
+        const container = this.container;
+        
+        container.addEventListener('mousedown', this.iniciarArrasto.bind(this));
+        document.addEventListener('mousemove', this.arrastar.bind(this));
+        document.addEventListener('mouseup', this.terminarArrasto.bind(this));
+        
+        container.addEventListener('touchstart', this.iniciarArrasto.bind(this));
+        document.addEventListener('touchmove', this.arrastar.bind(this));
+        document.addEventListener('touchend', this.terminarArrasto.bind(this));
+        
+        container.addEventListener('dragstart', (e) => e.preventDefault());
+      }
+      
+      iniciarArrasto(e) {
+        this.arrastando = true;
+        this.pararAutoPlay();
+        
+        if (e.type === 'touchstart') {
+          this.startX = e.touches[0].clientX;
+        } else {
+          this.startX = e.clientX;
+        }
+        
+        this.currentX = this.startX;
+        this.container.style.cursor = 'grabbing';
+        
+        if (this.indicacaoArraste) {
+          this.indicacaoArraste.style.opacity = '0';
+        }
+      }
+      
+      arrastar(e) {
+        if (!this.arrastando) return;
+        e.preventDefault();
+        
+        if (e.type === 'touchmove') {
+          this.currentX = e.touches[0].clientX;
+        } else {
+          this.currentX = e.clientX;
+        }
+      }
+      
+      terminarArrasto(e) {
+        if (!this.arrastando) return;
+        this.arrastando = false;
+        this.container.style.cursor = 'grab';
+        
+        const diffX = this.startX - this.currentX;
+        
+        if (Math.abs(diffX) > this.threshold) {
+          if (diffX > 0) {
+            this.proximoSlide();
+          } else {
+            this.slideAnterior();
+          }
+        }
+        
+        if (this.indicacaoArraste) {
+          setTimeout(() => {
+            this.indicacaoArraste.style.opacity = '0.8';
+          }, 1000);
+        }
+        
+        setTimeout(() => {
+          this.reiniciarAutoPlay();
+        }, 3000);
+      }
+      
+      configurarIndicacao() {
+        setTimeout(() => {
+          if (this.indicacaoArraste && !this.arrastando) {
+            this.indicacaoArraste.style.opacity = '0';
+          }
+        }, 5000);
+        
+        this.container.addEventListener('mouseenter', () => {
+          if (this.indicacaoArraste) {
+            this.indicacaoArraste.style.opacity = '0.8';
+          }
+        });
+        
+        this.container.addEventListener('mouseleave', () => {
+          if (this.indicacaoArraste && !this.arrastando) {
+            setTimeout(() => {
+              this.indicacaoArraste.style.opacity = '0';
+            }, 1000);
+          }
+        });
+      }
+    }
+
+    // CONFIGURAÇÃO DO MENU DE CATEGORIAS MELHORADO
+    function configurarMenuCategorias() {
+      const categoriasBtn = document.getElementById('categoriasBtn');
+      const categoriasMenu = document.getElementById('categoriasMenu');
+      const categoriasContainer = document.querySelector('.categorias-container');
+      const categoriaItems = document.querySelectorAll('.categoria-item');
+      const categoriasSearch = document.getElementById('categoriasSearch');
+      const categoriasLista = document.getElementById('categoriasLista');
+      const categoriasResultados = document.getElementById('categoriasResultados');
+      const categoriasFechar = document.getElementById('categoriasFechar');
+      const btnVoltar = document.getElementById('btnVoltar');
+      
+      if (!categoriasBtn || !categoriasMenu) return;
+      
+      // Abrir/fechar menu
+      categoriasBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        categoriasMenu.classList.toggle('ativo');
+        if (categoriasMenu.classList.contains('ativo')) {
+          categoriasSearch.focus();
+        }
+      });
+      
+      // Fechar menu ao clicar fora
+      document.addEventListener('click', function(e) {
+        if (!categoriasContainer.contains(e.target)) {
+          categoriasMenu.classList.remove('ativo');
+          categoriaItems.forEach(item => {
+            item.classList.remove('ativo');
+          });
+        }
+      });
+      
+      // Fechar menu com botão
+      if (categoriasFechar) {
+        categoriasFechar.addEventListener('click', function() {
+          categoriasMenu.classList.remove('ativo');
+        });
+      }
+      
+      // Prevenir fechamento ao clicar dentro do menu
+      categoriasMenu.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+      
+      // Expandir/recolher categorias
+      categoriaItems.forEach(item => {
+        const header = item.querySelector('.categoria-header');
+        header.addEventListener('click', function(e) {
+          e.stopPropagation();
+          
+          // Fechar outras categorias se não estiver segurando Ctrl
+          if (!e.ctrlKey) {
+            categoriaItems.forEach(otherItem => {
+              if (otherItem !== item) {
+                otherItem.classList.remove('ativo');
+              }
+            });
+          }
+          
+          item.classList.toggle('ativo');
+        });
+      });
+      
+      // Sistema de busca dentro do menu
+      if (categoriasSearch) {
+        categoriasSearch.addEventListener('input', function() {
+          const query = this.value.toLowerCase().trim();
+          filtrarCategorias(query);
+        });
+      }
+      
+      // Fechar categorias ao clicar em um link
+      document.querySelectorAll('.subcategoria-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          categoriasMenu.classList.remove('ativo');
+          categoriaItems.forEach(item => {
+            item.classList.remove('ativo');
+          });
+        });
+      });
+      
+      if (btnVoltar) {
+        btnVoltar.addEventListener('click', voltarParaTodosLivros);
+      }
+      
+      // Função para filtrar categorias
+      function filtrarCategorias(query) {
+        let categoriasVisiveis = 0;
+        let subcategoriasVisiveis = 0;
+        
+        categoriaItems.forEach(item => {
+          const categoriaNome = item.querySelector('.categoria-header span').textContent.toLowerCase();
+          const subcategorias = item.querySelectorAll('.subcategoria-link');
+          let subcategoriasEncontradas = 0;
+          
+          // Filtrar subcategorias
+          subcategorias.forEach(subcategoria => {
+            const subcategoriaNome = subcategoria.textContent.toLowerCase();
+            
+            if (query === '' || categoriaNome.includes(query) || subcategoriaNome.includes(query)) {
+              subcategoria.classList.remove('oculto');
+              subcategoria.classList.add('filtrado');
+              subcategoriasEncontradas++;
+              subcategoriasVisiveis++;
+            } else {
+              subcategoria.classList.remove('filtrado');
+              subcategoria.classList.add('oculto');
+            }
+          });
+          
+          // Mostrar/ocultar categoria baseado nos resultados
+          if (query === '' || categoriaNome.includes(query) || subcategoriasEncontradas > 0) {
+            item.classList.remove('oculto');
+            item.classList.add('filtrado');
+            categoriasVisiveis++;
+            
+            // Expandir automaticamente se houver resultados da busca
+            if (query !== '' && (categoriaNome.includes(query) || subcategoriasEncontradas > 0)) {
+              item.classList.add('ativo');
+            } else if (query === '') {
+              // Recolher todas quando a busca estiver vazia
+              item.classList.remove('ativo');
+            }
+          } else {
+            item.classList.remove('filtrado');
+            item.classList.add('oculto');
+          }
+        });
+        
+        // Atualizar contador de resultados
+        if (categoriasResultados) {
+          if (query === '') {
+            categoriasResultados.innerHTML = `<span>${categoriasVisiveis} categorias disponíveis</span>`;
+          } else {
+            categoriasResultados.innerHTML = `<span>${subcategoriasVisiveis} resultados encontrados em ${categoriasVisiveis} categorias</span>`;
+          }
+        }
+      }
+      
+      // Inicializar contador
+      if (categoriasResultados) {
+        categoriasResultados.innerHTML = `<span>${categoriaItems.length} categorias disponíveis</span>`;
+      }
+    }
+
+    // FUNÇÃO DE BUSCA DE LIVROS
+    function searchBook() {
+      const query = document.getElementById("searchText").value.trim();
+
+      // Normaliza o texto: remove acentos, converte para minúsculas e remove espaços extras
+      const normalizeText = (text) => {
+        return text
+          .toLowerCase()
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+          .replace(/\s+/g, ' ')
+          .trim();
+      };
+
+      const normalizedQuery = normalizeText(query);
+
+      const books = {
+        // Fantasia
+        "senhor dos aneis": "aneis.html",
+        "senhor dos anéis": "aneis.html",
+        "sociedade do anel": "aneis.html",
+        "cronicas de narnia": "cronicas.html",
+        "crônicas de nárnia": "cronicas.html",
+        "as cronicas de narnia": "cronicas.html",
+        "as crônicas de nárnia": "cronicas.html",
+        "narnia": "cronicas.html",
+        "crônicas": "cronicas.html",
+        "cronicas": "cronicas.html",
+      
+        
+        // Harry Potter: prisioneiro de azkaban
+        "harry potter": "prisioneiro_de_azkaban.html",
+        "harry potter e o prisioneiro de azkaban": "prisioneiro_de_azkaban.html",
+        "prisioneiro de azkaban": "prisioneiro_de_azkaban.html",
+
+        //harry potte: calice de fogo
+        "harry potter e o calice de fogo": "calice_de_fogo.html",
+        "harry potter e o cálice de fogo": "calice_de_fogo.html",
+        "calice de fogo": "calice_de_fogo.html",
+        "cálice de fogo": "calice_de_fogo.html",
+        
+        // One Piece
+        "one piece": "one_piece.html",
+        "one piece vol 106": "one_piece.html",
+        "one piece volume 106": "pne_piece.html",
+        
+        
+        
+        // o principe cruel
+        "o principe cruel": "o_príncipe_cruel.html",
+        "o príncipe cruel": "o_príncipe_cruel.html",
+        "principe cruel": "o_príncipe_cruel.html",
+        "príncipe cruel": "o_príncipe_cruel.html",
+        
+         // casas estranhas
+        "casas estranhas": "casas_estranhas.html",
+        "casas estranhas vol 1": "casas_estranhas.html",
+        "casas estranhas volume 1": "casas_estranhas.html",
+        
+         // the art of horizon zero dawn
+        "the art of horizon zero dawn": "horizon.html",
+        "art of horizon zero dawn": "horizon.html",
+        "horizon zero dawn": "horizon.html",
+        "horizon": "horizon.html",
+        
+         // um de nos e o proximo
+        "um de nos e o proximo": "um_de_nos.html",
+        "um de nós é o próximo": "um_de_nos.html",
+        "um de nos e o proximo vol 2": "um_de_nos.html",
+        "um de nos": "um_de_nos.html",
+        
+         // declinio de um homem
+        "declinio de um homem": "declinio.html",
+        "declínio de um homem": "declinio.html",
+        "declínio": "declinio.html",
+        
+         // weak hero
+        "weak hero": "weak_hero.html",
+        "weak hero vol 1": "weak_hero.html",
+        "weak": "weak_hero.html",
+        
+         // bungo stray dogs
+        "bungo stray dogs": "bungo_stray_dogs.html",
+        "bungo stray dogs vol 25": "bungo_stray_dogs.html",
+        "bungo": "bungo_stray_dogs.html",
+      
+      };
+
+      // Busca exata primeiro
+      if (books[normalizedQuery]) {
+        window.location.href = books[normalizedQuery];
+        return;
+      }
+
+      // Busca parcial se não encontrar exato
+      for (const [bookName, bookLink] of Object.entries(books)) {
+        if (normalizedQuery.includes(bookName) || bookName.includes(normalizedQuery)) {
+          window.location.href = bookLink;
+          return;
+        }
+      }
+    }
+
+    // SUGESTÕES DE BUSCA
+    function configurarBusca() {
+      const searchInput = document.getElementById('searchText');
+      const suggestionsDiv = document.getElementById('suggestions');
+      const searchButton = document.getElementById('searchButton');
+
+      // Adicionar evento de clique na lupa
+      searchButton.addEventListener('click', searchBook);
+
+      // Função para normalizar texto (igual à usada na busca)
+      const normalizeText = (text) => {
+        return text
+          .toLowerCase()
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+          .replace(/\s+/g, ' ')
+          .trim();
+      };
+
+      searchInput.addEventListener('input', function() {
+        const query = this.value.trim();
+        suggestionsDiv.innerHTML = '';
+
+        if (query) {
+          const normalizedQuery = normalizeText(query);
+          
+          const books = {
+            "senhor dos anéis": "aneis.html",
+            "bungo stray dogs vol 25": "bungo_stray_gogs.html",
+            "harry potter e o cálice de fogo": "calice_de_fogo.html",
+            "casas estranhas vol 1": "casas_estranhas.html",
+            "crônicas de nárnia": "cronicas.html",
+            "declínio de um homem": "declinio.html",
+            "god of war (vol. 1)": "god.html",
+            "the art of horizon zero dawn": "horizon.html",
+            "Mortal Kombat": "kombat.html",
+            "o príncipe cruel": "o_príncipe_cruel.html",
+            "one piece vol 106": "one_Piece.html",
+            "harry potter e o prisioneiro de azkaban": "prisioneiro_de_azkaban.html",
+            "um de nós é o próximo": "um_de_nos.HTML",
+            "weak hero vol 1": "weak_Hero.html",
+            "the last of us: sonhos americanos": "zombi.html",
+          };
+
+          const matches = Object.keys(books).filter(book => 
+            normalizeText(book).includes(normalizedQuery) || 
+            normalizedQuery.includes(normalizeText(book))
+          );
+
+          if (matches.length > 0) {
+            matches.forEach(match => {
+              const suggestion = document.createElement('div');
+              suggestion.className = 'suggestion';
+              suggestion.textContent = match;
+              suggestion.addEventListener('click', () => {
+                searchInput.value = match;
+                window.location.href = books[match];
+              });
+              suggestionsDiv.appendChild(suggestion);
+            });
+            suggestionsDiv.style.display = 'block';
+          } else {
+            suggestionsDiv.style.display = 'none';
+          }
+        } else {
+          suggestionsDiv.style.display = 'none';
+        }
+      });
+
+      searchInput.addEventListener('blur', function() {
+        setTimeout(() => {
+          suggestionsDiv.style.display = 'none';
+        }, 200);
+      });
+
+      searchInput.addEventListener('focus', function() {
+        if (this.value.trim() && suggestionsDiv.children.length > 0) {
+          suggestionsDiv.style.display = 'block';
+        }
+      });
+
+      // Evento de Enter para busca
+      searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          searchBook();
+        }
+      });
+    }
+
+    // SCROLL BEHAVIOR PARA HEADER
+    function configurarScrollHeader() {
+      let lastScroll = 0;
+      const topo = document.querySelector('.topo');
+
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > 100 && currentScroll > lastScroll) {
+          topo.style.transform = 'translateY(-100%)';
+        } else {
+          topo.style.transform = 'translateY(0)';
+        }
+
+        lastScroll = currentScroll;
+      });
+    }
+
+    // === SCRIPT DO GATO MÁGICO NIGHT (MODIFICADO PARA ÁUDIO) ===
+    const gato = document.getElementById("gatoMagico");
+    const audioGato = document.getElementById("audioGato");
+    let reagindo = false;
+
+    // Evento de clique no gato
+    gato.addEventListener("click", async () => {
+      if (!reagindo) {
+        // Iniciar a reprodução do áudio
+        reagindo = true;
+        gato.classList.add("reagindo");
+        
+        try {
+          await audioGato.play();
+        } catch (error) {
+          console.error("Erro ao reproduzir áudio:", error);
+          reagindo = false;
+          gato.classList.remove("reagindo");
+        }
+      } else {
+        // Se já está falando, para o áudio
+        audioGato.pause();
+        audioGato.currentTime = 0;
+        reagindo = false;
+        gato.classList.remove("reagindo");
+      }
+    });
+
+    // Eventos para controlar o estado do gato
+    audioGato.addEventListener("ended", () => {
+      reagindo = false;
+      gato.classList.remove("reagindo");
+    });
+
+    audioGato.addEventListener("pause", () => {
+      reagindo = false;
+      gato.classList.remove("reagindo");
+    });
+
+    // INICIALIZAÇÃO
+    document.addEventListener('DOMContentLoaded', function() {
+      // Inicializar sistema de acessibilidade
+      new AccessibilityManager();
+      
+      // Gerar conteúdo dinâmico
+      gerarCardsLivros();
+      
+      // Configurar funcionalidades
+      configurarBusca();
+      configurarMenuCategorias();
+      configurarScrollHeader();
+
+      // Inicializar carrossel
+      const carrosselPromocional = document.querySelector('.carrossel-promocional');
+      if (carrosselPromocional) {
+        new Carrossel(carrosselPromocional);
+      }
+
+      // Adicionar animação nos cards
+      const cards = document.querySelectorAll('.card-livro');
+      cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.3}s`;
+      });
+    });
+  </script>
 </body>
 </html>

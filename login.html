@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login na Encantu's - Sua livraria virtual de indicações literárias">
+  <title>Entrar - Encantu's</title>
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+  <link rel="stylesheet" href="cs/login.css">
+  
+  <!-- ESTILOS DE ACESSIBILIDADE INTEGRADOS -->
+  <style>
+    /* === WIDGET DE ACESSIBILIDADE === */
+    .accessibility-widget {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 10000;
+    }
+
+    .accessibility-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4b2e68 0%, #47216d 100%);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      z-index: 10001;
+    }
+
+    .accessibility-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .accessibility-menu {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      background: rgba(26, 14, 63, 0.95);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      padding: 20px;
+      width: 280px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: none;
+      z-index: 10000;
+    }
+
+    .accessibility-menu.active {
+      display: block;
+      animation: fadeInUp 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .accessibility-menu h3 {
+      color: white;
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .theme-controls,
+    .font-size-controls {
+      margin-bottom: 20px;
+    }
+
+    .theme-controls span,
+    .font-size-controls span {
+      display: block;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 10px;
+      font-family: 'Merriweather', serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .theme-buttons,
+    .font-size-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .theme-btn,
+    .font-btn,
+    .reset-btn {
+      flex: 1;
+      padding: 10px 15px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Merriweather', serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .theme-btn:hover,
+    .font-btn:hover,
+    .reset-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .theme-btn.active,
+    .font-btn.active {
+      background: linear-gradient(135deg, #4b2e68 0%, #47216d 100%);
+      border-color: rgba(255, 255, 255, 0.4);
+      color: white;
+      box-shadow: 0 4px 15px rgba(75, 46, 104, 0.4);
+    }
+
+    .accessibility-actions {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 15px;
+      margin-top: 10px;
+    }
+
+    .reset-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .reset-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* === SISTEMA DE TAMANHO DE FONTE UNIFICADO === */
+    body.font-normal {
+      font-size: 16px;
+    }
+
+    body.font-large {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    body.font-x-large {
+      font-size: 20px;
+      line-height: 1.7;
+    }
+
+    /* Ajustes específicos para elementos com diferentes tamanhos de fonte */
+    body.font-large .topo-menu a,
+    body.font-large .input-field,
+    body.font-large .label,
+    body.font-large .remember-forgot label,
+    body.font-large .register p,
+    body.font-large .social-login-title span,
+    body.font-large .modal-content p {
+      font-size: 1.05em;
+    }
+
+    body.font-x-large .topo-menu a,
+    body.font-x-large .input-field,
+    body.font-x-large .label,
+    body.font-x-large .remember-forgot label,
+    body.font-x-large .register p,
+    body.font-x-large .social-login-title span,
+    body.font-x-large .modal-content p {
+      font-size: 1.1em;
+    }
+
+    body.font-large .login-header h1,
+    body.font-large .modal-header h3 {
+      font-size: 2.4rem;
+    }
+
+    body.font-x-large .login-header h1,
+    body.font-x-large .modal-header h3 {
+      font-size: 2.6rem;
+    }
+
+    /* === MODO CLARO UNIFICADO === */
+    body.light-mode {
+      /* Cores Principais */
+      --primary: #ffffff;
+      --secondary: #f8fafc;
+      --accent: #000000;
+      --accent-light: #8b5cf6;
+      --accent-dark: #ffffff;
+      
+      /* Cores de Texto */
+      --text-primary: #000000;
+      --text-secondary: #000000;
+      --text-muted: #000000;
+      
+      /* Cores de Fundo */
+      --background-primary: #ffffff;
+      --background-secondary: #f8fafc;
+      --background-card: rgba(255, 255, 255, 0.95);
+      
+      /* Cores de Borda */
+      --border-light: #e2e8f0;
+      --border-medium: #cbd5e1;
+      
+      /* Gradientes para Modo Claro */
+      --gradient-primary: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+      --gradient-accent: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%);
+      
+      /* Sombras para Modo Claro */
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.08);
+      
+      background: var(--gradient-primary);
+      color: var(--text-primary);
+    }
+
+    /* === MODO CLARO - PÁGINA DE LOGIN === */
+
+    /* Header no modo claro */
+    body.light-mode .topo {
+      background: rgba(255, 255, 255, 0.97);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    body.light-mode .topo-menu a {
+      color: var(--text-primary);
+    }
+
+    body.light-mode .topo-menu a:hover {
+      color: var(--accent);
+    }
+
+    body.light-mode .topo-menu a.active {
+      color: var(--accent);
+    }
+
+    /* Logo no modo claro */
+    body.light-mode .topo-imagem {
+      filter: brightness(0.8);
+    }
+
+    /* Container de login no modo claro */
+    body.light-mode .login_box {
+      background: var(--background-card);
+      border: 1px solid var(--border-light);
+      color: var(--text-primary);
+    }
+
+    body.light-mode .login-header h1 {
+      color: var(--text-primary);
+    }
+
+    /* Inputs no modo claro */
+    body.light-mode .input-field {
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid var(--border-medium);
+      color: var(--text-primary);
+    }
+
+    body.light-mode .input-field::placeholder {
+      color: var(--text-muted);
+    }
+
+    body.light-mode .input-field:focus {
+      background: rgba(255, 255, 255, 1);
+      border-color: var(--accent);
+    }
+
+    body.light-mode .label {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .icon {
+      color: var(--text-muted);
+    }
+
+    body.light-mode .input-field:focus ~ .icon {
+      color: var(--accent);
+    }
+
+    /* Botões no modo claro */
+    body.light-mode .input-submit {
+      background: var(--gradient-accent);
+      color: white;
+    }
+
+    body.light-mode .input-submit:hover {
+      background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
+    }
+
+    /* Lembrar-me e Esqueci senha no modo claro */
+    body.light-mode .remember-forgot label {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .remember-forgot a {
+      color: var(--accent);
+    }
+
+    /* Cadastro link no modo claro */
+    body.light-mode .register p {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .register a {
+      color: var(--accent);
+    }
+
+    /* === MODO CLARO - AJUSTES ESPECÍFICOS === */
+    body.light-mode .social-login-title span {
+      color: #2d3748 !important; /* Cor mais escura para melhor contraste */
+      font-weight: 600;
+    }
+
+    /* Ajuste adicional para garantir que fique escuro em todos os tamanhos de fonte */
+    body.light-mode.font-large .social-login-title span,
+    body.light-mode.font-x-large .social-login-title span {
+      color: #2d3748 !important;
+    }
+
+    /* Botões sociais no modo claro */
+    body.light-mode .social-button {
+      background: var(--background-card);
+      border: 2px solid var(--border-medium);
+      color: #4a5568 !important;
+    }
+
+    body.light-mode .social-button:hover {
+      border-color: var(--accent);
+      color: #2d3748 !important;
+    }
+
+    /* Modal no modo claro */
+    body.light-mode .social-modal-content {
+      background: var(--background-card);
+      border: 1px solid var(--border-light);
+    }
+
+    body.light-mode .social-modal-title {
+      color: var(--text-primary);
+    }
+
+    body.light-mode .social-option h3 {
+      color: var(--text-primary);
+    }
+
+    body.light-mode .social-option p {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .social-terms p {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .social-terms a {
+      color: var(--accent);
+    }
+
+    /* Botões do modal no modo claro */
+    body.light-mode .social-submit-btn {
+      background: var(--gradient-accent);
+      color: white;
+    }
+
+    body.light-mode .social-submit-btn:hover {
+      background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
+    }
+
+    /* Botão de acessibilidade no modo claro */
+    body.light-mode .accessibility-btn {
+      background: var(--gradient-accent);
+    }
+
+    body.light-mode .accessibility-menu {
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid var(--border-light);
+    }
+
+    body.light-mode .accessibility-menu h3 {
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    body.light-mode .theme-controls span,
+    body.light-mode .font-size-controls span {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .font-btn,
+    body.light-mode .theme-btn,
+    body.light-mode .reset-btn {
+      background: rgba(248, 250, 252, 0.8);
+      border: 2px solid var(--border-medium);
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .font-btn:hover,
+    body.light-mode .theme-btn:hover,
+    body.light-mode .reset-btn:hover {
+      background: rgba(248, 250, 252, 1);
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    body.light-mode .font-btn.active,
+    body.light-mode .theme-btn.active {
+      background: var(--gradient-accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* === ESTILOS PERSONALIZADOS PARA O LOGIN === */
+    
+    /* Header do login menor */
+    .login-header {
+      margin-bottom: 10px;
+    }
+
+    .login-header h1 {
+      font-size: 2rem !important;
+      font-weight: 700;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    /* Remover linha do "Entrar com redes sociais" */
+    .social-login-title {
+      position: relative;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .social-login-title span {
+      background: transparent;
+      padding: 0 15px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .social-login-title::before {
+      display: none !important;
+    }
+
+    .social-login-title::after {
+      display: none !important;
+    }
+
+    /* Ajustar tamanho dos botões sociais */
+    .social-login {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .social-button {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-button:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Animações para notificações */
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideOutRight {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
+    /* Ajustes responsivos */
+    @media (max-width: 768px) {
+      .accessibility-widget {
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .accessibility-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+      
+      .accessibility-menu {
+        width: 260px;
+        right: -10px;
+      }
+
+      .login-header h1 {
+        font-size: 1.8rem !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Botão de Acessibilidade -->
+  <div class="accessibility-widget">
+    <button class="accessibility-btn" id="accessibilityBtn" aria-label="Opções de acessibilidade">
+      <i class="bx bx-universal-access"></i>
+    </button>
+    
+    <div class="accessibility-menu" id="accessibilityMenu">
+      <h3>ACESSIBILIDADE</h3>
+      
+      <!-- Controle de Tema -->
+      <div class="theme-controls">
+        <span>Tema do Site:</span>
+        <div class="theme-buttons">
+          <button class="theme-btn" data-theme="dark" aria-label="Modo escuro">
+            <i class="bx bx-moon"></i> Escuro
+          </button>
+          <button class="theme-btn" data-theme="light" aria-label="Modo claro">
+            <i class="bx bx-sun"></i> Claro
+          </button>
+        </div>
+      </div>
+      
+      <!-- Controle de Tamanho de Fonte -->
+      <div class="font-size-controls">
+        <span>Tamanho da Fonte:</span>
+        <div class="font-size-buttons">
+          <button class="font-btn" data-size="normal" aria-label="Fonte normal">
+            A
+          </button>
+          <button class="font-btn" data-size="large" aria-label="Fonte grande">
+            A
+          </button>
+          <button class="font-btn" data-size="x-large" aria-label="Fonte extra grande">
+            A
+          </button>
+        </div>
+      </div>
+      
+      <div class="accessibility-actions">
+        <button class="reset-btn" id="resetAccessibility" aria-label="Redefinir configurações">
+          <i class="bx bx-reset"></i> Redefinir
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Superior -->
+  <header class="topo">
+    <div class="topo-content">
+      <div class="topo-esquerdo">
+        <div class="topo-logo">
+          <a href="index.html">
+            <img class="topo-imagem" src="imagem/mago.png" alt="Logo Encantu's" />
+          </a>
+        </div>
+        <nav class="topo-menu">
+          <a href="index.html">Início</a>
+          <a href="login.html" class="active">Entrar</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  
+  <main class="main-content">
+    <div class="wrapper">
+      <div class="login_box">
+        <header class="login-header">
+          <h1>Entrar</h1>
+        </header>
+        <form id="loginForm" class="login-form" novalidate>
+          <div class="input_box">
+            <input type="text" id="user" class="input-field" placeholder=" " required>
+            <label for="user" class="label">Nome de usuário</label>
+            <i class="bx bx-user icon" aria-hidden="true"></i>
+            <span class="error-message" id="user-error"></span>
+          </div>
+          <div class="input_box">
+            <input type="password" id="pass" class="input-field" placeholder=" " required>
+            <label for="pass" class="label">Senha</label>
+            <i class="bx bx-lock-alt icon" aria-hidden="true"></i>
+            <i class="bx bx-show-alt show-icon" id="togglePassword" role="button" aria-label="Mostrar senha" tabindex="0"></i>
+            <span class="error-message" id="pass-error"></span>
+          </div>
+          <div class="remember-forgot">
+            <div class="remember-me">
+              <input type="checkbox" id="remember">
+              <label for="remember">Lembrar-me</label>
+            </div>
+            <div class="forgot">
+              <a href="#" aria-label="Recuperar senha esquecida">Esqueceu a senha?</a>
+            </div>
+          </div>
+          <div class="input_box">
+            <input type="submit" class="input-submit" value="Entrar">
+          </div>
+          <div class="social-login-title">
+            <span>Entrar com redes sociais</span>
+          </div>
+          <div class="social-login">
+            <button type="button" class="social-button google-button" id="googleLogin" aria-label="Entrar com Google">
+              <i class='bx bxl-google google-icon' aria-hidden="true"></i>
+            </button>
+            <button type="button" class="social-button microsoft-button" id="microsoftLogin" aria-label="Entrar com Microsoft">
+              <i class='bx bxl-microsoft microsoft-icon' aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="register">
+            <p>Não tem uma conta? <a href="cadastro.html" aria-label="Ir para página de cadastro">Cadastrar-se</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal de seleção de método de login -->
+  <div class="social-modal" id="socialModal">
+    <div class="social-modal-content">
+      <div class="social-modal-header">
+        <div class="social-modal-title" id="modalTitle">
+          <i class='bx bxl-google social-provider-icon'></i>
+          <span>Entrar com Google</span>
+        </div>
+        <button class="social-modal-close" id="modalClose" aria-label="Fechar">
+          <i class='bx bx-x'></i>
+        </button>
+      </div>
+      
+      <div class="social-options">
+        <div class="social-option" id="optionEmail">
+          <i class='bx bx-envelope'></i>
+          <div class="option-info">
+            <h3>Usar meu e-mail</h3>
+            <p>Enviaremos um link mágico para seu e-mail</p>
+          </div>
+        </div>
+        
+        <div class="social-option" id="optionOAuth">
+          <i class='bx bx-log-in-circle'></i>
+          <div class="option-info">
+            <h3>Continuar com OAuth</h3>
+            <p>Autenticação direta com Google</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para email -->
+  <div class="social-modal" id="emailModal">
+    <div class="social-modal-content">
+      <div class="social-modal-header">
+        <div class="social-modal-title" id="emailModalTitle">
+          <i class='bx bx-envelope social-provider-icon'></i>
+          <span>Entrar com e-mail</span>
+        </div>
+        <button class="social-modal-close" id="emailModalClose" aria-label="Fechar">
+          <i class='bx bx-x'></i>
+        </button>
+      </div>
+      
+      <form class="social-email-form" id="socialEmailForm">
+        <div class="input_box">
+          <input type="email" id="socialEmail" class="input-field" placeholder=" " required>
+          <label for="socialEmail" class="label">Endereço de e-mail</label>
+          <i class="bx bx-envelope icon" aria-hidden="true"></i>
+          <span class="error-message" id="social-email-error"></span>
+        </div>
+        
+        <button type="submit" class="social-submit-btn" id="socialSubmit">
+          <i class='bx bx-send'></i>
+          Enviar link de acesso
+        </button>
+        
+        <div class="social-terms">
+          <p>Ao continuar, você concorda com nossos <a href="#">Termos de Serviço</a> e <a href="#">Política de Privacidade</a>.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT DE ACESSIBILIDADE INTEGRADO -->
+  <script>
+    // SISTEMA DE ACESSIBILIDADE UNIFICADO
+    class AccessibilityManager {
+      constructor() {
+        this.storageKey = 'encantus_accessibility';
+        this.currentSize = 'normal';
+        this.currentTheme = 'dark';
+        this.init();
+      }
+
+      init() {
+        this.loadSettings();
+        this.setupEventListeners();
+        this.applyAccessibilityToPage();
+      }
+
+      setupEventListeners() {
+        const accessibilityBtn = document.getElementById('accessibilityBtn');
+        const accessibilityMenu = document.getElementById('accessibilityMenu');
+        const fontButtons = document.querySelectorAll('.font-btn');
+        const themeButtons = document.querySelectorAll('.theme-btn');
+        const resetBtn = document.getElementById('resetAccessibility');
+
+        // Alternar menu de acessibilidade
+        if (accessibilityBtn) {
+          accessibilityBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            accessibilityMenu.classList.toggle('active');
+          });
+        }
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.accessibility-widget')) {
+            accessibilityMenu.classList.remove('active');
+          }
+        });
+
+        // Botões de tamanho de fonte
+        fontButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const size = btn.getAttribute('data-size');
+            this.setFontSize(size);
+          });
+        });
+
+        // Botões de tema
+        themeButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const theme = btn.getAttribute('data-theme');
+            this.setTheme(theme);
+          });
+        });
+
+        // Botão de redefinir
+        if (resetBtn) {
+          resetBtn.addEventListener('click', () => {
+            this.resetSettings();
+          });
+        }
+
+        // Tecla ESC fecha o menu
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            accessibilityMenu.classList.remove('active');
+          }
+        });
+      }
+
+      setFontSize(size) {
+        this.currentSize = size;
+        this.applyFontSize(size);
+        this.saveSettings();
+        this.updateActiveButton(size, 'size');
+        this.showNotification(`Tamanho da fonte alterado para ${this.getSizeName(size)}`);
+      }
+
+      setTheme(theme) {
+        this.currentTheme = theme;
+        this.applyTheme(theme);
+        this.saveSettings();
+        this.updateActiveButton(theme, 'theme');
+        this.showNotification(`Tema alterado para ${this.getThemeName(theme)}`);
+      }
+
+      applyFontSize(size) {
+        // Remove todas as classes de tamanho
+        document.body.classList.remove('font-normal', 'font-large', 'font-x-large');
+        
+        // Adiciona a classe correspondente
+        document.body.classList.add(`font-${size}`);
+        
+        // Atualiza o botão ativo
+        this.updateActiveButton(size, 'size');
+      }
+
+      applyTheme(theme) {
+        // Remove ambas as classes de tema
+        document.body.classList.remove('dark-mode', 'light-mode');
+        
+        // Adiciona a classe correspondente
+        document.body.classList.add(`${theme}-mode`);
+        
+        // Atualiza o botão ativo
+        this.updateActiveButton(theme, 'theme');
+      }
+
+      // APLICAR ACESSIBILIDADE À PÁGINA INTEIRA
+      applyAccessibilityToPage() {
+        // Aplicar tema
+        this.applyTheme(this.currentTheme);
+        
+        // Aplicar tamanho da fonte
+        this.applyFontSize(this.currentSize);
+      }
+
+      updateActiveButton(value, type) {
+        const buttons = document.querySelectorAll(`.${type}-btn`);
+        buttons.forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute(`data-${type}`) === value) {
+            btn.classList.add('active');
+          }
+        });
+      }
+
+      getSizeName(size) {
+        const names = {
+          'normal': 'Normal',
+          'large': 'Grande', 
+          'x-large': 'Extra Grande'
+        };
+        return names[size] || 'Normal';
+      }
+
+      getThemeName(theme) {
+        const names = {
+          'dark': 'Escuro',
+          'light': 'Claro'
+        };
+        return names[theme] || 'Escuro';
+      }
+
+      resetSettings() {
+        this.currentSize = 'normal';
+        this.currentTheme = 'dark';
+        this.applyFontSize('normal');
+        this.applyTheme('dark');
+        this.saveSettings();
+        this.showNotification('Configurações de acessibilidade redefinidas!');
+      }
+
+      saveSettings() {
+        const settings = {
+          fontSize: this.currentSize,
+          theme: this.currentTheme,
+          lastUpdated: new Date().toISOString()
+        };
+        localStorage.setItem(this.storageKey, JSON.stringify(settings));
+      }
+
+      loadSettings() {
+        try {
+          const saved = localStorage.getItem(this.storageKey);
+          if (saved) {
+            const settings = JSON.parse(saved);
+            if (settings.fontSize) {
+              this.currentSize = settings.fontSize;
+            }
+            if (settings.theme) {
+              this.currentTheme = settings.theme;
+            }
+          }
+        } catch (error) {
+          console.warn('Erro ao carregar configurações de acessibilidade:', error);
+        }
+      }
+
+      showNotification(message) {
+        // Criar elemento de notificação
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: #4a3b9b;
+          color: white;
+          padding: 12px 20px;
+          border-radius: 8px;
+          z-index: 10000;
+          font-family: 'Merriweather', serif;
+          font-weight: 600;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+          animation: slideInRight 0.3s ease;
+        `;
+        
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        // Remover após 3 segundos
+        setTimeout(() => {
+          notification.style.animation = 'slideOutRight 0.3s ease';
+          setTimeout(() => {
+            if (notification.parentNode) {
+              notification.parentNode.removeChild(notification);
+            }
+          }, 300);
+        }, 3000);
+      }
+    }
+
+    // Configurações OAuth - EM PRODUÇÃO, USE VARIÁVEIS DE AMBIENTE
+    const OAUTH_CONFIG = {
+      google: {
+        clientId: 'SEU_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+        scope: 'email profile openid',
+        authUrl: 'https://accounts.google.com/o/oauth2/v2/auth',
+        redirectUri: `${window.location.origin}/auth/callback`
+      },
+      microsoft: {
+        clientId: 'SEU_MICROSOFT_CLIENT_ID',
+        scope: 'user.read openid profile email',
+        authUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+        redirectUri: `${window.location.origin}/auth/callback`
+      }
+    };
+
+    // Inicializar quando o DOM estiver pronto
+    document.addEventListener('DOMContentLoaded', function() {
+      // Inicializar sistema de acessibilidade
+      new AccessibilityManager();
+      
+      const togglePassword = document.querySelector('#togglePassword');
+      const password = document.querySelector('#pass');
+      const loginForm = document.querySelector('#loginForm');
+      const usernameInput = document.querySelector('#user');
+      const googleLoginBtn = document.querySelector('#googleLogin');
+      const microsoftLoginBtn = document.querySelector('#microsoftLogin');
+      
+      // Elementos dos modais
+      const socialModal = document.querySelector('#socialModal');
+      const modalClose = document.querySelector('#modalClose');
+      const emailModal = document.querySelector('#emailModal');
+      const emailModalClose = document.querySelector('#emailModalClose');
+      const socialEmailForm = document.querySelector('#socialEmailForm');
+      const socialEmailInput = document.querySelector('#socialEmail');
+      
+      // Opções de login
+      const optionEmail = document.querySelector('#optionEmail');
+      const optionOAuth = document.querySelector('#optionOAuth');
+      
+      let currentProvider = '';
+      
+      // Alternar visibilidade da senha
+      togglePassword.addEventListener('click', function() {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        this.classList.toggle('bx-show-alt');
+        this.classList.toggle('bx-hide');
+        
+        const isVisible = type === 'text';
+        this.setAttribute('aria-label', isVisible ? 'Ocultar senha' : 'Mostrar senha');
+      });
+      
+      togglePassword.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+      
+      // Validação em tempo real
+      usernameInput.addEventListener('input', function() {
+        validateField(this, /^[a-zA-Z0-9_]{3,20}$/, 'Nome de usuário deve ter entre 3 e 20 caracteres');
+      });
+      
+      password.addEventListener('input', function() {
+        validateField(this, /^.{6,}$/, 'A senha deve ter pelo menos 6 caracteres');
+      });
+      
+      // Login com Google - Abre modal de opções
+      googleLoginBtn.addEventListener('click', function() {
+        currentProvider = 'google';
+        openSocialModal('Google', 'bxl-google', 'google-provider');
+      });
+      
+      // Login com Microsoft - Abre modal de opções
+      microsoftLoginBtn.addEventListener('click', function() {
+        currentProvider = 'microsoft';
+        openSocialModal('Microsoft', 'bxl-microsoft', 'microsoft-provider');
+      });
+      
+      // Opção de email
+      optionEmail.addEventListener('click', function() {
+        closeSocialModal();
+        openEmailModal();
+      });
+      
+      // Opção OAuth (autenticação direta)
+      optionOAuth.addEventListener('click', function() {
+        closeSocialModal();
+        signInWithOAuth(currentProvider);
+      });
+      
+      // Fechar modais
+      modalClose.addEventListener('click', closeSocialModal);
+      emailModalClose.addEventListener('click', closeEmailModal);
+      
+      // Fechar modais ao clicar fora
+      socialModal.addEventListener('click', function(e) {
+        if (e.target === socialModal) closeSocialModal();
+      });
+      
+      emailModal.addEventListener('click', function(e) {
+        if (e.target === emailModal) closeEmailModal();
+      });
+      
+      // Fechar modais com ESC
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          if (socialModal.classList.contains('active')) closeSocialModal();
+          if (emailModal.classList.contains('active')) closeEmailModal();
+        }
+      });
+      
+      // Enviar formulário de email
+      socialEmailForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (validateEmail(socialEmailInput.value)) {
+          sendMagicLink(socialEmailInput.value, currentProvider);
+        } else {
+          showMessage('Por favor, insira um endereço de email válido.', 'error');
+        }
+      });
+      
+      // Validação do formulário principal
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const isUsernameValid = validateField(usernameInput, /^[a-zA-Z0-9_]{3,20}$/, 'Nome de usuário deve ter entre 3 e 20 caracteres');
+        const isPasswordValid = validateField(password, /^.{6,}$/, 'A senha deve ter pelo menos 6 caracteres');
+        
+        if (isUsernameValid && isPasswordValid) {
+          const username = usernameInput.value;
+          const passwordValue = password.value;
+          
+          // Simulação de autenticação
+          showMessage('Verificando credenciais...', 'info');
+          
+          setTimeout(() => {
+            // Aqui você faria a chamada real para sua API
+            if (username === 'admin' && passwordValue === 'password123') {
+              showMessage('Login bem-sucedido! Redirecionando...', 'success');
+              setTimeout(() => {
+                console.log('Redirecionando para o dashboard...');
+                // window.location.href = 'dashboard.html';
+              }, 1500);
+            } else {
+              showMessage('Nome de usuário ou senha incorretos.', 'error');
+            }
+          }, 1000);
+        }
+      });
+      
+      // Verificar se há parâmetros de callback OAuth na URL
+      checkOAuthCallback();
+      
+      // ========== FUNÇÕES PRINCIPAIS ==========
+      
+      function openSocialModal(providerName, iconClass, providerClass) {
+        const modalTitle = document.querySelector('#modalTitle');
+        modalTitle.innerHTML = `
+          <i class='bx ${iconClass} social-provider-icon'></i>
+          <span>Entrar com ${providerName}</span>
+        `;
+        modalTitle.className = `social-modal-title ${providerClass}`;
+        socialModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function closeSocialModal() {
+        socialModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      
+      function openEmailModal() {
+        emailModal.classList.add('active');
+        socialEmailInput.value = '';
+        socialEmailInput.focus();
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function closeEmailModal() {
+        emailModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      
+      // Função principal de autenticação OAuth
+      function signInWithOAuth(provider) {
+        const config = OAUTH_CONFIG[provider];
+        
+        if (!config) {
+          showMessage('Provedor não configurado.', 'error');
+          return;
+        }
+        
+        showMessage(`Iniciando autenticação com ${provider}...`, 'info');
+        
+        // Parâmetros OAuth2
+        const params = new URLSearchParams({
+          client_id: config.clientId,
+          redirect_uri: config.redirectUri,
+          response_type: 'code',
+          scope: config.scope,
+          state: generateStateParameter(provider),
+          prompt: 'select_account'
+        });
+        
+        // URL de autorização
+        const authUrl = `${config.authUrl}?${params.toString()}`;
+        
+        // Abrir popup OAuth
+        openOAuthPopup(authUrl, provider);
+      }
+      
+      function openOAuthPopup(url, provider) {
+        const width = 500;
+        const height = 600;
+        const left = (screen.width - width) / 2;
+        const top = (screen.height - height) / 2;
+        
+        const popup = window.open(
+          url,
+          `${provider}OAuth`,
+          `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes,status=yes`
+        );
+        
+        // Verificar se o popup foi bloqueado
+        if (!popup) {
+          showMessage('Popup bloqueado. Por favor, permita popups para este site.', 'error');
+          return;
+        }
+        
+        // Monitorar o popup
+        const popupTimer = setInterval(() => {
+          if (popup.closed) {
+            clearInterval(popupTimer);
+            showMessage('Autenticação cancelada.', 'info');
+          }
+          
+          try {
+            // Verificar se foi redirecionado para a URL de callback
+            if (popup.location.href.startsWith(OAUTH_CONFIG[provider].redirectUri)) {
+              clearInterval(popupTimer);
+              popup.close();
+              handleOAuthCallback(popup.location.href, provider);
+            }
+          } catch (e) {
+            // Cross-origin block - isso é normal
+          }
+        }, 500);
+      }
+      
+      function handleOAuthCallback(callbackUrl, provider) {
+        const url = new URL(callbackUrl);
+        const code = url.searchParams.get('code');
+        const error = url.searchParams.get('error');
+        const state = url.searchParams.get('state');
+        
+        if (error) {
+          showMessage(`Erro na autenticação: ${error}`, 'error');
+          return;
+        }
+        
+        if (!code) {
+          showMessage('Código de autorização não recebido.', 'error');
+          return;
+        }
+        
+        // Validar state parameter
+        if (!validateStateParameter(state, provider)) {
+          showMessage('Erro de segurança: state parameter inválido.', 'error');
+          return;
+        }
+        
+        // Trocar code por access token (em produção, faça isso no backend)
+        exchangeCodeForToken(code, provider);
+      }
+      
+      function exchangeCodeForToken(code, provider) {
+        showMessage('Finalizando autenticação...', 'info');
+        
+        // EM PRODUÇÃO: Enviar code para seu backend
+        // fetch('/api/auth/token', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({ code, provider })
+        // })
+        
+        // Simulação
+        setTimeout(() => {
+          showMessage(`Autenticação com ${provider} realizada com sucesso!`, 'success');
+          console.log(`OAuth ${provider} completed - Code: ${code}`);
+          
+          // Redirecionar ou atualizar UI
+          setTimeout(() => {
+            // window.location.href = 'dashboard.html';
+          }, 1000);
+        }, 2000);
+      }
+      
+      function sendMagicLink(email, provider) {
+        showMessage(`Enviando link mágico para ${email}...`, 'info');
+        
+        // EM PRODUÇÃO: Integrar com serviço de magic links
+        // fetch('/api/auth/magic-link', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({ email, provider })
+        // })
+        
+        // Simulação
+        setTimeout(() => {
+          closeEmailModal();
+          showMessage(`Link de acesso enviado para ${email}`, 'success');
+          console.log(`Magic link sent to ${email} for ${provider}`);
+        }, 1500);
+      }
+      
+      function checkOAuthCallback() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const state = urlParams.get('state');
+        const provider = urlParams.get('provider');
+        
+        if (code && state && provider) {
+          handleOAuthCallback(window.location.href, provider);
+        }
+      }
+      
+      // ========== FUNÇÕES AUXILIARES ==========
+      
+      function generateStateParameter(provider) {
+        const state = {
+          provider: provider,
+          timestamp: Date.now(),
+          random: Math.random().toString(36).substring(2)
+        };
+        
+        const stateString = btoa(JSON.stringify(state));
+        sessionStorage.setItem('oauth_state', stateString);
+        return stateString;
+      }
+      
+      function validateStateParameter(state, provider) {
+        try {
+          const storedState = sessionStorage.getItem('oauth_state');
+          if (!storedState) return false;
+          
+          const stateData = JSON.parse(atob(state));
+          const storedData = JSON.parse(atob(storedState));
+          
+          sessionStorage.removeItem('oauth_state');
+          
+          return stateData.provider === provider && 
+                 stateData.timestamp > Date.now() - 300000; // 5 minutos
+        } catch (e) {
+          return false;
+        }
+      }
+      
+      function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+      
+      function validateField(field, regex, errorMessage) {
+        const value = field.value.trim();
+        const isValid = regex.test(value);
+        const errorElement = document.getElementById(`${field.id}-error`);
+        
+        if (!isValid && value !== '') {
+          if (errorElement) errorElement.textContent = errorMessage;
+          field.classList.add('error');
+        } else {
+          if (errorElement) errorElement.textContent = '';
+          field.classList.remove('error');
+        }
+        
+        return isValid;
+      }
+      
+      function showMessage(message, type) {
+        const existingMessage = document.querySelector('.message');
+        if (existingMessage) existingMessage.remove();
+        
+        const messageElement = document.createElement('div');
+        messageElement.className = `message ${type}`;
+        messageElement.textContent = message;
+        messageElement.setAttribute('role', 'alert');
+        
+        document.body.appendChild(messageElement);
+        
+        setTimeout(() => {
+          messageElement.style.animation = 'slideOut 0.3s ease';
+          setTimeout(() => {
+            if (messageElement.parentNode) {
+              messageElement.parentNode.removeChild(messageElement);
+            }
+          }, 300);
+        }, 5000);
+      }
+    });
+  </script>
+</body>
+</html>

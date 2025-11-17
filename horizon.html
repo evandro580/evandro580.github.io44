@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Detalhes do livro The Art of Horizon Zero Dawn - Encantu's Livraria">
+  <title>The Art of Horizon Zero Dawn - Livro | Encantu's</title>
+  <link rel="stylesheet" href="cs/livros.css" />
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- ESTILOS DE ACESSIBILIDADE INTEGRADOS -->
+  <style>
+    /* === WIDGET DE ACESSIBILIDADE === */
+    .accessibility-widget {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 10000;
+    }
+
+    .accessibility-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4b2e68 0%, #47216d 100%);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      z-index: 10001;
+    }
+
+    .accessibility-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .accessibility-menu {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      background: rgba(26, 14, 63, 0.95);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      padding: 20px;
+      width: 280px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: none;
+      z-index: 10000;
+    }
+
+    .accessibility-menu.active {
+      display: block;
+      animation: fadeInUp 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .accessibility-menu h3 {
+      color: white;
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .theme-controls,
+    .font-size-controls {
+      margin-bottom: 20px;
+    }
+
+    .theme-controls span,
+    .font-size-controls span {
+      display: block;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 10px;
+      font-family: 'Merriweather', serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .theme-buttons,
+    .font-size-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .theme-btn,
+    .font-btn,
+    .reset-btn {
+      flex: 1;
+      padding: 10px 15px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Merriweather', serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .theme-btn:hover,
+    .font-btn:hover,
+    .reset-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .theme-btn.active,
+    .font-btn.active {
+      background: linear-gradient(135deg, #4b2e68 0%, #47216d 100%);
+      border-color: rgba(255, 255, 255, 0.4);
+      color: white;
+      box-shadow: 0 4px 15px rgba(75, 46, 104, 0.4);
+    }
+
+    .accessibility-actions {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 15px;
+      margin-top: 10px;
+    }
+
+    .reset-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .reset-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* === SISTEMA DE TAMANHO DE FONTE UNIFICADO === */
+    body.font-normal {
+      font-size: 16px;
+    }
+
+    body.font-large {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    body.font-x-large {
+      font-size: 20px;
+      line-height: 1.7;
+    }
+
+    /* Ajustes específicos para elementos com diferentes tamanhos de fonte */
+    body.font-large .navbar-menu a,
+    body.font-large .detalhe-info p,
+    body.font-large .detalhes-adicionais p,
+    body.font-large .footer-item h3 {
+      font-size: 1.05em;
+    }
+
+    body.font-x-large .navbar-menu a,
+    body.font-x-large .detalhe-info p,
+    body.font-x-large .detalhes-adicionais p,
+    body.font-x-large .footer-item h3 {
+      font-size: 1.1em;
+    }
+
+    body.font-large .detalhe-info h1 {
+      font-size: 2.4rem;
+    }
+
+    body.font-x-large .detalhe-info h1 {
+      font-size: 2.6rem;
+    }
+
+    /* === MODO CLARO UNIFICADO === */
+    body.light-mode {
+      /* Cores Principais */
+      --primary: #ffffff;
+      --secondary: #f8fafc;
+      --accent: #7c3aed;
+      --accent-light: #8b5cf6;
+      --accent-dark: #6d28d9;
+      
+      /* Cores de Texto */
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      
+      /* Cores de Fundo */
+      --background-primary: #ffffff;
+      --background-secondary: #f8fafc;
+      --background-card: rgba(255, 255, 255, 0.95);
+      
+      /* Cores de Borda */
+      --border-light: #e2e8f0;
+      --border-medium: #cbd5e1;
+      
+      /* Gradientes para Modo Claro */
+      --gradient-primary: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+      --gradient-accent: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%);
+      
+      /* Sombras para Modo Claro */
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.08);
+      
+      background: var(--gradient-primary);
+      color: var(--text-primary);
+    }
+
+    /* === MODO CLARO - PÁGINAS DE EXTENSÃO === */
+
+    /* Navbar no modo claro */
+    body.light-mode .navbar {
+      background-color: var(--background-primary);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    body.light-mode .navbar .logo span {
+      color: var(--text-primary);
+    }
+
+    body.light-mode .navbar-menu a {
+      color: var(--text-primary);
+    }
+
+    body.light-mode .navbar-menu a:hover {
+      color: var(--accent);
+      background-color: rgba(124, 58, 237, 0.05);
+    }
+
+    /* Container de detalhes no modo claro */
+    body.light-mode .detalhe-container {
+      background: var(--background-card);
+      border: 1px solid var(--border-light);
+      color: var(--text-primary);
+    }
+
+    body.light-mode .detalhe-info h1 {
+      color: var(--text-primary);
+    }
+
+    body.light-mode .detalhe-info p {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .detalhes-adicionais {
+      background: rgba(248, 250, 252, 0.8);
+    }
+
+    body.light-mode .detalhes-adicionais p {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .detalhes-adicionais strong {
+      color: var(--text-primary);
+    }
+
+    /* Botões no modo claro */
+    body.light-mode .btn-comprar {
+      background: var(--gradient-accent);
+      color: white;
+    }
+
+    body.light-mode .btn-comprar:hover {
+      background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
+    }
+
+    body.light-mode .btn-voltar {
+      background: var(--background-card);
+      color: var(--text-primary);
+      border: 2px solid var(--border-medium);
+    }
+
+    body.light-mode .btn-voltar:hover {
+      border-color: var(--accent);
+    }
+
+    /* Footer no modo claro */
+    body.light-mode .footer {
+      background: var(--gradient-primary);
+      border-top: 1px solid var(--border-light);
+    }
+
+    body.light-mode .footer-item {
+      background: rgba(248, 250, 252, 0.8);
+      border: 1px solid var(--border-light);
+    }
+
+    body.light-mode .footer-item:hover {
+      background: rgba(248, 250, 252, 1);
+      border-color: var(--accent);
+    }
+
+    body.light-mode .footer-item h3 {
+      color: var(--text-secondary);
+    }
+
+    /* Botões de scroll no modo claro */
+    body.light-mode .scroll-btn {
+      background: var(--gradient-accent);
+      color: white;
+    }
+
+    body.light-mode .scroll-btn:hover {
+      background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
+    }
+
+    /* Botão de acessibilidade no modo claro */
+    body.light-mode .accessibility-btn {
+      background: var(--gradient-accent);
+    }
+
+    body.light-mode .accessibility-menu {
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid var(--border-light);
+    }
+
+    body.light-mode .accessibility-menu h3 {
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    body.light-mode .theme-controls span,
+    body.light-mode .font-size-controls span {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .font-btn,
+    body.light-mode .theme-btn,
+    body.light-mode .reset-btn {
+      background: rgba(248, 250, 252, 0.8);
+      border: 2px solid var(--border-medium);
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .font-btn:hover,
+    body.light-mode .theme-btn:hover,
+    body.light-mode .reset-btn:hover {
+      background: rgba(248, 250, 252, 1);
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    body.light-mode .font-btn.active,
+    body.light-mode .theme-btn.active {
+      background: var(--gradient-accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* Animações para notificações */
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideOutRight {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
+    /* Ajustes responsivos */
+    @media (max-width: 768px) {
+      .accessibility-widget {
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .accessibility-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+      
+      .accessibility-menu {
+        width: 260px;
+        right: -10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Botão de Acessibilidade -->
+  <div class="accessibility-widget">
+    <button class="accessibility-btn" id="accessibilityBtn" aria-label="Opções de acessibilidade">
+      <i class="fas fa-universal-access"></i>
+    </button>
+    
+    <div class="accessibility-menu" id="accessibilityMenu">
+      <h3>ACESSIBILIDADE</h3>
+      
+      <!-- Controle de Tema -->
+      <div class="theme-controls">
+        <span>Tema do Site:</span>
+        <div class="theme-buttons">
+          <button class="theme-btn" data-theme="dark" aria-label="Modo escuro">
+            <i class="fas fa-moon"></i> Escuro
+          </button>
+          <button class="theme-btn" data-theme="light" aria-label="Modo claro">
+            <i class="fas fa-sun"></i> Claro
+          </button>
+        </div>
+      </div>
+      
+      <!-- Controle de Tamanho de Fonte -->
+      <div class="font-size-controls">
+        <span>Tamanho da Fonte:</span>
+        <div class="font-size-buttons">
+          <button class="font-btn" data-size="normal" aria-label="Fonte normal">
+            A
+          </button>
+          <button class="font-btn" data-size="large" aria-label="Fonte grande">
+            A
+          </button>
+          <button class="font-btn" data-size="x-large" aria-label="Fonte extra grande">
+            A
+          </button>
+        </div>
+      </div>
+      
+      <div class="accessibility-actions">
+        <button class="reset-btn" id="resetAccessibility" aria-label="Redefinir configurações">
+          <i class="fas fa-redo"></i> Redefinir
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barra de Navegação -->
+  <nav class="navbar" aria-label="Navegação principal">
+    <div class="navbar-content">
+      <div class="logo">
+        <img src="imagem/mago.png" alt="Logo Encantu's" class="navbar-logo" />
+        <span>Encantu's</span>
+      </div>
+      <div class="navbar-menu">
+        <a href="index.html">Início</a>
+        <a href="mailto:encantus1livraria@gmail.com">Suporte</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Container de Detalhes do Livro -->
+  <main class="detalhe-container">
+    <div class="imagem-livro">
+      <img src="https://m.media-amazon.com/images/I/810HInpTcJL._SY425_.jpg" alt="Capa do livro The Art of Horizon Zero Dawn" />
+    </div>
+    <div class="detalhe-info">
+      <h1>The Art of Horizon Zero Dawn</h1>
+
+      <p>O livro "The Art of Horizon Zero Dawn" é uma obra que mostra todo o processo de criação do jogo Horizon Zero Dawn, desenvolvido pela Guerrilla Games. Ele apresenta ilustrações, artes conceituais e comentários dos artistas que ajudaram a construir o mundo pós-apocalíptico dominado por máquinas inspiradas em animais.</p>
+      <div class="detalhes-adicionais">
+        <p><strong>Autor:</strong> Paul Davies</p>
+        <p><strong>Editora:</strong> Titan Books (UK)</p>
+        <p><strong>Páginas:</strong> 192</p>
+        <p><strong>Ano:</strong> 2017</p>
+      </div>
+      <div class="botoes-comprar">
+        <a href="https://www.amazon.com.br/Art-Horizon-Zero-Dawn/dp/1785653636/ref=sr_1_1?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1JJZX2LH4JZVZ&dib=eyJ2IjoiMSJ9.WjCafsrZTGysAaAsBwTnPQnccUXdbcUgiU7D6v6pkEmETsDlnylyI82ClZIh3vMGNqfFUxV_Nhybr1XPDr6SNbQqPYJ2Xkxb68eYK906qnOq_5_Ru7P7wDW6ukX9DddLpnX6f-hbKTlnC-ataovfPO7-kBdG0i5RKJiXYotIB3jRr4641tdwR8E9cGdP0VJBG5v9KP7WIBGa3CWuujUpSm6zekW71awx_jNWBSfmNhfKKC-DEfxqdeEeNxx-hPghFwlDgdRhZK36AOXGaFj5GwDxKyZW5hhkzHuBUI1ObCw.d6oAG7GwT6lEICrV_9haAB6CFDtwg-KK_vAbQPqiEKs&dib_tag=se&keywords=The+Art+of+Horizon+Zero+Dawn&qid=1761843577&sprefix=the+art+of+horizon+zero+dawn%2Caps%2C632&sr=8-1&ufe=app_do%3Aamzn1.fos.fcd6d665-32ba-4479-9f21-b774e276a678" target="_blank" class="btn-comprar">Comprar na Amazon</a>
+        <a href="https://shopee.com.br/The-Art-of-Horizon-Zero-Dawn-autor-Paul-Davies-i.1025766461.18199724890?extraParams=%7B%22display_model_id%22%3A238782005875%2C%22model_selection_logic%22%3A3%7D&sp_atk=acd38f20-e4f8-487e-9abd-3536bd2e22d9&xptdk=acd38f20-e4f8-487e-9abd-3536bd2e22d9" target="_blank" class="btn-comprar">Comprar na Shopee</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" aria-label="Recomendações de livros">
+    <button class="scroll-btn left-btn" aria-label="Livros anteriores">←</button>
+    <div class="footer-wrapper">
+      <div class="footer-container">
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/91puw8POkwL._SY425_.jpg" alt="Hidden Pictures">
+          <h3>Hidden Pictures</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/91QKw2Tht6L._SY385_.jpg" alt="Tormenta na Vila dos Tecidos ">
+          <h3>Tormenta na Vila dos Tecidos </h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/41s0HrN8rTL._SY445_SX342_QL70_ML2_.jpg" alt="O Hóspede Misterioso">
+          <h3>O Hóspede Misterioso</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/51+TXeAq19L._SY445_SX342_QL70_ML2_.jpg" alt="No Meio da Noite">
+          <h3>No Meio da Noite</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/81PqXneVHWL._SY425_.jpg" alt="Ainda não morri">
+          <h3>Ainda não morri</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/91CNRVUanbL._SY385_.jpg" alt="O Livro Maldito">
+          <h3>O Livro Maldito</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/41FeBz6vzdL._SY445_SX342_ML2_.jpg" alt="Eu Estou Feliz que a Minha Mãe Morreu">
+          <h3>Eu Estou Feliz que a Minha Mãe Morreu</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/51iogbC-XXL._SY445_SX342_ML2_.jpg" alt="O Nome da Rosa">
+          <h3>O Nome da Rosa</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/41lvO8kww1L._SY445_SX342_QL70_ML2_.jpg" alt="We Used To Live Here">
+          <h3>We Used To Live Here</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/91z+eHc2CvL._SY385_.jpg" alt="Imagens Estranhas">
+          <h3>Imagens Estranhas</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/71-YhujYUxS._SY425_.jpg" alt="A Cabeça do Santo ">
+          <h3>A Cabeça do Santo </h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/51-9DsDM4DL._SY445_SX342_ML2_.jpg" alt="Coraline">
+          <h3>Coraline</h3>
+        </div>
+      </div>
+    </div>
+    <button class="scroll-btn right-btn" aria-label="Próximos livros">→</button>
+  </footer>
+
+  <!-- JAVASCRIPT DE ACESSIBILIDADE INTEGRADO -->
+  <script>
+    // SISTEMA DE ACESSIBILIDADE UNIFICADO
+    class AccessibilityManager {
+      constructor() {
+        this.storageKey = 'encantus_accessibility';
+        this.currentSize = 'normal';
+        this.currentTheme = 'dark';
+        this.init();
+      }
+
+      init() {
+        this.loadSettings();
+        this.setupEventListeners();
+        this.applyAccessibilityToPage();
+      }
+
+      setupEventListeners() {
+        const accessibilityBtn = document.getElementById('accessibilityBtn');
+        const accessibilityMenu = document.getElementById('accessibilityMenu');
+        const fontButtons = document.querySelectorAll('.font-btn');
+        const themeButtons = document.querySelectorAll('.theme-btn');
+        const resetBtn = document.getElementById('resetAccessibility');
+
+        // Alternar menu de acessibilidade
+        if (accessibilityBtn) {
+          accessibilityBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            accessibilityMenu.classList.toggle('active');
+          });
+        }
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.accessibility-widget')) {
+            accessibilityMenu.classList.remove('active');
+          }
+        });
+
+        // Botões de tamanho de fonte
+        fontButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const size = btn.getAttribute('data-size');
+            this.setFontSize(size);
+          });
+        });
+
+        // Botões de tema
+        themeButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const theme = btn.getAttribute('data-theme');
+            this.setTheme(theme);
+          });
+        });
+
+        // Botão de redefinir
+        if (resetBtn) {
+          resetBtn.addEventListener('click', () => {
+            this.resetSettings();
+          });
+        }
+
+        // Tecla ESC fecha o menu
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            accessibilityMenu.classList.remove('active');
+          }
+        });
+      }
+
+      setFontSize(size) {
+        this.currentSize = size;
+        this.applyFontSize(size);
+        this.saveSettings();
+        this.updateActiveButton(size, 'size');
+        this.showNotification(`Tamanho da fonte alterado para ${this.getSizeName(size)}`);
+      }
+
+      setTheme(theme) {
+        this.currentTheme = theme;
+        this.applyTheme(theme);
+        this.saveSettings();
+        this.updateActiveButton(theme, 'theme');
+        this.showNotification(`Tema alterado para ${this.getThemeName(theme)}`);
+      }
+
+      applyFontSize(size) {
+        // Remove todas as classes de tamanho
+        document.body.classList.remove('font-normal', 'font-large', 'font-x-large');
+        
+        // Adiciona a classe correspondente
+        document.body.classList.add(`font-${size}`);
+        
+        // Atualiza o botão ativo
+        this.updateActiveButton(size, 'size');
+      }
+
+      applyTheme(theme) {
+        // Remove ambas as classes de tema
+        document.body.classList.remove('dark-mode', 'light-mode');
+        
+        // Adiciona a classe correspondente
+        document.body.classList.add(`${theme}-mode`);
+        
+        // Atualiza o botão ativo
+        this.updateActiveButton(theme, 'theme');
+      }
+
+      // APLICAR ACESSIBILIDADE À PÁGINA INTEIRA
+      applyAccessibilityToPage() {
+        // Aplicar tema
+        this.applyTheme(this.currentTheme);
+        
+        // Aplicar tamanho da fonte
+        this.applyFontSize(this.currentSize);
+      }
+
+      updateActiveButton(value, type) {
+        const buttons = document.querySelectorAll(`.${type}-btn`);
+        buttons.forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute(`data-${type}`) === value) {
+            btn.classList.add('active');
+          }
+        });
+      }
+
+      getSizeName(size) {
+        const names = {
+          'normal': 'Normal',
+          'large': 'Grande', 
+          'x-large': 'Extra Grande'
+        };
+        return names[size] || 'Normal';
+      }
+
+      getThemeName(theme) {
+        const names = {
+          'dark': 'Escuro',
+          'light': 'Claro'
+        };
+        return names[theme] || 'Escuro';
+      }
+
+      resetSettings() {
+        this.currentSize = 'normal';
+        this.currentTheme = 'dark';
+        this.applyFontSize('normal');
+        this.applyTheme('dark');
+        this.saveSettings();
+        this.showNotification('Configurações de acessibilidade redefinidas!');
+      }
+
+      saveSettings() {
+        const settings = {
+          fontSize: this.currentSize,
+          theme: this.currentTheme,
+          lastUpdated: new Date().toISOString()
+        };
+        localStorage.setItem(this.storageKey, JSON.stringify(settings));
+      }
+
+      loadSettings() {
+        try {
+          const saved = localStorage.getItem(this.storageKey);
+          if (saved) {
+            const settings = JSON.parse(saved);
+            if (settings.fontSize) {
+              this.currentSize = settings.fontSize;
+            }
+            if (settings.theme) {
+              this.currentTheme = settings.theme;
+            }
+          }
+        } catch (error) {
+          console.warn('Erro ao carregar configurações de acessibilidade:', error);
+        }
+      }
+
+      showNotification(message) {
+        // Criar elemento de notificação
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: #4a3b9b;
+          color: white;
+          padding: 12px 20px;
+          border-radius: 8px;
+          z-index: 10000;
+          font-family: 'Merriweather', serif;
+          font-weight: 600;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+          animation: slideInRight 0.3s ease;
+        `;
+        
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        // Remover após 3 segundos
+        setTimeout(() => {
+          notification.style.animation = 'slideOutRight 0.3s ease';
+          setTimeout(() => {
+            if (notification.parentNode) {
+              notification.parentNode.removeChild(notification);
+            }
+          }, 300);
+        }, 3000);
+      }
+    }
+
+    // CARROSSEL DO FOOTER
+    document.addEventListener('DOMContentLoaded', function() {
+      // Inicializar sistema de acessibilidade
+      new AccessibilityManager();
+      
+      const footerContainer = document.querySelector('.footer-container');
+      const leftBtn = document.querySelector('.left-btn');
+      const rightBtn = document.querySelector('.right-btn');
+      const footerItems = document.querySelectorAll('.footer-item');
+      const footerWrapper = document.querySelector('.footer-wrapper');
+      
+      let scrollPosition = 0;
+      const scrollStep = 300;
+      let activeItem = null;
+      
+      function calculateMaxScroll() {
+        const containerWidth = footerContainer.scrollWidth;
+        const wrapperWidth = footerWrapper.offsetWidth - 100;
+        return Math.max(0, containerWidth - wrapperWidth);
+      }
+      
+      let maxScroll = calculateMaxScroll();
+      
+      // Ajuste inicial para alinhar os livros mais à esquerda
+      footerContainer.style.transform = `translateX(-${scrollPosition}px)`;
+      
+      function updateButtons() {
+        leftBtn.disabled = scrollPosition === 0;
+        rightBtn.disabled = scrollPosition >= maxScroll;
+      }
+      
+      // Navegação do carrossel
+      leftBtn.addEventListener('click', () => {
+        scrollPosition = Math.max(0, scrollPosition - scrollStep);
+        footerContainer.style.transform = `translateX(-${scrollPosition}px)`;
+        updateButtons();
+      });
+      
+      rightBtn.addEventListener('click', () => {
+        scrollPosition = Math.min(maxScroll, scrollPosition + scrollStep);
+        footerContainer.style.transform = `translateX(-${scrollPosition}px)`;
+        updateButtons();
+      });
+      
+      // Efeito de subida nos livros ao clicar
+      footerItems.forEach(item => {
+        item.addEventListener('click', function() {
+          if (activeItem) {
+            activeItem.classList.remove('active');
+          }
+          
+          this.classList.add('active');
+          activeItem = this;
+        });
+        
+        // Navegação por teclado
+        item.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+          }
+        });
+      });
+      
+      // Remove o efeito ao clicar fora dos livros
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.footer-item') && activeItem) {
+          activeItem.classList.remove('active');
+          activeItem = null;
+        }
+      });
+      
+      // Suporte para navegação por teclado (setas)
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+          leftBtn.click();
+        } else if (e.key === 'ArrowRight') {
+          rightBtn.click();
+        }
+      });
+      
+      window.addEventListener('resize', () => {
+        maxScroll = calculateMaxScroll();
+        scrollPosition = Math.min(scrollPosition, maxScroll);
+        footerContainer.style.transform = `translateX(-${scrollPosition}px)`;
+        updateButtons();
+      });
+      
+      updateButtons();
+    });
+  </script>
+</body>
+</html>

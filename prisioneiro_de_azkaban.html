@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Detalhes do livro God of War: Ragnarök - Encantu's Livraria">
+  <title>HARRY POTTER E O PRISIONEIRO DE AZKABAN - Livro | Encantu's</title>
+  <link rel="stylesheet" href="cs/livros.css" />
+</head>
+<body>
+   <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+   <!-- ESTILOS DE ACESSIBILIDADE INTEGRADOS -->
+  <style>
+    /* === WIDGET DE ACESSIBILIDADE === */
+    .accessibility-widget {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 10000;
+    }
+
+    .accessibility-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4b2e68 0%, #47216d 100%);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      z-index: 10001;
+    }
+
+    .accessibility-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .accessibility-menu {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      background: rgba(26, 14, 63, 0.95);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      padding: 20px;
+      width: 280px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: none;
+      z-index: 10000;
+    }
+
+    .accessibility-menu.active {
+      display: block;
+      animation: fadeInUp 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .accessibility-menu h3 {
+      color: white;
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .theme-controls,
+    .font-size-controls {
+      margin-bottom: 20px;
+    }
+
+    .theme-controls span,
+    .font-size-controls span {
+      display: block;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 10px;
+      font-family: 'Merriweather', serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .theme-buttons,
+    .font-size-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .theme-btn,
+    .font-btn,
+    .reset-btn {
+      flex: 1;
+      padding: 10px 15px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Merriweather', serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .theme-btn:hover,
+    .font-btn:hover,
+    .reset-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .theme-btn.active,
+    .font-btn.active {
+      background: linear-gradient(135deg, #4b2e68 0%, #47216d 100%);
+      border-color: rgba(255, 255, 255, 0.4);
+      color: white;
+      box-shadow: 0 4px 15px rgba(75, 46, 104, 0.4);
+    }
+
+    .accessibility-actions {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 15px;
+      margin-top: 10px;
+    }
+
+    .reset-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .reset-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* === SISTEMA DE TAMANHO DE FONTE UNIFICADO === */
+    body.font-normal {
+      font-size: 16px;
+    }
+
+    body.font-large {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    body.font-x-large {
+      font-size: 20px;
+      line-height: 1.7;
+    }
+
+    /* Ajustes específicos para elementos com diferentes tamanhos de fonte */
+    body.font-large .navbar-menu a,
+    body.font-large .detalhe-info p,
+    body.font-large .detalhes-adicionais p,
+    body.font-large .footer-item h3 {
+      font-size: 1.05em;
+    }
+
+    body.font-x-large .navbar-menu a,
+    body.font-x-large .detalhe-info p,
+    body.font-x-large .detalhes-adicionais p,
+    body.font-x-large .footer-item h3 {
+      font-size: 1.1em;
+    }
+
+    body.font-large .detalhe-info h1 {
+      font-size: 2.4rem;
+    }
+
+    body.font-x-large .detalhe-info h1 {
+      font-size: 2.6rem;
+    }
+
+    /* === MODO CLARO UNIFICADO === */
+    body.light-mode {
+      /* Cores Principais */
+      --primary: #ffffff;
+      --secondary: #f8fafc;
+      --accent: #7c3aed;
+      --accent-light: #8b5cf6;
+      --accent-dark: #6d28d9;
+      
+      /* Cores de Texto */
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      
+      /* Cores de Fundo */
+      --background-primary: #ffffff;
+      --background-secondary: #f8fafc;
+      --background-card: rgba(255, 255, 255, 0.95);
+      
+      /* Cores de Borda */
+      --border-light: #e2e8f0;
+      --border-medium: #cbd5e1;
+      
+      /* Gradientes para Modo Claro */
+      --gradient-primary: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+      --gradient-accent: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%);
+      
+      /* Sombras para Modo Claro */
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.08);
+      
+      background: var(--gradient-primary);
+      color: var(--text-primary);
+    }
+
+    /* === MODO CLARO - PÁGINAS DE EXTENSÃO === */
+
+    /* Navbar no modo claro */
+    body.light-mode .navbar {
+      background-color: var(--background-primary);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    body.light-mode .navbar .logo span {
+      color: var(--text-primary);
+    }
+
+    body.light-mode .navbar-menu a {
+      color: var(--text-primary);
+    }
+
+    body.light-mode .navbar-menu a:hover {
+      color: var(--accent);
+      background-color: rgba(124, 58, 237, 0.05);
+    }
+
+    /* Container de detalhes no modo claro */
+    body.light-mode .detalhe-container {
+      background: var(--background-card);
+      border: 1px solid var(--border-light);
+      color: var(--text-primary);
+    }
+
+    body.light-mode .detalhe-info h1 {
+      color: var(--text-primary);
+    }
+
+    body.light-mode .detalhe-info p {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .detalhes-adicionais {
+      background: rgba(248, 250, 252, 0.8);
+    }
+
+    body.light-mode .detalhes-adicionais p {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .detalhes-adicionais strong {
+      color: var(--text-primary);
+    }
+
+    /* Botões no modo claro */
+    body.light-mode .btn-comprar {
+      background: var(--gradient-accent);
+      color: white;
+    }
+
+    body.light-mode .btn-comprar:hover {
+      background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
+    }
+
+    body.light-mode .btn-voltar {
+      background: var(--background-card);
+      color: var(--text-primary);
+      border: 2px solid var(--border-medium);
+    }
+
+    body.light-mode .btn-voltar:hover {
+      border-color: var(--accent);
+    }
+
+    /* Footer no modo claro */
+    body.light-mode .footer {
+      background: var(--gradient-primary);
+      border-top: 1px solid var(--border-light);
+    }
+
+    body.light-mode .footer-item {
+      background: rgba(248, 250, 252, 0.8);
+      border: 1px solid var(--border-light);
+    }
+
+    body.light-mode .footer-item:hover {
+      background: rgba(248, 250, 252, 1);
+      border-color: var(--accent);
+    }
+
+    body.light-mode .footer-item h3 {
+      color: var(--text-secondary);
+    }
+
+    /* Botões de scroll no modo claro */
+    body.light-mode .scroll-btn {
+      background: var(--gradient-accent);
+      color: white;
+    }
+
+    body.light-mode .scroll-btn:hover {
+      background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
+    }
+
+    /* Botão de acessibilidade no modo claro */
+    body.light-mode .accessibility-btn {
+      background: var(--gradient-accent);
+    }
+
+    body.light-mode .accessibility-menu {
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid var(--border-light);
+    }
+
+    body.light-mode .accessibility-menu h3 {
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    body.light-mode .theme-controls span,
+    body.light-mode .font-size-controls span {
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .font-btn,
+    body.light-mode .theme-btn,
+    body.light-mode .reset-btn {
+      background: rgba(248, 250, 252, 0.8);
+      border: 2px solid var(--border-medium);
+      color: var(--text-secondary);
+    }
+
+    body.light-mode .font-btn:hover,
+    body.light-mode .theme-btn:hover,
+    body.light-mode .reset-btn:hover {
+      background: rgba(248, 250, 252, 1);
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    body.light-mode .font-btn.active,
+    body.light-mode .theme-btn.active {
+      background: var(--gradient-accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* Animações para notificações */
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideOutRight {
+      from {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
+    /* Ajustes responsivos */
+    @media (max-width: 768px) {
+      .accessibility-widget {
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .accessibility-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+      
+      .accessibility-menu {
+        width: 260px;
+        right: -10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Botão de Acessibilidade -->
+  <div class="accessibility-widget">
+    <button class="accessibility-btn" id="accessibilityBtn" aria-label="Opções de acessibilidade">
+      <i class="fas fa-universal-access"></i>
+    </button>
+    
+    <div class="accessibility-menu" id="accessibilityMenu">
+      <h3>ACESSIBILIDADE</h3>
+      
+      <!-- Controle de Tema -->
+      <div class="theme-controls">
+        <span>Tema do Site:</span>
+        <div class="theme-buttons">
+          <button class="theme-btn" data-theme="dark" aria-label="Modo escuro">
+            <i class="fas fa-moon"></i> Escuro
+          </button>
+          <button class="theme-btn" data-theme="light" aria-label="Modo claro">
+            <i class="fas fa-sun"></i> Claro
+          </button>
+        </div>
+      </div>
+      
+      <!-- Controle de Tamanho de Fonte -->
+      <div class="font-size-controls">
+        <span>Tamanho da Fonte:</span>
+        <div class="font-size-buttons">
+          <button class="font-btn" data-size="normal" aria-label="Fonte normal">
+            A
+          </button>
+          <button class="font-btn" data-size="large" aria-label="Fonte grande">
+            A
+          </button>
+          <button class="font-btn" data-size="x-large" aria-label="Fonte extra grande">
+            A
+          </button>
+        </div>
+      </div>
+      
+      <div class="accessibility-actions">
+        <button class="reset-btn" id="resetAccessibility" aria-label="Redefinir configurações">
+          <i class="fas fa-redo"></i> Redefinir
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Barra de Navegação -->
+  <nav class="navbar" aria-label="Navegação principal">
+    <div class="navbar-content">
+      <div class="logo">
+        <img src="imagem/mago.png" alt="Logo Encantu's" class="navbar-logo" />
+        <span>Encantu's</span>
+      </div>
+      <div class="navbar-menu">
+        <a href="index.html">Início</a>
+        <a href="mailto:encantus1livraria@gmail.com">Suporte</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Container de Detalhes do Livro -->
+  <main class="detalhe-container">
+    <div class="imagem-livro">
+      <img src="https://m.media-amazon.com/images/I/81u+ljPVifL._SY425_.jpg" alt="Capa do livro HARRY POTTER E O PRISIONEIRO DE AZKABAN" />
+    </div>
+    <div class="detalhe-info">
+      <h1>HARRY POTTER E O PRISIONEIRO DE AZKABAN</h1>
+      
+      <p>O livro “Harry Potter e o Prisioneiro de Azkaban”, de J.K. Rowling, é o terceiro da série. Nele, Harry volta para o terceiro ano na escola Hogwarts e descobre que Sirius Black, um perigoso prisioneiro de Azkaban, fugiu e parece estar atrás dele.
+
+Durante o ano, Hogwarts é vigiada pelos dementadores, criaturas que sugam a felicidade das pessoas. Harry aprende a se defender deles com o feitiço do Patrono. Aos poucos, ele descobre que Sirius Black não é o vilão que todos acreditam, mas sim o padrinho de Harry, injustamente acusado de trair seus pais.</p>
+      <div class="detalhes-adicionais">
+        <p><strong>Autor:</strong>J.K. Rowling</p>
+        <p><strong>Editora:</strong> Rocco</p>
+        <p><strong>Páginas:</strong> 288 </p>
+        <p><strong>Ano:</strong> 2017</p>
+      </div>
+      <div class="botoes-comprar">
+        <a href="https://www.amazon.com.br/Harry-Potter-Prisioneiro-Azkaban-Rowling/dp/853253080X/ref=pd_sbs_d_sccl_1_1/144-8239152-5780001?pd_rd_w=V2Gph&content-id=amzn1.sym.53b2f13e-ab3a-40f2-aab9-7e4b988d3762&pf_rd_p=53b2f13e-ab3a-40f2-aab9-7e4b988d3762&pf_rd_r=JAFD5B7YV7EEPWCVNHCW&pd_rd_wg=8HXoM&pd_rd_r=02d628a9-80e4-4890-aeff-d25a732ec699&pd_rd_i=853253080X&psc=1" target="_blank" class="btn-comprar">Comprar na Amazon</a>
+        <a href="https://shopee.com.br/Harry-Potter-e-o-Prisioneiro-de-Azkaban-i.538965024.23098106977?extraParams=%7B%22display_model_id%22%3A149781326586%2C%22model_selection_logic%22%3A3%7D&sp_atk=4990509a-52b8-4f90-bacb-6863a34d7735&xptdk=4990509a-52b8-4f90-bacb-6863a34d7735" target="_blank" class="btn-comprar">Comprar na Shopee</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" aria-label="Recomendações de livros">
+    <button class="scroll-btn left-btn" aria-label="Livros anteriores">←</button>
+    <div class="footer-wrapper">
+      <div class="footer-container">
+        <div class="footer-item" tabindex="0">
+          <img src="data:image/jpeg;base64,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" alt="Asas de Fogo Reino Escondido">
+          <h3>Asas de Fogo Reino Escondido</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/51NiIHPz4wL._SY445_SX342_ML2_.jpg" alt="O Nome do Vento">
+          <h3>O Nome do Vento</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/71BtQsBUQlL._SY342_.jpg" alt="Harry Potter e a Pedra Filosofal">
+          <h3>Harry Potter e a Pedra Filosofal</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/81jbivNEVML._SY385_.jpg" alt="Harry Potter e a Câmara Secreta">
+          <h3>Harry Potter e a Câmara Secreta</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/41SknlxiqHL._SY445_SX342_ML2_.jpg" alt="Harry Potter e a Ordem de Fenix">
+          <h3>Harry Potter e a Ordem de Fenix</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/41JUKfBWxhL._SY445_SX342_ML2_.jpg" alt="Assassin's Creed Odyssey">
+          <h3>Assassin's Creed Odyssey</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/51msVf94L2L._SY445_SX342_ML2_.jpg" alt="Harry Potter e o Enigma do Principe">
+          <h3>Harry Potter e o Enigma do Principe</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/51PoQ61oq-L._SY445_SX342_ML2_.jpg" alt="Harry Potter Relíquias da Morte">
+          <h3>Harry Potter Relíquias da Morte</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/51Qf1l2wBhL._SY445_SX342_ML2_.jpg" alt="God of War">
+          <h3>God of War</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/31s6uzmWhzL._SY385_.jpg" alt="Mortal Kombat">
+          <h3>Mortal Kombat</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/512spcWaWDL._SY445_SX342_ML2_.jpg" alt="The Last of Us Part II">
+          <h3>The Last of Us Part II</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/41RBd2DvmgL._SY445_SX342_ML2_.jpg" alt="Senhor dos Anéis">
+          <h3>Senhor dos Anéis</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/510g4bewKXL._SY445_SX342_ML2_.jpg" alt="O Jardim Secreto">
+          <h3>O Jardim Secreto</h3>
+        </div>
+        <div class="footer-item" tabindex="0">
+          <img src="https://m.media-amazon.com/images/I/41ypn4s9KTL._SY445_SX342_ML2_.jpg" alt="A Destruidora de Casamentos">
+          <h3>A Destruidora de Casamentos</h3>
+        </div>
+      </div>
+    </div>
+    <button class="scroll-btn right-btn" aria-label="Próximos livros">→</button>
+    <!-- REMOVIDOS OS INDICADORES DO CARROSSEL -->
+  </footer>
+
+  <!-- JAVASCRIPT DE ACESSIBILIDADE INTEGRADO -->
+  <script>
+    // SISTEMA DE ACESSIBILIDADE UNIFICADO
+    class AccessibilityManager {
+      constructor() {
+        this.storageKey = 'encantus_accessibility';
+        this.currentSize = 'normal';
+        this.currentTheme = 'dark';
+        this.init();
+      }
+
+      init() {
+        this.loadSettings();
+        this.setupEventListeners();
+        this.applyAccessibilityToPage();
+      }
+
+      setupEventListeners() {
+        const accessibilityBtn = document.getElementById('accessibilityBtn');
+        const accessibilityMenu = document.getElementById('accessibilityMenu');
+        const fontButtons = document.querySelectorAll('.font-btn');
+        const themeButtons = document.querySelectorAll('.theme-btn');
+        const resetBtn = document.getElementById('resetAccessibility');
+
+        // Alternar menu de acessibilidade
+        if (accessibilityBtn) {
+          accessibilityBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            accessibilityMenu.classList.toggle('active');
+          });
+        }
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.accessibility-widget')) {
+            accessibilityMenu.classList.remove('active');
+          }
+        });
+
+        // Botões de tamanho de fonte
+        fontButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const size = btn.getAttribute('data-size');
+            this.setFontSize(size);
+          });
+        });
+
+        // Botões de tema
+        themeButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const theme = btn.getAttribute('data-theme');
+            this.setTheme(theme);
+          });
+        });
+
+        // Botão de redefinir
+        if (resetBtn) {
+          resetBtn.addEventListener('click', () => {
+            this.resetSettings();
+          });
+        }
+
+        // Tecla ESC fecha o menu
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            accessibilityMenu.classList.remove('active');
+          }
+        });
+      }
+
+      setFontSize(size) {
+        this.currentSize = size;
+        this.applyFontSize(size);
+        this.saveSettings();
+        this.updateActiveButton(size, 'size');
+        this.showNotification(`Tamanho da fonte alterado para ${this.getSizeName(size)}`);
+      }
+
+      setTheme(theme) {
+        this.currentTheme = theme;
+        this.applyTheme(theme);
+        this.saveSettings();
+        this.updateActiveButton(theme, 'theme');
+        this.showNotification(`Tema alterado para ${this.getThemeName(theme)}`);
+      }
+
+      applyFontSize(size) {
+        // Remove todas as classes de tamanho
+        document.body.classList.remove('font-normal', 'font-large', 'font-x-large');
+        
+        // Adiciona a classe correspondente
+        document.body.classList.add(`font-${size}`);
+        
+        // Atualiza o botão ativo
+        this.updateActiveButton(size, 'size');
+      }
+
+      applyTheme(theme) {
+        // Remove ambas as classes de tema
+        document.body.classList.remove('dark-mode', 'light-mode');
+        
+        // Adiciona a classe correspondente
+        document.body.classList.add(`${theme}-mode`);
+        
+        // Atualiza o botão ativo
+        this.updateActiveButton(theme, 'theme');
+      }
+
+      // APLICAR ACESSIBILIDADE À PÁGINA INTEIRA
+      applyAccessibilityToPage() {
+        // Aplicar tema
+        this.applyTheme(this.currentTheme);
+        
+        // Aplicar tamanho da fonte
+        this.applyFontSize(this.currentSize);
+      }
+
+      updateActiveButton(value, type) {
+        const buttons = document.querySelectorAll(`.${type}-btn`);
+        buttons.forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute(`data-${type}`) === value) {
+            btn.classList.add('active');
+          }
+        });
+      }
+
+      getSizeName(size) {
+        const names = {
+          'normal': 'Normal',
+          'large': 'Grande', 
+          'x-large': 'Extra Grande'
+        };
+        return names[size] || 'Normal';
+      }
+
+      getThemeName(theme) {
+        const names = {
+          'dark': 'Escuro',
+          'light': 'Claro'
+        };
+        return names[theme] || 'Escuro';
+      }
+
+      resetSettings() {
+        this.currentSize = 'normal';
+        this.currentTheme = 'dark';
+        this.applyFontSize('normal');
+        this.applyTheme('dark');
+        this.saveSettings();
+        this.showNotification('Configurações de acessibilidade redefinidas!');
+      }
+
+      saveSettings() {
+        const settings = {
+          fontSize: this.currentSize,
+          theme: this.currentTheme,
+          lastUpdated: new Date().toISOString()
+        };
+        localStorage.setItem(this.storageKey, JSON.stringify(settings));
+      }
+
+      loadSettings() {
+        try {
+          const saved = localStorage.getItem(this.storageKey);
+          if (saved) {
+            const settings = JSON.parse(saved);
+            if (settings.fontSize) {
+              this.currentSize = settings.fontSize;
+            }
+            if (settings.theme) {
+              this.currentTheme = settings.theme;
+            }
+          }
+        } catch (error) {
+          console.warn('Erro ao carregar configurações de acessibilidade:', error);
+        }
+      }
+
+      showNotification(message) {
+        // Criar elemento de notificação
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: #4a3b9b;
+          color: white;
+          padding: 12px 20px;
+          border-radius: 8px;
+          z-index: 10000;
+          font-family: 'Merriweather', serif;
+          font-weight: 600;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+          animation: slideInRight 0.3s ease;
+        `;
+        
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        // Remover após 3 segundos
+        setTimeout(() => {
+          notification.style.animation = 'slideOutRight 0.3s ease';
+          setTimeout(() => {
+            if (notification.parentNode) {
+              notification.parentNode.removeChild(notification);
+            }
+          }, 300);
+        }, 3000);
+      }
+    }
+
+    // CARROSSEL DO FOOTER
+    document.addEventListener('DOMContentLoaded', function() {
+      // Inicializar sistema de acessibilidade
+      new AccessibilityManager();
+      
+      const footerContainer = document.querySelector('.footer-container');
+      const leftBtn = document.querySelector('.left-btn');
+      const rightBtn = document.querySelector('.right-btn');
+      let scrollPosition = 0;
+      const scrollStep = 220;
+      
+      // Função para atualizar o scroll máximo
+      function updateMaxScroll() {
+        return footerContainer.scrollWidth - footerContainer.parentElement.clientWidth;
+      }
+
+      // Função para rolar o carrossel
+      function scrollCarousel(direction) {
+        const maxScroll = updateMaxScroll();
+        
+        if (direction === 'left') {
+          scrollPosition = Math.max(0, scrollPosition - scrollStep);
+        } else {
+          scrollPosition = Math.min(maxScroll, scrollPosition + scrollStep);
+        }
+        
+        footerContainer.style.transform = `translateX(-${scrollPosition}px)`;
+        updateButtons();
+      }
+
+      // Função para atualizar estado dos botões
+      function updateButtons() {
+        const maxScroll = updateMaxScroll();
+        leftBtn.disabled = scrollPosition <= 0;
+        rightBtn.disabled = scrollPosition >= maxScroll;
+        
+        // Adiciona/remove classe para estilo visual quando desabilitado
+        leftBtn.classList.toggle('disabled', scrollPosition <= 0);
+        rightBtn.classList.toggle('disabled', scrollPosition >= maxScroll);
+      }
+
+      // Event listeners
+      leftBtn.addEventListener('click', () => scrollCarousel('left'));
+      rightBtn.addEventListener('click', () => scrollCarousel('right'));
+
+      // Suporte para teclado
+      leftBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          scrollCarousel('left');
+        }
+      });
+
+      rightBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          scrollCarousel('right');
+        }
+      });
+
+      // Inicializar estado dos botões
+      updateButtons();
+
+      // Atualizar quando a janela for redimensionada
+      window.addEventListener('resize', () => {
+        const maxScroll = updateMaxScroll();
+        scrollPosition = Math.min(scrollPosition, maxScroll);
+        footerContainer.style.transform = `translateX(-${scrollPosition}px)`;
+        updateButtons();
+      });
+    });
+  </script>
+</body>
+</html>
